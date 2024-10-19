@@ -7,12 +7,11 @@ public class Player : MonoBehaviour //Скорее всего singleton
 
     public int Health = 100;
     public int Energy = 100;
-    Rigidbody rb;
-    private void Start()
+    private Rigidbody _rigidBody;
+
+    private void Awake()
     {
-        rb = this.GetComponent<Rigidbody>();
-        //ToSpawn();
-        //WorldTime.DayEndedEvent += ToSpawn;
+        _rigidBody = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -26,12 +25,12 @@ public class Player : MonoBehaviour //Скорее всего singleton
 
     public void ToSpawn()
     {
-        this.GetComponent<Rigidbody>().MovePosition(spawnPosition);
+        GetComponent<Rigidbody>().MovePosition(spawnPosition);
     }
 
     public void Warp(Vector3 position)
     {
-        rb.MovePosition(position);
+        _rigidBody.MovePosition(position);
     }
 
     public void LooseHealth(int delta)
