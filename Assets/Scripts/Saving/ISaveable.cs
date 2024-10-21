@@ -1,4 +1,4 @@
-namespace FlavorfulStory.SavingSystem
+namespace FlavorfulStory.Saving
 {
     public interface ISaveable
     {

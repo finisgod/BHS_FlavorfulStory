@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FlavorfulStory.SavingSystem
+namespace FlavorfulStory.Saving
 {
     [System.Serializable]
     public class SerializableVector3

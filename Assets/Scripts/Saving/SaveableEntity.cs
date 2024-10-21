@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FlavorfulStory.SavingSystem
+namespace FlavorfulStory.Saving
 {
     [ExecuteAlways]
     public class SaveableEntity : MonoBehaviour

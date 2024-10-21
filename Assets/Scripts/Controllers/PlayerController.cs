@@ -14,7 +14,7 @@ namespace FlavorfulStory.Control
 
         private void Update()
         {
-            var direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            var direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
             _playerMovement.Move(direction);
             _playerMovement.Rotate(direction);
         }
