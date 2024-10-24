@@ -6,9 +6,13 @@ using UnityEngine.SceneManagement;
 
 namespace FlavorfulStory.Saving
 {
+    /// <summary> Система сохранений.</summary>
     public class SavingSystem : MonoBehaviour
     {
         #region Public Methods
+        /// <summary> Загрузка последней сцены.</summary>
+        /// <param name="saveFile"> Название файла с сохранением.</param>
+        /// <returns> Корутина, которая запускает асинхронную подгрузку сцены.</returns>
         public static System.Collections.IEnumerator LoadLastScene(string saveFile)
         {
             Dictionary<string, object> state = LoadFile(saveFile);
@@ -21,7 +25,8 @@ namespace FlavorfulStory.Saving
             RestoreState(state);
         }
 
-        // Save the current scene's state to the given save file.
+        /// <summary> Сохранение состояния текущей сцены в заданном файле сохранения.</summary>
+        /// <param name="saveFile"> Название файла, куда необходимо сохранить данные.</param>
         public static void Save(string saveFile)
         {
             Dictionary<string, object> state = LoadFile(saveFile);
@@ -29,17 +34,25 @@ namespace FlavorfulStory.Saving
             SaveFile(saveFile, state);
         }
 
-        // Load the current scene's state from the given save file.
+        /// <summary> Загрузка текущего состояния сцены из заданного файла сохранения.</summary>
+        /// <param name="saveFile"> Название файла, откуда необходимо загружать данные.</param>
         public static void Load(string saveFile) => RestoreState(LoadFile(saveFile));
 
-        // Delete all data associated with this save file.
+        /// <summary> Удаление файла сохранения.</summary>
+        /// <param name="saveFile"> Название файла, который необходимо удалить.</param>
         public static void Delete(string saveFile) => File.Delete(GetPathFromSaveFile(saveFile));
 
+        /// <summary> Получение пути до сохраненного файла.</summary>
+        /// <param name="saveFile"> Название файла сохранения.</param>
+        /// <returns> Возвращает путь до сохраненного файла.</returns>
         public static string GetPathFromSaveFile(string saveFile) =>
             Path.Combine(Application.persistentDataPath, saveFile + ".sav");
         #endregion
 
         #region Private Methods
+        /// <summary> Загрузка данных из файла.</summary>
+        /// <param name="saveFile"> Название файла сохранения.</param>
+        /// <returns> Возвращает словарь названия и объекта.</returns>
         private static Dictionary<string, object> LoadFile(string saveFile)
         {
             string path = GetPathFromSaveFile(saveFile);
@@ -52,6 +65,9 @@ namespace FlavorfulStory.Saving
             }
         }
 
+        /// <summary> Сохранение данных в файл.</summary>
+        /// <param name="saveFile"> Название файла сохранения.</param>
+        /// <param name="state"> Состояние, которое необходимо записать в файл.</param>
         private static void SaveFile(string saveFile, object state)
         {
             string path = GetPathFromSaveFile(saveFile);
@@ -63,6 +79,8 @@ namespace FlavorfulStory.Saving
             }
         }
 
+        /// <summary> Фиксация состояний всех объектов при сохранении.</summary>
+        /// <param name="state"> Словарь, содержащий состояния всех объектов, которые необходимо зафиксировать.</param>
         private static void CaptureState(Dictionary<string, object> state)
         {
             foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
@@ -72,6 +90,8 @@ namespace FlavorfulStory.Saving
             state["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex;
         }
 
+        /// <summary> Восстановление состояний всех объектов при загрузке.</summary>
+        /// <param name="state"> Словарь, содержащий состояния всех объектов, которые необходимо загрузить.</param>
         private static void RestoreState(Dictionary<string, object> state)
         {
             foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())

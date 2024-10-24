@@ -22,17 +22,17 @@ public class WorldTime : MonoBehaviour, ISaveable
     /// <summary>
     /// 
     /// </summary>
-    [SerializeField] float tick = 100f;
+    [SerializeField] private float tick = 100f;
 
     /// <summary>
     /// 
     /// </summary>
-    [SerializeField] float startTime; //86 400 sec in day
+    [SerializeField] private float startTime; //86 400 sec in day
 
     /// <summary>
     /// 
     /// </summary>
-    static float currTime; //86 400 sec in day
+    private static float _currentTime; //86 400 sec in day
 
     /// <summary>
     /// 
@@ -42,7 +42,7 @@ public class WorldTime : MonoBehaviour, ISaveable
     /// <summary>
     /// 
     /// </summary>
-    static bool isStarted = false;
+    private static bool isStarted = false;
 
     /// <summary>
     /// 
@@ -63,14 +63,15 @@ public class WorldTime : MonoBehaviour, ISaveable
         else
         {
             Instance = this;
-            currTime = startTime;
+            _currentTime = startTime;
         }
 
         DontDestroyOnLoad(Instance.gameObject);
 
-        if (currTime < dayTime || currTime > nightTime) { isDay = false; }
+        if (_currentTime < dayTime || _currentTime > nightTime) { isDay = false; }
         else { isDay = true; }
     }
+
     public void Update()
     {
         //consts
@@ -79,26 +80,30 @@ public class WorldTime : MonoBehaviour, ISaveable
         float nightTickMultiplier = dayInterval / nightInterval;
         //
 
-        currTime += tick;
+        _currentTime += tick;
 
-        if (currTime < dayTime || currTime > nightTime) { isDay = false; }
-        else { isDay = true; }
+        if (_currentTime < dayTime || _currentTime > nightTime) isDay = false;
+        else isDay = true;
 
-        if (currTime > 86400) { currTime = 0; DayEndedEvent?.Invoke(); }
+        if (_currentTime > 86400) 
+        { 
+            _currentTime = 0;
+            DayEndedEvent?.Invoke(); 
+        }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public static float GetCurrentTime()
     {
-        return currTime;
+        return _currentTime;
     }
 
     #region Saving
-    public object CaptureState() => currTime;
+    public object CaptureState() => _currentTime;
 
-    public void RestoreState(object state)
-    {
-        print((float)state);
-        currTime = (float)state;
-    }
+    public void RestoreState(object state) => _currentTime = (float)state;
     #endregion
 }
