@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+
 /// <summary>Класс описывающий логику анимаций гг.</summary>
 public class PlayerAnimationController : MonoBehaviour
 {
