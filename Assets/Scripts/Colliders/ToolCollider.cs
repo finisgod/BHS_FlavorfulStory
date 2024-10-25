@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToolCollider : BaseCollider //NotUsed yet //все коллайдеры оптимизировать. Много лишних действий в OnTriggerEnter / Stay
+public class ToolCollider //NotUsed yet //все коллайдеры оптимизировать. Много лишних действий в OnTriggerEnter / Stay
 {
     private ToolColliderGameObjectCollection m_ToolColliderGameObjectCollection = new ToolColliderGameObjectCollection(); //Имя мб короче
     /// <summary>Метод вызывающийся при входе в коллайдер объекта на котором этот скрипт висит .</summary>
