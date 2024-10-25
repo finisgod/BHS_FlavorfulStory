@@ -28,7 +28,9 @@ namespace FlavorfulStory.Saving
         /// <param name="state"> Объект состояния, который необходимо восстановить.</param>
         public void RestoreState(object state)
         {
-            var stateDict = (Dictionary<string, object>)state;
+            var stateDict = state as Dictionary<string, object>;
+            if (stateDict == null) return;
+
             foreach (ISaveable saveable in GetComponents<ISaveable>())
             {
                 string typeString = saveable.GetType().ToString();

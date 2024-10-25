@@ -16,6 +16,8 @@ namespace FlavorfulStory.Saving
         public static System.Collections.IEnumerator LoadLastScene(string saveFile)
         {
             Dictionary<string, object> state = LoadFile(saveFile);
+            if (state == null) yield break;
+
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
             if (state.ContainsKey("lastSceneBuildIndex"))
             {
@@ -30,6 +32,8 @@ namespace FlavorfulStory.Saving
         public static void Save(string saveFile)
         {
             Dictionary<string, object> state = LoadFile(saveFile);
+            if (state == null) return;
+
             CaptureState(state);
             SaveFile(saveFile, state);
         }
@@ -61,7 +65,7 @@ namespace FlavorfulStory.Saving
             using (FileStream stream = File.Open(path, FileMode.Open))
             {
                 var formatter = new BinaryFormatter();
-                return (Dictionary<string, object>)formatter.Deserialize(stream);
+                return formatter.Deserialize(stream) as Dictionary<string, object>;
             }
         }
 
@@ -94,6 +98,8 @@ namespace FlavorfulStory.Saving
         /// <param name="state"> Словарь, содержащий состояния всех объектов, которые необходимо загрузить.</param>
         private static void RestoreState(Dictionary<string, object> state)
         {
+            if (state == null) return;
+
             foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
             {
                 string id = saveable.UniqueIdentifier;
