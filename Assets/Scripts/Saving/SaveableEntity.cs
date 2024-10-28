@@ -9,6 +9,7 @@ namespace FlavorfulStory.Saving
     {
         /// <summary> GUID.</summary>
         [SerializeField] private string _uniqueIdentifier;
+
         /// <summary> GUID.</summary>
         public string UniqueIdentifier => _uniqueIdentifier;
 
@@ -41,8 +42,8 @@ namespace FlavorfulStory.Saving
 
         #region Setting GUID
 #if UNITY_EDITOR
-        /// <summary> Глобальный словарь со всеми GUID на сцене.</summary>
-        private static readonly Dictionary<string, SaveableEntity> _globalLookup = new();
+        /// <summary> База данных GUID всех сохраняемых объектов на сцене.</summary>
+        private static readonly Dictionary<string, SaveableEntity> _saveableEntityDatabase = new();
 
         /// <summary> Является ли объект префабом?</summary>
         /// <remarks> В префабах не должен выставляться GUID.</remarks>
@@ -65,7 +66,7 @@ namespace FlavorfulStory.Saving
                 property.stringValue = System.Guid.NewGuid().ToString();
                 serializedObject.ApplyModifiedProperties();
             }
-            _globalLookup[property.stringValue] = this;
+            _saveableEntityDatabase[property.stringValue] = this;
         }
 
         /// <summary> Является ли GUID уникальным?</summary>
@@ -73,13 +74,13 @@ namespace FlavorfulStory.Saving
         /// <returns> Возвращает True - если GUID является уникальным, False - в противном случае.</returns>
         private bool IsUnique(string candidate)
         {
-            if (!_globalLookup.ContainsKey(candidate) || _globalLookup[candidate] == this)
+            if (!_saveableEntityDatabase.ContainsKey(candidate) || _saveableEntityDatabase[candidate] == this)
                 return true;
 
-            if (_globalLookup[candidate] == null 
-                || _globalLookup[candidate].UniqueIdentifier != candidate)
+            if (_saveableEntityDatabase[candidate] == null
+                || _saveableEntityDatabase[candidate].UniqueIdentifier != candidate)
             {
-                _globalLookup.Remove(candidate);
+                _saveableEntityDatabase.Remove(candidate);
                 return true;
             }
             return false;

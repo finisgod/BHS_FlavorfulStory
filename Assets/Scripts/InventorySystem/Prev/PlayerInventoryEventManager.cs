@@ -15,7 +15,6 @@ public class PlayerInventoryEventManager : MonoBehaviour //ћб сможет закрыть фун
         manager.ItemAddedEvent += InventoryManager_ItemAddedEvent;
         manager.ItemRemovedEvent += InventoryManager_ItemRemovedEvent;
         manager.ItemCountChangedEvent += InventoryManager_ItemCountChangedEvent;
-        inventoryManagerUI.ItemSelectedChangedEvent += InventoryManager_ItemSelectedEvent;
     }
     /// <summary>ќбработка добавлени€ айтема в инвентарь.</summary>
     private void InventoryManager_ItemAddedEvent(Item newItem)

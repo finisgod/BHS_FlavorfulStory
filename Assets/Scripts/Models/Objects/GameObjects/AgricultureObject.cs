@@ -1,13 +1,10 @@
 ﻿using Assets.Scripts.Interfaces.InventorySystem;
 using Assets.Scripts.Items.Instruments;
-using UnityEngine;
-using Instruments = Assets.Scripts.Items.Instruments;
 
 namespace Assets.Scripts.Models.Objects.GameObjects
 {
     public class AgricultureObject : Object, IAgricultureObject, IToolPickableObject, IItemProduceable
     {
-        private int _growDays = 0;
         private double _startWorldTime = 0;
         private bool _isGrown = false;
         private double _goalGrowTime = 10000.0;

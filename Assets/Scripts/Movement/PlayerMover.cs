@@ -5,7 +5,7 @@ namespace FlavorfulStory.Movement
 {
     /// <summary> Передвижение игрока.</summary>
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerMovement : MonoBehaviour, ISaveable
+    public class PlayerMover : MonoBehaviour, ISaveable
     {
         [Header("Параметры передвижения")]
         /// <summary> Скорость движения.</summary>

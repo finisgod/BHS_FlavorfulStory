@@ -274,7 +274,6 @@ public class InventoryManagerUI : MonoBehaviour //Покрыть комментариями. Упросит
                 SetSelectedBorder(_selectedCell);
 
                 CellItem cellItem = _selectedCell.gameObject.GetComponentInChildren<CellItem>();
-                ItemSelectedChangedEvent?.Invoke(cellItem.Item);
             }
         }
     }
@@ -311,11 +310,4 @@ public class InventoryManagerUI : MonoBehaviour //Покрыть комментариями. Упросит
     {
         cell.GetComponentInChildren<CellCounter>().gameObject.GetComponent<TMP_Text>().text = value;
     }
-    /// <summary>Хендлер для эвента отражающего открытие инвентаря.</summary>
-    public delegate void InventoryOpenedHandlerEvent(Item newItem);
-    public event InventoryOpenedHandlerEvent InventoryOpenedHandler;
-    /// <summary>Хендлер для эвента отражающего изменение количества айтема в инвентаре (пака).</summary>
-    public delegate void ItemSelectedChangedHandler(Item newItem);
-    public event ItemSelectedChangedHandler ItemSelectedChangedEvent;
-
 }

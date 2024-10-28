@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary> Клас-менеджер отвечающий за инвентарь. </summary>
@@ -105,6 +104,4 @@ public class InventoryManager : MonoBehaviour
     /// <summary> Хендлер для эвента, отражающего удаление айтема из инвентаря.</summary>
     public delegate void ItemRemovedHandler(Item newItem);
     public event ItemRemovedHandler ItemRemovedEvent;
-
 }
-

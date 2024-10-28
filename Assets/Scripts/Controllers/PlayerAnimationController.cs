@@ -41,12 +41,4 @@ public class PlayerAnimationController : MonoBehaviour
     {
         _animator.SetTrigger(trigger);
     }
-
-
-    /// <summary>Хендлер для эвента отражающего конец анимации.</summary>
-    public delegate void AnimationStartedEvent();
-    public event AnimationEndedEvent AnimationStartedEventHandler;
-    /// <summary>Хендлер для эвента отражающего открытие инвентаря.</summary>
-    public delegate void AnimationEndedEvent();
-    public event AnimationEndedEvent AnimationEndedEventHandler;
 }

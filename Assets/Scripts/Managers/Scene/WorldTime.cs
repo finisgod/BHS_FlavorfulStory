@@ -42,11 +42,6 @@ public class WorldTime : MonoBehaviour, ISaveable
     /// <summary>
     /// 
     /// </summary>
-    private static bool isStarted = false;
-
-    /// <summary>
-    /// 
-    /// </summary>
     public delegate void DayEndHandler();
 
     /// <summary>

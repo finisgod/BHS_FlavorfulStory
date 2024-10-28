@@ -3,20 +3,21 @@ using UnityEngine;
 
 namespace FlavorfulStory.Control
 {
+    [RequireComponent(typeof(PlayerMover))]
     public class PlayerController : MonoBehaviour
     {
-        private PlayerMovement _playerMovement;
+        private PlayerMover _playerMover;
 
         private void Awake()
         {
-            _playerMovement = GetComponent<PlayerMovement>();
+            _playerMover = GetComponent<PlayerMover>();
         }
 
         private void Update()
         {
             var direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
-            _playerMovement.Move(direction);
-            _playerMovement.Rotate(direction);
+            _playerMover.Move(direction);
+            _playerMover.Rotate(direction);
         }
     }
 }

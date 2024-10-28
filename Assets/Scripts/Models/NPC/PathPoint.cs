@@ -12,8 +12,6 @@ public class PathPoint : MonoBehaviour
 
     List<Vector3> pool = new List<Vector3>();
 
-    private bool achieved = false;
-
     Dictionary<string, bool> NpcAchievedDict = new Dictionary<string, bool>();
 
     public void Start()

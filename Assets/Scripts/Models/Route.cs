@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public struct Vector3OnScene
@@ -16,13 +15,13 @@ public struct Vector3OnScene
 
 public class Route : MonoBehaviour //–азнести логику на несколько классов
 {
-    [SerializeField] ScenePortals portals;
-    [SerializeField] List<PathPoint> route;
-    [SerializeField] float time;
-    [SerializeField] string name;//ToDo: Change to routeName
-    [SerializeField] string npcName;
+    [SerializeField] private ScenePortals portals;
+    [SerializeField] private List<PathPoint> route;
+    [SerializeField] private float time;
+    [SerializeField] private string routeName;
+    [SerializeField] private string npcName;
     public float Time { get { return time; } }
-    public string Name { get { return name; } }
+    public string Name { get { return routeName; } }
     public bool Achieved { get; set; }
     public int Count { get { return route.Count; } }
 

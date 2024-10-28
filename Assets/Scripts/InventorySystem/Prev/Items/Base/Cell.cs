@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
 /// <summary> Ѕазовый класс €чейки (дл€ хранени€ в инвентаре).</summary>
 public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
@@ -14,27 +13,24 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         //Debug.Log("Cell clicked");
     }
-    //Drag and drop logic
-    private bool _isHovered = false;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         DragDropManager.CurrentCell = this;
-        _isHovered = true;
         //if (IsEmpty)
-            //Debug.Log("Entered empty cell");
+        //Debug.Log("Entered empty cell");
         //else
-            //Debug.Log("Entered filled cell");
+        //Debug.Log("Entered filled cell");
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        _isHovered = false;
         DragDropManager.CurrentCell = null;
         //Debug.Log("Exit inventory");
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = false;
-       //Debug.Log("Cell OnBeginDrag");
+        //Debug.Log("Cell OnBeginDrag");
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -58,7 +54,7 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 {
                     item.transform.SetParent(DragDropManager.CurrentCell.transform);
                     item.transform.SetAsFirstSibling();
-                    DragDropManager.SwapCellCountersValues(DragDropManager.CurrentCell , this);
+                    DragDropManager.SwapCellCountersValues(DragDropManager.CurrentCell, this);
                 }
             }
             item.GetComponent<RectTransform>().localPosition = Vector3.zero;
