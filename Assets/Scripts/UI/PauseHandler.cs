@@ -1,23 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// Класс, отвечающий за постановку на паузу.
+/// РљР»Р°СЃСЃ, РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° РїРѕСЃС‚Р°РЅРѕРІРєСѓ РЅР° РїР°СѓР·Сѓ.
 /// </summary>
 public class PauseHandler : MonoBehaviour
 {
     [Header("Objects")]
-    /// <summary>Список объектов UI объектов, которые открываются при паузе.</summary>
+    /// <summary>РЎРїРёСЃРѕРє РѕР±СЉРµРєС‚РѕРІ UI РѕР±СЉРµРєС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ РѕС‚РєСЂС‹РІР°СЋС‚СЃСЏ РїСЂРё РїР°СѓР·Рµ.</summary>
     [SerializeField] private List<GameObject> _enableObjects;
-    /// <summary>Список объектов UI объектов, которые скрываются при паузе.</summary>
+    /// <summary>РЎРїРёСЃРѕРє РѕР±СЉРµРєС‚РѕРІ UI РѕР±СЉРµРєС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ СЃРєСЂС‹РІР°СЋС‚СЃСЏ РїСЂРё РїР°СѓР·Рµ.</summary>
     [SerializeField] private List<GameObject> _disableObjects;
-    ///<summary>Переменная состояния паузы.</summary>
+    ///<summary>РџРµСЂРµРјРµРЅРЅР°СЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїР°СѓР·С‹.</summary>
     private bool _isPaused;
-    ///<summary>По умолчанию игра не на паузе.</summary>
+    ///<summary>РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РёРіСЂР° РЅРµ РЅР° РїР°СѓР·Рµ.</summary>
     private void Start()
     {
         _isPaused = false;
     }
-    ///<summary>Считывания нажатия кнопки ESC. </summary>
+    ///<summary>РЎС‡РёС‚С‹РІР°РЅРёСЏ РЅР°Р¶Р°С‚РёСЏ РєРЅРѕРїРєРё ESC. </summary>
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -25,7 +25,7 @@ public class PauseHandler : MonoBehaviour
             SetPause();
         }
     }
-    ///<summary>Метод для включения/выключения объектов UI при паузе.</summary>
+    ///<summary>РњРµС‚РѕРґ РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ/РІС‹РєР»СЋС‡РµРЅРёСЏ РѕР±СЉРµРєС‚РѕРІ UI РїСЂРё РїР°СѓР·Рµ.</summary>
     private void SetPause()
     {
         if (!_isPaused)
@@ -44,9 +44,9 @@ public class PauseHandler : MonoBehaviour
         }
     }
     /// <summary>
-    /// Метод для включения UI объектов при паузе.
+    /// РњРµС‚РѕРґ РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ UI РѕР±СЉРµРєС‚РѕРІ РїСЂРё РїР°СѓР·Рµ.
     /// </summary>
-    /// <param name="objects">Список UI объектов, которые нужны активировать при паузе. </param>
+    /// <param name="objects">РЎРїРёСЃРѕРє UI РѕР±СЉРµРєС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅС‹ Р°РєС‚РёРІРёСЂРѕРІР°С‚СЊ РїСЂРё РїР°СѓР·Рµ. </param>
     private void ActivateObjects(List<GameObject> objects)
     {
         for (int i = 0; i < objects.Count; i++)
@@ -55,9 +55,9 @@ public class PauseHandler : MonoBehaviour
         }
     }
     /// <summary>
-    /// Метод для отключения UI объектов при паузе.
+    /// РњРµС‚РѕРґ РґР»СЏ РѕС‚РєР»СЋС‡РµРЅРёСЏ UI РѕР±СЉРµРєС‚РѕРІ РїСЂРё РїР°СѓР·Рµ.
     /// </summary>
-    /// <param name="objects">Список UI объектов, которые нужны активировать при паузе. </param>
+    /// <param name="objects">РЎРїРёСЃРѕРє UI РѕР±СЉРµРєС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅС‹ Р°РєС‚РёРІРёСЂРѕРІР°С‚СЊ РїСЂРё РїР°СѓР·Рµ. </param>
     private void DeactivateObjects(List<GameObject> objects)
     {
         for (int i = 0; i < objects.Count; i++)
