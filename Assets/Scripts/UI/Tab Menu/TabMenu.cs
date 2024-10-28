@@ -35,8 +35,8 @@ public class TabMenu : MonoBehaviour
 
     private void Update()
     {
-        _left = Input.GetKeyDown(KeyCode.LeftArrow);
-        _right = Input.GetKeyDown(KeyCode.RightArrow);
+        _left = Input.GetKeyDown(KeyCode.Q);
+        _right = Input.GetKeyDown(KeyCode.E);
 
         if (_left || _right)
         {

@@ -2759,9 +2759,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2f237a605614ea2a1af8d13baa34fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _masterVolume: {fileID: 6067356185050924485}
-  _sfxVolume: {fileID: 4167417089332972127}
-  _musicVolume: {fileID: 3403561622029318555}
+  _masterVolumeSlider: {fileID: 6067356185050924485}
+  _sfxVolumeSlider: {fileID: 4167417089332972127}
+  _musicVolumeSlider: {fileID: 3403561622029318555}
 --- !u!114 &5095155435290035746
 MonoBehaviour:
   m_ObjectHideFlags: 0

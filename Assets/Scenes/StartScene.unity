@@ -1343,6 +1343,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1290489864 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6067356185050924485, guid: a0f559117ef514874a6b1ecda193e547,
+    type: 3}
+  m_PrefabInstance: {fileID: 8529319048301440173}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1346132859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1554,6 +1566,30 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4105370313291191146}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1937748463 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4167417089332972127, guid: a0f559117ef514874a6b1ecda193e547,
+    type: 3}
+  m_PrefabInstance: {fileID: 8529319048301440173}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2014530888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3403561622029318555, guid: a0f559117ef514874a6b1ecda193e547,
+    type: 3}
+  m_PrefabInstance: {fileID: 8529319048301440173}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2117178140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1971,7 +2007,7 @@ PrefabInstance:
     - target: {fileID: 768034364353862927, guid: a0f559117ef514874a6b1ecda193e547,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -83.333336
+      value: -83.33334
       objectReference: {fileID: 0}
     - target: {fileID: 803434433768398700, guid: a0f559117ef514874a6b1ecda193e547,
         type: 3}
@@ -2298,6 +2334,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6865419168756592194, guid: a0f559117ef514874a6b1ecda193e547,
+        type: 3}
+      propertyPath: _sfxVolumeSlider
+      value: 
+      objectReference: {fileID: 1937748463}
+    - target: {fileID: 6865419168756592194, guid: a0f559117ef514874a6b1ecda193e547,
+        type: 3}
+      propertyPath: _musicVolumeSlider
+      value: 
+      objectReference: {fileID: 2014530888}
+    - target: {fileID: 6865419168756592194, guid: a0f559117ef514874a6b1ecda193e547,
+        type: 3}
+      propertyPath: _masterVolumeSlider
+      value: 
+      objectReference: {fileID: 1290489864}
     - target: {fileID: 7375065681592654658, guid: a0f559117ef514874a6b1ecda193e547,
         type: 3}
       propertyPath: m_AnchorMax.y
