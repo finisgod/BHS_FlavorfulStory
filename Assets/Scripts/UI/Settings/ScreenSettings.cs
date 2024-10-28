@@ -2,37 +2,37 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 /// <summary>
-/// Класс, отвечающий за настройки разрешения и режима окна, в котором будет находится игра.
+/// РљР»Р°СЃСЃ, РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° РЅР°СЃС‚СЂРѕР№РєРё СЂР°Р·СЂРµС€РµРЅРёСЏ Рё СЂРµР¶РёРјР° РѕРєРЅР°, РІ РєРѕС‚РѕСЂРѕРј Р±СѓРґРµС‚ РЅР°С…РѕРґРёС‚СЃСЏ РёРіСЂР°.
 /// </summary>
 public class ScreenSettings : MonoBehaviour
 {
-    /// <summary>Ссылка на выпадающий список с разрешениями.</summary>
+    /// <summary>РЎСЃС‹Р»РєР° РЅР° РІС‹РїР°РґР°СЋС‰РёР№ СЃРїРёСЃРѕРє СЃ СЂР°Р·СЂРµС€РµРЅРёСЏРјРё.</summary>
     [SerializeField] private TMP_Dropdown _screenModeDropdown;
-    /// <summary>Ссылка на выпадающий список с типами окна.</summary>
+    /// <summary>РЎСЃС‹Р»РєР° РЅР° РІС‹РїР°РґР°СЋС‰РёР№ СЃРїРёСЃРѕРє СЃ С‚РёРїР°РјРё РѕРєРЅР°.</summary>
     [SerializeField] private TMP_Dropdown _resolutionDropdown;
-    /// <summary>Метод, для получения и установки максимального значения обновления монитора.</summary>
+    /// <summary>РњРµС‚РѕРґ, РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ Рё СѓСЃС‚Р°РЅРѕРІРєРё РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РѕР±РЅРѕРІР»РµРЅРёСЏ РјРѕРЅРёС‚РѕСЂР°.</summary>
     private double MaxRefreshRate { get; set; }
-    /// <summary>Список разрешений.</summary>
+    /// <summary>РЎРїРёСЃРѕРє СЂР°Р·СЂРµС€РµРЅРёР№.</summary>
     private readonly List<Resolution> _resolutions = new();
-    /// <summary>Список режимов окна.</summary>
+    /// <summary>РЎРїРёСЃРѕРє СЂРµР¶РёРјРѕРІ РѕРєРЅР°.</summary>
     private List<string> _screenModeOptions = new() {
-        "Окно",
-        "Полный экран",
+        "РћРєРЅРѕ",
+        "РџРѕР»РЅС‹Р№ СЌРєСЂР°РЅ",
     };
-    /// <summary>Инициализация разрешений и рижемов окна и обновление значений в выпадаюзих списках.</summary>
+    /// <summary>РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЂР°Р·СЂРµС€РµРЅРёР№ Рё СЂРёР¶РµРјРѕРІ РѕРєРЅР° Рё РѕР±РЅРѕРІР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёР№ РІ РІС‹РїР°РґР°СЋР·РёС… СЃРїРёСЃРєР°С….</summary>
     private void Start()
     {
         InitializeResolutions();
         InitializeScreenModes();
         UpdateDropdownValues();
     }
-    /// <summary>Метод для обновления значений выпадающих списков.</summary>
+    /// <summary>РњРµС‚РѕРґ РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ Р·РЅР°С‡РµРЅРёР№ РІС‹РїР°РґР°СЋС‰РёС… СЃРїРёСЃРєРѕРІ.</summary>
     private void UpdateDropdownValues()
     {
         _resolutionDropdown.RefreshShownValue();
         _screenModeDropdown.RefreshShownValue();
     }
-    /// <summary>Метод для получения всех поддерживаемых разрешений экрана и добавления их в соответствующий выпадающий список.</summary>
+    /// <summary>РњРµС‚РѕРґ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РІСЃРµС… РїРѕРґРґРµСЂР¶РёРІР°РµРјС‹С… СЂР°Р·СЂРµС€РµРЅРёР№ СЌРєСЂР°РЅР° Рё РґРѕР±Р°РІР»РµРЅРёСЏ РёС… РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РІС‹РїР°РґР°СЋС‰РёР№ СЃРїРёСЃРѕРє.</summary>
     private void InitializeResolutions()
     {
         var allResolutions = Screen.resolutions;
@@ -53,7 +53,7 @@ public class ScreenSettings : MonoBehaviour
         _resolutionDropdown.value = uniqueResolutions.Count - 1;
         _resolutionDropdown.RefreshShownValue();
     }
-    /// <summary>Метод для получения всех поддерживаемых режимов экрана и добавления их в соответствующий выпадающий список.</summary>
+    /// <summary>РњРµС‚РѕРґ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РІСЃРµС… РїРѕРґРґРµСЂР¶РёРІР°РµРјС‹С… СЂРµР¶РёРјРѕРІ СЌРєСЂР°РЅР° Рё РґРѕР±Р°РІР»РµРЅРёСЏ РёС… РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РІС‹РїР°РґР°СЋС‰РёР№ СЃРїРёСЃРѕРє.</summary>
     private void InitializeScreenModes()
     {
         _screenModeDropdown.ClearOptions();
@@ -66,18 +66,18 @@ public class ScreenSettings : MonoBehaviour
 
         _screenModeDropdown.RefreshShownValue();
     }
-    /// <summary>Метод для установки выбранного разрешения экрана.</summary>
+    /// <summary>РњРµС‚РѕРґ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РІС‹Р±СЂР°РЅРЅРѕРіРѕ СЂР°Р·СЂРµС€РµРЅРёСЏ СЌРєСЂР°РЅР°.</summary>
     private void SetResolution(int width, int height)
     {
         Screen.SetResolution(width, height, Screen.fullScreenMode);
     }
-    /// <summary>Метод, слушающий выбор пользователя в выпадающем списке разрещений.</summary>
+    /// <summary>РњРµС‚РѕРґ, СЃР»СѓС€Р°СЋС‰РёР№ РІС‹Р±РѕСЂ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РІ РІС‹РїР°РґР°СЋС‰РµРј СЃРїРёСЃРєРµ СЂР°Р·СЂРµС‰РµРЅРёР№.</summary>
     public void OnResolutionOptionChanged()
     {
         Resolution resolution = _resolutions[_resolutionDropdown.value];
         SetResolution(resolution.width, resolution.height);
     }
-    /// <summary>Метод, слушающий выбор пользователя в выпадающем списке режимов окна.</summary>
+    /// <summary>РњРµС‚РѕРґ, СЃР»СѓС€Р°СЋС‰РёР№ РІС‹Р±РѕСЂ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РІ РІС‹РїР°РґР°СЋС‰РµРј СЃРїРёСЃРєРµ СЂРµР¶РёРјРѕРІ РѕРєРЅР°.</summary>
     public void OnScreenModeChanged()
     {
         switch (_screenModeDropdown.value)

@@ -1,27 +1,27 @@
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
-/// Класс, считывающий значение слайдера.
+/// РљР»Р°СЃСЃ, СЃС‡РёС‚С‹РІР°СЋС‰РёР№ Р·РЅР°С‡РµРЅРёРµ СЃР»Р°Р№РґРµСЂР°.
 /// </summary>
 [RequireComponent(typeof(Slider))]
 public class SliderHandler : MonoBehaviour
 {
-    /// <summary> Название канала в микшере.</summary>
+    /// <summary> РќР°Р·РІР°РЅРёРµ РєР°РЅР°Р»Р° РІ РјРёРєС€РµСЂРµ.</summary>
     [SerializeField] private string _name;
-    /// <summary> Ссылка на слайдер.</summary>
+    /// <summary> РЎСЃС‹Р»РєР° РЅР° СЃР»Р°Р№РґРµСЂ.</summary>
     private Slider _slider;
-    /// <summary>Получение компонента Слайдер</summary>
+    /// <summary>РџРѕР»СѓС‡РµРЅРёРµ РєРѕРјРїРѕРЅРµРЅС‚Р° РЎР»Р°Р№РґРµСЂ</summary>
     private void Awake()
     {
         _slider = GetComponent<Slider>();
     }
-    /// <summary>Назначение действия на слайдер, при измененении его значения.</summary>
+    /// <summary>РќР°Р·РЅР°С‡РµРЅРёРµ РґРµР№СЃС‚РІРёСЏ РЅР° СЃР»Р°Р№РґРµСЂ, РїСЂРё РёР·РјРµРЅРµРЅРµРЅРёРё РµРіРѕ Р·РЅР°С‡РµРЅРёСЏ.</summary>
     private void Start()
     {
         _slider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
     }
 
-    /// <summary> Метод, вызываемый при изменении значения слайдера.</summary>
+    /// <summary> РњРµС‚РѕРґ, РІС‹Р·С‹РІР°РµРјС‹Р№ РїСЂРё РёР·РјРµРЅРµРЅРёРё Р·РЅР°С‡РµРЅРёСЏ СЃР»Р°Р№РґРµСЂР°.</summary>
     private void ValueChangeCheck()
     {
         AudioManager.Instance.SetMixerValue(_name, _slider.value);

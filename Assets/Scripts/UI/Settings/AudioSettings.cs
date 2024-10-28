@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
-/// Структура, содержащая значения текущие значения слайдеров громкости.
+/// РЎС‚СЂСѓРєС‚СѓСЂР°, СЃРѕРґРµСЂР¶Р°С‰Р°СЏ Р·РЅР°С‡РµРЅРёСЏ С‚РµРєСѓС‰РёРµ Р·РЅР°С‡РµРЅРёСЏ СЃР»Р°Р№РґРµСЂРѕРІ РіСЂРѕРјРєРѕСЃС‚Рё.
 /// </summary>
 public struct SoundSettings
 {
@@ -10,27 +10,27 @@ public struct SoundSettings
     public float Music;
 }
 /// <summary>
-/// Класс, считывающий значения слайдеров громкости.
+/// РљР»Р°СЃСЃ, СЃС‡РёС‚С‹РІР°СЋС‰РёР№ Р·РЅР°С‡РµРЅРёСЏ СЃР»Р°Р№РґРµСЂРѕРІ РіСЂРѕРјРєРѕСЃС‚Рё.
 /// </summary>
 public class AudioSettings : MonoBehaviour
 {
-    /// <summary>Ссылка на слайдер общей громкости.</summary>
+    /// <summary>РЎСЃС‹Р»РєР° РЅР° СЃР»Р°Р№РґРµСЂ РѕР±С‰РµР№ РіСЂРѕРјРєРѕСЃС‚Рё.</summary>
     [SerializeField] private Slider _masterVolumeSlider;
-    /// <summary>Ссылка на слайдер громкости эффектов.</summary>
+    /// <summary>РЎСЃС‹Р»РєР° РЅР° СЃР»Р°Р№РґРµСЂ РіСЂРѕРјРєРѕСЃС‚Рё СЌС„С„РµРєС‚РѕРІ.</summary>
     [SerializeField] private Slider _sfxVolumeSlider;
-    /// <summary>Ссылка на слайдер громкости музыки.</summary>
+    /// <summary>РЎСЃС‹Р»РєР° РЅР° СЃР»Р°Р№РґРµСЂ РіСЂРѕРјРєРѕСЃС‚Рё РјСѓР·С‹РєРё.</summary>
     [SerializeField] private Slider _musicVolumeSlider;
-    /// <summary>Текущие настройки громкости.</summary>
+    /// <summary>РўРµРєСѓС‰РёРµ РЅР°СЃС‚СЂРѕР№РєРё РіСЂРѕРјРєРѕСЃС‚Рё.</summary>
     public SoundSettings _currentSettings;
     /// <summary>
-    /// Установка значений по умолчанию.
+    /// РЈСЃС‚Р°РЅРѕРІРєР° Р·РЅР°С‡РµРЅРёР№ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ.
     /// </summary>
     private void Start()
     {
         SetDefaultSettings();
     }
     /// <summary>
-    /// Метод, устанавливающий значения по умолчанию.
+    /// РњРµС‚РѕРґ, СѓСЃС‚Р°РЅР°РІР»РёРІР°СЋС‰РёР№ Р·РЅР°С‡РµРЅРёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ.
     /// </summary>
     public void SetDefaultSettings()
     {
@@ -42,21 +42,21 @@ public class AudioSettings : MonoBehaviour
         _currentSettings.Music = 0.5f;
     }
     /// <summary>
-    /// Метод, сохраняющий зачение слайдера общей громкости.
+    /// РњРµС‚РѕРґ, СЃРѕС…СЂР°РЅСЏСЋС‰РёР№ Р·Р°С‡РµРЅРёРµ СЃР»Р°Р№РґРµСЂР° РѕР±С‰РµР№ РіСЂРѕРјРєРѕСЃС‚Рё.
     /// </summary>
     public void SetMasterVolume()
     {
         _currentSettings.Master = _masterVolumeSlider.value;
     }
     /// <summary>
-    /// Метод, сохраняющий зачение слайдера громкости эффектов.
+    /// РњРµС‚РѕРґ, СЃРѕС…СЂР°РЅСЏСЋС‰РёР№ Р·Р°С‡РµРЅРёРµ СЃР»Р°Р№РґРµСЂР° РіСЂРѕРјРєРѕСЃС‚Рё СЌС„С„РµРєС‚РѕРІ.
     /// </summary>
     public void SetSFXVolume()
     {
         _currentSettings.SFX = _sfxVolumeSlider.value;
     }
     /// <summary>
-    /// Метод, сохраняющий зачение слайдера громкости музыки.
+    /// РњРµС‚РѕРґ, СЃРѕС…СЂР°РЅСЏСЋС‰РёР№ Р·Р°С‡РµРЅРёРµ СЃР»Р°Р№РґРµСЂР° РіСЂРѕРјРєРѕСЃС‚Рё РјСѓР·С‹РєРё.
     /// </summary>
     public void SetMusicVolume()
     {

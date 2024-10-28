@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.Audio;
 /// <summary>
-/// Класс, управляюший громкостью аудио каналов.
+/// РљР»Р°СЃСЃ, СѓРїСЂР°РІР»СЏСЋС€РёР№ РіСЂРѕРјРєРѕСЃС‚СЊСЋ Р°СѓРґРёРѕ РєР°РЅР°Р»РѕРІ.
 /// </summary>
 public class AudioManager : MonoBehaviour
 {
-    /// <summary>Экземпляр объекта.</summary>
+    /// <summary>Р­РєР·РµРјРїР»СЏСЂ РѕР±СЉРµРєС‚Р°.</summary>
     public static AudioManager Instance;
-    /// <summary>Аудиомиксер.</summary>
+    /// <summary>РђСѓРґРёРѕРјРёРєСЃРµСЂ.</summary>
     public AudioMixer _audioMixer;
-    /// <summary>Создание единственного экземпляра класса.</summary>
+    /// <summary>РЎРѕР·РґР°РЅРёРµ РµРґРёРЅСЃС‚РІРµРЅРЅРѕРіРѕ СЌРєР·РµРјРїР»СЏСЂР° РєР»Р°СЃСЃР°.</summary>
     private void Awake()
     {
         if (Instance != null)
@@ -24,10 +24,10 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(Instance.gameObject);
     }
     /// <summary>
-    /// Метод, отвечающий за изменение параметра громкости определенного аудио канала
+    /// РњРµС‚РѕРґ, РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° РёР·РјРµРЅРµРЅРёРµ РїР°СЂР°РјРµС‚СЂР° РіСЂРѕРјРєРѕСЃС‚Рё РѕРїСЂРµРґРµР»РµРЅРЅРѕРіРѕ Р°СѓРґРёРѕ РєР°РЅР°Р»Р°
     /// </summary>
-    /// <param name="name">Название аудио канала</param>
-    /// <param name="value">Новое значение, считанное со слайдера</param>
+    /// <param name="name">РќР°Р·РІР°РЅРёРµ Р°СѓРґРёРѕ РєР°РЅР°Р»Р°</param>
+    /// <param name="value">РќРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ, СЃС‡РёС‚Р°РЅРЅРѕРµ СЃРѕ СЃР»Р°Р№РґРµСЂР°</param>
     public void SetMixerValue(string name, float value)
     {
         const int MinMixerValue = -80;

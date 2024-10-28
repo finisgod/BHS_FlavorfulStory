@@ -3,35 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 /// <summary>
-/// Класс, отвечающий за поспроизведение музыки.
+/// РљР»Р°СЃСЃ, РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° РїРѕСЃРїСЂРѕРёР·РІРµРґРµРЅРёРµ РјСѓР·С‹РєРё.
 /// </summary>
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour
 {
-    /// <summary> Ссылка на микшер.</summary>
+    /// <summary> РЎСЃС‹Р»РєР° РЅР° РјРёРєС€РµСЂ.</summary>
     [SerializeField] private AudioMixer _audioMixer;
-    /// <summary> Список аудиоклипов для песен.</summary>
+    /// <summary> РЎРїРёСЃРѕРє Р°СѓРґРёРѕРєР»РёРїРѕРІ РґР»СЏ РїРµСЃРµРЅ.</summary>
     [SerializeField] private List<AudioClip> _tracks;
-    /// <summary> Ссылка на аудиоисточник.</summary>
+    /// <summary> РЎСЃС‹Р»РєР° РЅР° Р°СѓРґРёРѕРёСЃС‚РѕС‡РЅРёРє.</summary>
     private AudioSource _audioPlayer;
-    /// <summary>Получение компонента аудио источника</summary>
+    /// <summary>РџРѕР»СѓС‡РµРЅРёРµ РєРѕРјРїРѕРЅРµРЅС‚Р° Р°СѓРґРёРѕ РёСЃС‚РѕС‡РЅРёРєР°</summary>
     private void Awake()
     {
         _audioPlayer = GetComponent<AudioSource>();
         _audioPlayer.pitch = 1;
     }
-    /// <summary> Метод для старта воспроизведения музыки.</summary>
+    /// <summary> РњРµС‚РѕРґ РґР»СЏ СЃС‚Р°СЂС‚Р° РІРѕСЃРїСЂРѕРёР·РІРµРґРµРЅРёСЏ РјСѓР·С‹РєРё.</summary>
     private void Start()
     {
         StartCoroutine(PlayTracks(_tracks));
     }
-    /// <summary> Метод для воспроизведения трека.</summary>
+    /// <summary> РњРµС‚РѕРґ РґР»СЏ РІРѕСЃРїСЂРѕРёР·РІРµРґРµРЅРёСЏ С‚СЂРµРєР°.</summary>
     private void PlayTrack(AudioClip audioClip)
     {
         _audioPlayer.clip = audioClip;
         _audioPlayer.Play();
     }
-    /// <summary> Метод для воспроизведения всех треков.</summary>
+    /// <summary> РњРµС‚РѕРґ РґР»СЏ РІРѕСЃРїСЂРѕРёР·РІРµРґРµРЅРёСЏ РІСЃРµС… С‚СЂРµРєРѕРІ.</summary>
     private IEnumerator PlayTracks(List<AudioClip> tracks)
     {
         while (true)
@@ -43,10 +43,10 @@ public class MusicManager : MonoBehaviour
         }
     }
     /// <summary>
-    /// Метод для получения случайного индекса из списка треков.
+    /// РњРµС‚РѕРґ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ СЃР»СѓС‡Р°Р№РЅРѕРіРѕ РёРЅРґРµРєСЃР° РёР· СЃРїРёСЃРєР° С‚СЂРµРєРѕРІ.
     /// </summary>
-    /// <param name="tracks">Список треков</param>
-    /// <returns>Случайный индекс</returns>
+    /// <param name="tracks">РЎРїРёСЃРѕРє С‚СЂРµРєРѕРІ</param>
+    /// <returns>РЎР»СѓС‡Р°Р№РЅС‹Р№ РёРЅРґРµРєСЃ</returns>
     private int GetRandomIndex(List<AudioClip> tracks)
     {
         return Random.Range(0, tracks.Count);

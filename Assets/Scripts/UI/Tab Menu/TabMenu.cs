@@ -2,28 +2,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
-/// Класс, отвечающий за отображение меню паузы и взаимодействия с этим меню.
+/// РљР»Р°СЃСЃ, РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РјРµРЅСЋ РїР°СѓР·С‹ Рё РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ СЌС‚РёРј РјРµРЅСЋ.
 /// </summary>
 public class TabMenu : MonoBehaviour
 {
     [Header("UI Objects")]
-    /// <summary>Список кнопок внутри меню</summary>
+    /// <summary>РЎРїРёСЃРѕРє РєРЅРѕРїРѕРє РІРЅСѓС‚СЂРё РјРµРЅСЋ</summary>
     [SerializeField] private List<Button> _tabButtons;
-    /// <summary>Список информационных блоков для соответствующих кнопок меню.</summary>
+    /// <summary>РЎРїРёСЃРѕРє РёРЅС„РѕСЂРјР°С†РёРѕРЅРЅС‹С… Р±Р»РѕРєРѕРІ РґР»СЏ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёС… РєРЅРѕРїРѕРє РјРµРЅСЋ.</summary>
     [SerializeField] private List<GameObject> _tabInfo;
     [Header("Sounds")]
-    /// <summary>Аудиоисточник.</summary>
+    /// <summary>РђСѓРґРёРѕРёСЃС‚РѕС‡РЅРёРє.</summary>
     [SerializeField] private AudioSource _audioSource;
-    /// <summary>Звук нажатия на кнопку меню.</summary>
+    /// <summary>Р—РІСѓРє РЅР°Р¶Р°С‚РёСЏ РЅР° РєРЅРѕРїРєСѓ РјРµРЅСЋ.</summary>
     [SerializeField] private AudioClip _pressedTabSound;
-    /// <summary>Переменная запоминающая, какая кнопка была нажата. </summary>
+    /// <summary>РџРµСЂРµРјРµРЅРЅР°СЏ Р·Р°РїРѕРјРёРЅР°СЋС‰Р°СЏ, РєР°РєР°СЏ РєРЅРѕРїРєР° Р±С‹Р»Р° РЅР°Р¶Р°С‚Р°. </summary>
     private int _previousIndex;
 
     private void Awake()
     {
         _audioSource.pitch = 1;
     }
-    /// <summary>Привязка открытия информационных блоков к соответствующим кнопкам..</summary>
+    /// <summary>РџСЂРёРІСЏР·РєР° РѕС‚РєСЂС‹С‚РёСЏ РёРЅС„РѕСЂРјР°С†РёРѕРЅРЅС‹С… Р±Р»РѕРєРѕРІ Рє СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРј РєРЅРѕРїРєР°Рј..</summary>
     private void Start()
     {
         for (int i = 0; i < _tabButtons.Count; i++)
@@ -35,7 +35,7 @@ public class TabMenu : MonoBehaviour
         _previousIndex = (int)(_tabButtons.Count / 2);
         OnTabSelected(_previousIndex);
     }
-    /// <summary>Обработка перемещения по кнопкам меню с помощью клавиатуры.</summary>
+    /// <summary>РћР±СЂР°Р±РѕС‚РєР° РїРµСЂРµРјРµС‰РµРЅРёСЏ РїРѕ РєРЅРѕРїРєР°Рј РјРµРЅСЋ СЃ РїРѕРјРѕС‰СЊСЋ РєР»Р°РІРёР°С‚СѓСЂС‹.</summary>
     private void Update()
     {
         bool _left = Input.GetKeyDown(KeyCode.Q);
@@ -48,9 +48,9 @@ public class TabMenu : MonoBehaviour
         }
     }
     /// <summary>
-    /// Метод, вызываемый при нажатии на кнопку, открывает соответствующий блок и скрывает предыдущий.
+    /// РњРµС‚РѕРґ, РІС‹Р·С‹РІР°РµРјС‹Р№ РїСЂРё РЅР°Р¶Р°С‚РёРё РЅР° РєРЅРѕРїРєСѓ, РѕС‚РєСЂС‹РІР°РµС‚ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ Р±Р»РѕРє Рё СЃРєСЂС‹РІР°РµС‚ РїСЂРµРґС‹РґСѓС‰РёР№.
     /// </summary>
-    /// <param name="index">Индекс открываемого блока.</param>
+    /// <param name="index">РРЅРґРµРєСЃ РѕС‚РєСЂС‹РІР°РµРјРѕРіРѕ Р±Р»РѕРєР°.</param>
     private void OnTabSelected(int index)
     {
         _tabInfo[_previousIndex].SetActive(false);
