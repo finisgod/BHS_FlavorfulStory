@@ -7,23 +7,15 @@ namespace FlavorfulStory.Inventory.UI
     [RequireComponent(typeof(Image))]
     public class InventoryItemIcon : MonoBehaviour
     {
-        /// <summary> Картинка иконки.</summary>
-        private Image _iconImage;
-
-        /// <summary> Инициализация объекта.</summary>
-        private void Awake()
-        {
-            _iconImage = GetComponent<Image>();
-        }
-
         /// <summary> Установить предмет инвентаря.</summary>
         /// <param name="item"> Предмет инвентаря.</param>
         public void SetItem(InventoryItem item)
         {
-            _iconImage.enabled = item != null;
+            var iconImage = GetComponent<Image>();
+            iconImage.enabled = item != null;
             if (item != null)
             {
-                _iconImage.sprite = item.Icon;
+                iconImage.sprite = item.Icon;
             }
         }
     }

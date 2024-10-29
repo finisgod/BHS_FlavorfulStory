@@ -25,8 +25,6 @@ namespace FlavorfulStory.Inventory
         private void Awake()
         {
             _slots = new InventoryItem[_inventorySize];
-            _slots[0] = InventoryItem.GetItemFromID("e8395b2d-5769-4631-8ab6-b52e02266f80");
-            _slots[1] = InventoryItem.GetItemFromID("368f7b2d-c83a-4fc0-a12c-921aa67a4beb");
         }
 
         /// <summary> Получить инвентарь игрока.</summary>

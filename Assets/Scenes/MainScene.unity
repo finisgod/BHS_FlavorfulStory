@@ -16942,7 +16942,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761f5a0f103fcc04e9c1b85bb4d0bbc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forward: 1
 --- !u!4 &418081773 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 729867273198166643, guid: 19029c1e7c9031d4bb5273374fc0dc4e,
@@ -18382,7 +18381,7 @@ MonoBehaviour:
   route:
   - {fileID: 907511181}
   time: 10000
-  name: To FishMarket
+  routeName: 
   npcName: Liza
 --- !u!1 &485040204
 GameObject:
@@ -21103,7 +21102,7 @@ MonoBehaviour:
   - {fileID: 1970919495}
   - {fileID: 907511181}
   time: 50000
-  name: To House
+  routeName: 
   npcName: Liza
 --- !u!1001 &540226810
 PrefabInstance:
@@ -24385,7 +24384,7 @@ MonoBehaviour:
   - {fileID: 265717231}
   - {fileID: 907511181}
   time: 50000
-  name: Test2
+  routeName: 
   npcName: 
 --- !u!1001 &673134675
 PrefabInstance:
@@ -33128,8 +33127,8 @@ GameObject:
   - component: {fileID: 933970309}
   - component: {fileID: 933970308}
   - component: {fileID: 933970316}
-  - component: {fileID: 933970314}
   - component: {fileID: 933970313}
+  - component: {fileID: 933970317}
   - component: {fileID: 933970310}
   - component: {fileID: 933970312}
   - component: {fileID: 933970315}
@@ -33253,20 +33252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f350fedb6969147a1b4693eb2d00c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &933970314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 933970307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f03260ac970e84ea5cada1c8cd2df7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 4
-  _rotateSpeed: 4
 --- !u!114 &933970315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33296,6 +33281,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uniqueIdentifier: Player
+--- !u!114 &933970317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933970307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6745febed436c5e478437cb08c83ca01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 4
+  _rotateSpeed: 4
 --- !u!1 &934425663 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 895bba5160ea131489e4882eb6ded6ab,
@@ -39913,7 +39912,7 @@ MonoBehaviour:
   - {fileID: 198213116}
   - {fileID: 817455837}
   time: 20000
-  name: Test
+  routeName: 
   npcName: 
 --- !u!4 &1073923472 stripped
 Transform:
@@ -46902,7 +46901,7 @@ MonoBehaviour:
   - {fileID: 1388840278}
   - {fileID: 625771980}
   time: 10000
-  name: Test
+  routeName: 
   npcName: 
 --- !u!1 &1296016358
 GameObject:
@@ -50223,7 +50222,7 @@ MonoBehaviour:
   route:
   - {fileID: 1202223691}
   time: 40000
-  name: To Shop
+  routeName: 
   npcName: 
 --- !u!4 &1341078386 stripped
 Transform:
@@ -52227,7 +52226,7 @@ MonoBehaviour:
   route:
   - {fileID: 1262079420}
   time: 20000
-  name: To Veggie
+  routeName: 
   npcName: 
 --- !u!4 &1386710500 stripped
 Transform:
@@ -60570,7 +60569,7 @@ MonoBehaviour:
   route:
   - {fileID: 144763305}
   time: 10000
-  name: To Bakery
+  routeName: 
   npcName: 
 --- !u!1 &1640683512
 GameObject:
@@ -88283,7 +88282,7 @@ MonoBehaviour:
   route:
   - {fileID: 849692158}
   time: 25000
-  name: To Fish
+  routeName: 
   npcName: 
 --- !u!4 &1925655588 stripped
 Transform:
@@ -97266,7 +97265,7 @@ MonoBehaviour:
   - {fileID: 507040829}
   - {fileID: 1312524109}
   time: 50000
-  name: To FishMarket
+  routeName: 
   npcName: Liza
 --- !u!1 &2109675289
 GameObject:

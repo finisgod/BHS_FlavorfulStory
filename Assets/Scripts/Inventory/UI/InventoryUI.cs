@@ -46,10 +46,10 @@ namespace FlavorfulStory.Inventory.UI
         /// <summary> Создание слотов инвентаря.</summary>
         private void SpawnInventorySlots()
         {
-            for (int i = 0; i < _playerInventory.InventorySize; i++)
+            for (int index = 0; index < _playerInventory.InventorySize; index++)
             {
                 var itemUI = Instantiate(_inventorySlotPrefab, _placeToSpawnSlots);
-                itemUI.Setup(_playerInventory, i);
+                itemUI.Setup(_playerInventory, index);
             }
         }
     }
