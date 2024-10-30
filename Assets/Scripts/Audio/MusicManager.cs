@@ -42,7 +42,6 @@ public class MusicManager : MonoBehaviour
         while (true)
         {
             int randomTrackIndex = Random.Range(0, tracks.Count);
-            Debug.Log(randomTrackIndex);
             PlayTrack(tracks[randomTrackIndex]);
             yield return new WaitForSeconds(tracks[randomTrackIndex].length);
         }
