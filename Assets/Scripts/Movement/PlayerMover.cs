@@ -5,40 +5,51 @@ namespace FlavorfulStory.Movement
 {
     /// <summary> Передвижение игрока.</summary>
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerMovement : MonoBehaviour, ISaveable
+    [RequireComponent(typeof(Animator))]
+    public class PlayerMover : MonoBehaviour, ISaveable
     {
         [Header("Параметры передвижения")]
         /// <summary> Скорость движения.</summary>
         [SerializeField] private float _moveSpeed;
-        /// <summary> Скорость поворота.</summary>
-        [SerializeField] private float _rotateSpeed;
 
         /// <summary> Твердое тело.</summary>
         private Rigidbody _rigidbody;
 
+        /// <summary> Аниматор игрока.</summary>
+        private Animator _animator;
+      
         /// <summary> Инициализация полей класса.</summary>
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            _animator = GetComponent<Animator>();
         }
 
         /// <summary> Передвижение игрока в заданном направлении.</summary>
         /// <param name="direction"> Направление, в котором движется игрок.</param>
         public void Move(Vector3 direction)
         {
-            Vector3 offset = _moveSpeed * Time.deltaTime * direction;
+            float multiplier = Input.GetKey(KeyCode.LeftShift) ? 0.5f : 1f;
+
+            // Animate
+            float speed = Mathf.Clamp01(direction.magnitude) * multiplier;
+            const float DampTime = 0.2f; // Значение получено эмпирически
+            _animator.SetFloat("Speed", speed, DampTime, Time.deltaTime);
+
+            // Move
+            Vector3 offset = _moveSpeed * multiplier * Time.deltaTime * direction;
             _rigidbody.MovePosition(_rigidbody.position + offset);
+
+            Rotate(direction);
         }
 
         /// <summary> Поворот игрока в заданном направлении.</summary>
         /// <param name="direction"> Направление, в котором движется игрок.</param>
-        public void Rotate(Vector3 direction)
+        private void Rotate(Vector3 direction)
         {
-            if (Vector3.Angle(transform.forward, direction) > 0)
-            {
-                Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, _rotateSpeed, 0);
-                transform.rotation = Quaternion.LookRotation(newDirection);
-            }
+            float _rotateSpeed = 4f;
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, _rotateSpeed, 0);
+            transform.rotation = Quaternion.LookRotation(newDirection);
         }
 
         #region Saving
