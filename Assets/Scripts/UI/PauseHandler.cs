@@ -43,26 +43,22 @@ public class PauseHandler : MonoBehaviour
             _isPaused = false;
         }
     }
-    /// <summary>
-    /// Метод для включения UI объектов при паузе.
-    /// </summary>
-    /// <param name="objects">Список UI объектов, которые нужны активировать при паузе. </param>
+
+    // DELETE
     private void ActivateObjects(List<GameObject> objects)
     {
-        for (int i = 0; i < objects.Count; i++)
+        foreach (GameObject obj in objects)
         {
-            objects[i].gameObject.SetActive(true);
+            obj.SetActive(true);
         }
     }
-    /// <summary>
-    /// Метод для отключения UI объектов при паузе.
-    /// </summary>
-    /// <param name="objects">Список UI объектов, которые нужны активировать при паузе. </param>
+
+    // DELETE
     private void DeactivateObjects(List<GameObject> objects)
     {
-        for (int i = 0; i < objects.Count; i++)
+        foreach (GameObject obj in objects)
         {
-            objects[i].gameObject.SetActive(false);
+            obj.SetActive(false);
         }
     }
 }
