@@ -21,7 +21,7 @@ namespace FlavorfulStory.Control
         {
             float x = Input.GetAxis("Horizontal"), z = Input.GetAxis("Vertical");
             var direction = new Vector3(x, 0, z).normalized;
-            _playerMover.Move(direction);
+            _playerMover.MoveAndRotate(direction);
         }
     }
 }
