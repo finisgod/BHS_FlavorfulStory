@@ -1,7 +1,7 @@
 using Assets.Scripts.Items.Instruments;
+using FlavorfulStory.Control;
 using System.Collections;
 using UnityEngine;
-using static UnityEditor.Progress;
 /// <summary> Класс описывающий логику расстановки предметов по сетке ObjectGrid.</summary>
 ///<remarks> Вешается на объект - сетку объектов для размещения предметов при помощи указателя мыши.</remarks>
 
@@ -78,8 +78,10 @@ public class GridInteractionCollider : MonoBehaviour //Разнести логику по разным
                         //run animation
                         if (farmTile.IsGrown && farmTile.IsBisy)
                         {
-                            PlayerAnimationController animationController = other.GetComponent<PlayerAnimationController>();
-                            StartCoroutine(MiningAnimationCoroutine(animationController, manager , 200, itemToPlace as ShovelItem, farmTile));
+                            //PlayerAnimationController animationController = other.GetComponent<PlayerAnimationController>();
+                            StartCoroutine(MiningAnimationCoroutine(manager, 200, itemToPlace as ShovelItem, farmTile));
+                            //animationController,
+
                         }
                         //
                     }
@@ -89,28 +91,28 @@ public class GridInteractionCollider : MonoBehaviour //Разнести логику по разным
         }
     }
     //Coroutines
-    public IEnumerator MiningAnimationCoroutine(PlayerAnimationController controller //Упростить
-        , InventoryManager inventory
+    public IEnumerator MiningAnimationCoroutine(   //PlayerAnimationController controller //Упростить
+        InventoryManager inventory
         , int timer
         , ShovelItem item
         , FarmTile tile)
     {
-        if (!controller.isAnimated)
-        {
-            controller.SetAnimated(true);
-            controller.SetTrigger("miningTrigger");
+        //if (!controller.isAnimated)
+        //{
+            //controller.SetAnimated(true);
+          //  controller.SetTrigger("miningTrigger");
             for (int i = 0; i < timer; i++)
             {
                 Debug.Log(i.ToString());
                 yield return null;
             }
-            controller.SetAnimated(false);
+            //controller.SetAnimated(false);
 
             ToolItemArgs args = new ToolItemArgs();
             item.UseLkm(tile, args);
             tile.GetAgriculture();
             inventory.AddToInventory(args.item);
-        }
+        //}
     }
 
     /// <summary>Метод вызывающийся при выходе из коллайдера объекта на котором этот скрипт висит .</summary>
