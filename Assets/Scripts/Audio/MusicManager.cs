@@ -1,26 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 /// <summary> Класс, отвечающий за поспроизведение музыки.</summary>
-[RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour
 {
-    /// <summary> Ссылка на микшер.</summary>
-    [SerializeField] private AudioMixer _audioMixer;
+    /// <summary> Ссылка на аудиоисточник.</summary>
+    [SerializeField] private AudioSource _source;
 
     /// <summary> Список аудиоклипов для песен.</summary>
     [SerializeField] private List<AudioClip> _tracks;
 
-    /// <summary> Ссылка на аудиоисточник.</summary>
-    private AudioSource _audioPlayer;
-
     /// <summary> Получение компонента аудио источника</summary>
     private void Awake()
     {
-        _audioPlayer = GetComponent<AudioSource>();
-        _audioPlayer.pitch = 1;
+        // CHECK
+        _source.pitch = 1;
     }
 
     /// <summary> Метод для старта воспроизведения музыки.</summary>
@@ -32,8 +27,8 @@ public class MusicManager : MonoBehaviour
     /// <summary> Метод для воспроизведения трека.</summary>
     private void PlayTrack(AudioClip audioClip)
     {
-        _audioPlayer.clip = audioClip;
-        _audioPlayer.Play();
+        _source.clip = audioClip;
+        _source.Play();
     }
 
     /// <summary> Метод для воспроизведения всех треков.</summary>

@@ -80,19 +80,33 @@ namespace FlavorfulStory.Movement
         }
 
         #region Saving
+        /// <summary>
+        /// 
+        /// </summary>
         [System.Serializable]
         private struct MoverSaveData
         {
+            /// <summary>
+            /// 
+            /// </summary>
             public SerializableVector3 Position;
+
+            /// <summary>
+            /// 
+            /// </summary>
             public SerializableVector3 Rotation;
         }
 
+        /// <summary> Фиксация состояния объекта при сохранении.</summary>
+        /// <returns> Возвращает объект, в котором фиксируется состояние.</returns>
         public object CaptureState() => new MoverSaveData()
         {
             Position = new SerializableVector3(transform.position),
             Rotation = new SerializableVector3(transform.eulerAngles)
         };
 
+        /// <summary> Восстановление состояния объекта при загрузке.</summary>
+        /// <param name="state"> Объект состояния, который необходимо восстановить.</param>
         public void RestoreState(object state)
         {
             var data = (MoverSaveData)state;
