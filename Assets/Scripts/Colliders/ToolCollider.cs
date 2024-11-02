@@ -25,7 +25,7 @@ public class ToolCollider : BaseCollider //NotUsed yet //все коллайдеры оптимизи
     //private void Update()
     //{
         //List<AgricultureObject> agricultures = GetObjectCollection().GetItems<AgricultureObject>();
-        //UnityEngine.Debug.Log("Founded: " + agricultures.Count + "Agricutures");
+        //UnityEngine.//Debug.Log("Founded: " + agricultures.Count + "Agricutures");
     //}
 }
 
