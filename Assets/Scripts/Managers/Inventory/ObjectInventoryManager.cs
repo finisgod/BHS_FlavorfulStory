@@ -21,7 +21,7 @@ public class ObjectInventoryManager : MonoBehaviour
     /// <summary>Методдля включения/выключения инвентаря .</summary>
     public void ToggleInventory()
     {
-        //Debug.Log("Use toggle");
+        Debug.Log("Use toggle");
         _inventoryUi.SetActive(!_inventoryUi.activeSelf);
     }
 }

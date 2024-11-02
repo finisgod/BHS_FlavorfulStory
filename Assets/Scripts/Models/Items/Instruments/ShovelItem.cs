@@ -6,9 +6,8 @@ namespace Assets.Scripts.Items.Instruments
 {
     public class ShovelItem : ToolItem 
     {
-        //public ShovelItem() : base() { }
-        //public ShovelItem(string name) : base(name) { }
-        public ShovelItem() : base("Shovel") { }
+        public ShovelItem() : base() { }
+        public ShovelItem(string name) : base(name) { }
         public override void UseLkm(object sender, IUsableItemArgs args)
         {
             if (args is ToolItemArgs && sender is FarmTile)
@@ -27,14 +26,14 @@ namespace Assets.Scripts.Items.Instruments
                         }
                     }
                 }
-                //Debug.Log("Shovel lkm");
+                Debug.Log("Shovel lkm");
             }
         }
         public override void UsePkm(object sender, IUsableItemArgs args)
         {
             if (args is ToolItemArgs)
             {
-                //Debug.Log("Shovel pkm");
+                Debug.Log("Shovel pkm");
             }
         }
     }

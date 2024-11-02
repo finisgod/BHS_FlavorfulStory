@@ -1,4 +1,3 @@
-using FlavorfulStory.Saving;
 using UnityEngine;
 
 /// <summary> Ѕазовый класс игрока дл€ сохранени€ его состо€ний.</summary> 

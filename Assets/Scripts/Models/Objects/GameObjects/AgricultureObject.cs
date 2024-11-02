@@ -15,34 +15,27 @@ namespace Assets.Scripts.Models.Objects.GameObjects
         //public double GoalGrowTime { get { return _goalGrowTime; } }
         public double CurrentGrowTime { get { return _currentGrowTime; } set { _currentGrowTime = value; } }
         public bool IsGrown { get { return _isGrown; } }
-
-        public bool IsCanGrow { get; set; }
         public AgricultureObject(string name) : base(name)
         {
         }
         public void Start()
         {
-            IsCanGrow = false;
             _goalGrowTime = 10000.0; //вынести в базовую инициализацию
             _startWorldTime = WorldTime.GetCurrentTime();
         }
         public void Update()
         {
-            //double delta = WorldTime.GetCurrentTime() - _startWorldTime;
-            //CurrentGrowTime = delta; //Доделать с днями
-            if (IsCanGrow)
-            {
-                CurrentGrowTime = WorldTime.Instance.IncreaseByTick(CurrentGrowTime);
-            }
-            else
-            {
-                //Debug.Log("CANT GROW");
-            }
-            //Debug.Log("GrowTime: " + CurrentGrowTime.ToString());
-            if (CurrentGrowTime > _goalGrowTime) 
-            { 
-                _isGrown = true; AgricultureGrown.Invoke(); //Убрать цикл
-            } 
+            double delta = WorldTime.GetCurrentTime() - _startWorldTime;
+
+            //Debug.Log("START: " + _startWorldTime.ToString());
+
+            CurrentGrowTime = delta; //Доделать с днями
+
+            if (CurrentGrowTime > _goalGrowTime) { _isGrown = true; AgricultureGrown.Invoke(); } //Убрать цикл
+
+            //Debug.Log(this.ObjectName + " Goal Grow time:" + _goalGrowTime.ToString());
+            //Debug.Log(this.ObjectName + " Grow time:" + CurrentGrowTime.ToString());
+
         }
         public Item PickByToolAndDestroy(ToolItem tool)
         {
