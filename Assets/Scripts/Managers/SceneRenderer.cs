@@ -20,7 +20,7 @@ public class SceneRenderer : MonoBehaviour
     /// <param name="sceneName"> . Имя сцены</param>
     public void SceneRenderOn(string sceneName)
     {
-        Debug.Log(sceneName + " Render On");
+        //Debug.Log(sceneName + " Render On");
         foreach (Scene s in scenes)
         {
             if (s.name == sceneName)
@@ -42,7 +42,7 @@ public class SceneRenderer : MonoBehaviour
     /// <param name="sceneName"> . Имя сцены</param>
     public void SceneRenderOff(string sceneName)
     {
-        Debug.Log(sceneName + " Render Off");
+        //Debug.Log(sceneName + " Render Off");
         foreach (Scene s in scenes)
         {
             if (s.name == sceneName)

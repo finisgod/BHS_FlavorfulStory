@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour
     public void AddToInventory(Item item)
     {
         //AddLogic for item prefab
-        Debug.Log("From InventoryManager / Added: " + item.Name);
+        //Debug.Log("From InventoryManager / Added: " + item.Name);
         if (!_inventory.ContainsName(item.Name))
         {
             item.Count = 1;
@@ -61,7 +61,7 @@ public class InventoryManager : MonoBehaviour
         {
             _selectedItem = null;
         }
-        else
+        else if (!(inventoryItem.Count > 0)) 
         {
             _selectedItem = _inventory.GetItem(0);
         }
@@ -89,8 +89,8 @@ public class InventoryManager : MonoBehaviour
     /// <summary> Метод для выбора текущего айтема.</summary>
     public void SetCurrentInventoryItem(int index)
     {
-        Debug.Log("Set current inventory item: " + index);
-        if (index < _inventory.Count && index > 0)
+        //Debug.Log("Set current inventory item: " + index);
+        if (index < _inventory.Count && index > -1)
         {
             //DropLogic
             _selectedItem = GetInventoryItem(index);

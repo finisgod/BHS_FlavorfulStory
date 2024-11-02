@@ -1,5 +1,8 @@
 ﻿using FlavorfulStory.Saving;
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary> Глобальное игровое время.</summary>
 public class WorldTime : MonoBehaviour, ISaveable
@@ -85,11 +88,16 @@ public class WorldTime : MonoBehaviour, ISaveable
         if (_currentTime < dayTime || _currentTime > nightTime) isDay = false;
         else isDay = true;
 
-        if (_currentTime > 86400) 
-        { 
+        if (_currentTime > 86400)
+        {
             _currentTime = 0;
-            DayEndedEvent?.Invoke(); 
+            DayEndedEvent?.Invoke();
         }
+    }
+
+    public double IncreaseByTick(double input) //change to timer
+    {
+        return input += tick;
     }
 
     /// <summary>
@@ -106,4 +114,5 @@ public class WorldTime : MonoBehaviour, ISaveable
 
     public void RestoreState(object state) => _currentTime = (float)state;
     #endregion
+
 }

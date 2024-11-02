@@ -21,8 +21,8 @@ public class PlayerInventoryInputController : MonoBehaviour //Сделать контроллер
         //Tests section
         if (Input.GetKeyDown(KeyCode.H))
         {
-            _inventoryManager.AddToInventory(new ShovelItem("Shovel"));
-            _inventoryManager.AddToInventory(new PlaceableItem("SwordFish"));
+            _inventoryManager.AddToInventory(new ShovelItem());
+            _inventoryManager.AddToInventory(new WaterCanItem());
             _inventoryManager.AddToInventory(new AgricultureItem("Beet"));
         }
         //Move To Another Manager

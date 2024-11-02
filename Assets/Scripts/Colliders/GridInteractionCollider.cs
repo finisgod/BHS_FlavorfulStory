@@ -1,7 +1,7 @@
 using Assets.Scripts.Items.Instruments;
-using FlavorfulStory.Control;
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.Progress;
 /// <summary> Класс описывающий логику расстановки предметов по сетке ObjectGrid.</summary>
 ///<remarks> Вешается на объект - сетку объектов для размещения предметов при помощи указателя мыши.</remarks>
 
@@ -24,7 +24,7 @@ public class GridInteractionCollider : MonoBehaviour //Разнести логику по разным
             Object currTileObj = CurrentTile.TileObject;
             if (currTileObj != null)
             {
-                Debug.Log("CURRENT TILE OBJ NAME:" + currTileObj.name);
+                //Debug.Log("CURRENT TILE OBJ NAME:" + currTileObj.name);
             }
         }
     }
@@ -35,7 +35,7 @@ public class GridInteractionCollider : MonoBehaviour //Разнести логику по разным
     {
         _gridTargetManager.gameObject.SetActive(true);
         _gridTargetManager.HighlightTile();
-        //if (selectedTile != null) Debug.Log("Founded tile");
+        //if (selectedTile != null) //Debug.Log("Founded tile");
         ObjectGrid grid = this.gameObject.GetComponent<ObjectGrid>();
         if (other.gameObject.tag == "Player")
         {
@@ -48,42 +48,47 @@ public class GridInteractionCollider : MonoBehaviour //Разнести логику по разным
             //}
             //if (isPlacing)
             //{
-            Item itemToPlace = null;
+            Item interactionItem = null;
             if (Input.GetKeyDown((KeyCode)UserKeys.CommitPlaceObject) && (manager.GetAllInventoryItems().Count > 0))
             {
-                itemToPlace = manager.GetCurrentInventoryItem();
-                Tile tileToPlace = _gridTargetManager.GetSelectedTile();
-                if (tileToPlace is PlaceableTile)
+                interactionItem = manager.GetCurrentInventoryItem();
+                Tile interactionTile = _gridTargetManager.GetSelectedTile();
+                if (interactionTile is PlaceableTile)
                 {
                     //Логика размещения айтема                    
-                    if (itemToPlace is IPlaceableItem)
+                    if (interactionItem is IPlaceableItem)
                     {
-                        bool result = _gridTargetManager.PlaceOnGrid((IPlaceableItem)itemToPlace, grid, tileToPlace as PlaceableTile);
-                        if (result) manager.RemoveFromInventory(itemToPlace);
+                        bool result = _gridTargetManager.PlaceOnGrid((IPlaceableItem)interactionItem, grid, interactionTile as PlaceableTile);
+                        if (result) manager.RemoveFromInventory(interactionItem);
                     }
                     //End placing
                     //isPlacing = false;
                     //
                 }
-                if (tileToPlace is FarmTile)
+                if (interactionTile is FarmTile)
                 {
-                    FarmTile farmTile = tileToPlace as FarmTile;
-                    if (itemToPlace is IAgricultureItem)
+                    FarmTile farmTile = interactionTile as FarmTile;
+                    if (interactionItem is IAgricultureItem)
                     {
-                        bool result = _gridTargetManager.PlantOnGrid((IAgricultureItem)itemToPlace, grid, tileToPlace as FarmTile);
-                        if (result) manager.RemoveFromInventory(itemToPlace);
+                        bool result = _gridTargetManager.PlantOnGrid((IAgricultureItem)interactionItem, grid, interactionTile as FarmTile);
+                        if (result) manager.RemoveFromInventory(interactionItem);
                     }
-                    if (itemToPlace is ShovelItem)
+                    //Убрать if'ы в отдельный класс - дженерик
+                    if (interactionItem is ShovelItem)
                     {
                         //run animation
                         if (farmTile.IsGrown && farmTile.IsBisy)
                         {
-                            //PlayerAnimationController animationController = other.GetComponent<PlayerAnimationController>();
-                            StartCoroutine(MiningAnimationCoroutine(manager, 200, itemToPlace as ShovelItem, farmTile));
-                            //animationController,
-
+                            PlayerAnimationController animationController = other.GetComponent<PlayerAnimationController>();
+                            StartCoroutine(MiningAnimationCoroutine(animationController, manager , 200, interactionItem as ShovelItem, farmTile));
                         }
                         //
+                    }
+                    if (interactionItem is WaterCanItem)
+                    {
+                        WaterCanItem waterCanItem = interactionItem as WaterCanItem;
+                        ToolItemArgs args = new ToolItemArgs();
+                        waterCanItem.UseLkm(interactionTile, args);
                     }
                 }
                 //}
@@ -91,28 +96,28 @@ public class GridInteractionCollider : MonoBehaviour //Разнести логику по разным
         }
     }
     //Coroutines
-    public IEnumerator MiningAnimationCoroutine(   //PlayerAnimationController controller //Упростить
-        InventoryManager inventory
+    public IEnumerator MiningAnimationCoroutine(PlayerAnimationController controller //Упростить
+        , InventoryManager inventory
         , int timer
         , ShovelItem item
         , FarmTile tile)
     {
-        //if (!controller.isAnimated)
-        //{
-            //controller.SetAnimated(true);
-          //  controller.SetTrigger("miningTrigger");
+        if (!controller.isAnimated)
+        {
+            controller.SetAnimated(true);
+            controller.SetTrigger("miningTrigger");
             for (int i = 0; i < timer; i++)
             {
-                Debug.Log(i.ToString());
+                //Debug.Log(i.ToString());
                 yield return null;
             }
-            //controller.SetAnimated(false);
+            controller.SetAnimated(false);
 
             ToolItemArgs args = new ToolItemArgs();
             item.UseLkm(tile, args);
             tile.GetAgriculture();
             inventory.AddToInventory(args.item);
-        //}
+        }
     }
 
     /// <summary>Метод вызывающийся при выходе из коллайдера объекта на котором этот скрипт висит .</summary>

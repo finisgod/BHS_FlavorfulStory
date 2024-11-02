@@ -20,25 +20,25 @@ public class PlayerInventoryEventManager : MonoBehaviour //Мб сможет закрыть фун
     /// <summary>Обработка добавления айтема в инвентарь.</summary>
     private void InventoryManager_ItemAddedEvent(Item newItem)
     {
-        Debug.Log("TriggeredEvent add with itemname: " + newItem.Name + ":COUNT:" + newItem.Count);
+        //Debug.Log("TriggeredEvent add with itemname: " + newItem.Name + ":COUNT:" + newItem.Count);
         inventoryManagerUI.AddItem(newItem);
     }
     /// <summary>Обработка измненеия количества айтема в инвентаре.</summary>
     private void InventoryManager_ItemCountChangedEvent(Item newItem)
     {
-        Debug.Log("TriggeredEvent new count: " + newItem.Name + ":COUNT:" + newItem.Count);
+        //Debug.Log("TriggeredEvent new count: " + newItem.Name + ":COUNT:" + newItem.Count);
         inventoryManagerUI.ChangeItemCount(newItem);
     }
     /// <summary>Обработка удаления айтема из инвентаря.</summary>
     private void InventoryManager_ItemRemovedEvent(Item newItem)
     {
-        Debug.Log("TriggeredEvent remove with itemname: " + newItem.Name);
+        //Debug.Log("TriggeredEvent remove with itemname: " + newItem.Name);
         inventoryManagerUI.RemoveItem(newItem);
     }
     /// <summary>Обработка выбора текущего айтема.</summary>
     private void InventoryManager_ItemSelectedEvent(Item newItem)
     {
-        Debug.Log("TriggeredEvent selected item with itemname: " + newItem.Name);
+        //Debug.Log("TriggeredEvent selected item with itemname: " + newItem.Name);
         manager.SetCurrentInventoryItem(manager.GetInventoryItemIndex(newItem));
     }
 }

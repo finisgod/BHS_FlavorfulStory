@@ -15,9 +15,8 @@ public class GridTargetManager : MonoBehaviour //ToDo: Create + GridGetTileManag
 
     public void HighlightTile() //”простить
     {
-        //Debug.Log("GET SELECTED TILE");
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = _camera.nearClipPlane; //веро€тно из-за этого отклик плохой и не всегда попадает на €чейку нужную
+        //mousePos.z = _camera.nearClipPlane;
         Ray ray = _camera.ScreenPointToRay(mousePos);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100, _layerMask))
@@ -34,7 +33,7 @@ public class GridTargetManager : MonoBehaviour //ToDo: Create + GridGetTileManag
                         highlightedTile.TryGetComponent<Tile>(out selectedTile);
                         if (selectedTile != null)
                         {
-                            if (!selectedTile.IsBisy)
+                            if (selectedTile.IsNeedToHighlight)
                             {
                                 highlightedTile.GetComponent<MeshRenderer>().material.color = Color.black;
                             }
@@ -49,7 +48,7 @@ public class GridTargetManager : MonoBehaviour //ToDo: Create + GridGetTileManag
                 highlightedTile.TryGetComponent<Tile>(out selectedTile);
                 if (selectedTile != null)
                 {
-                    if (!selectedTile.IsBisy)
+                    if (selectedTile.IsNeedToHighlight)
                     {
                         hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                     }
