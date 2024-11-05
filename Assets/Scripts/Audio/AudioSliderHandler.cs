@@ -26,14 +26,12 @@ namespace FlavorfulStory.Audio
         private void OnEnable()
         {
             _slider.onValueChanged.AddListener(delegate { ValueChanged(); });
-            _audioSettings.SliderUpdate += UpdateSlider;
         }
 
         /// <summary> Вызывается при отключении объекта.</summary>
         private void OnDisable()
         {
             _slider.onValueChanged.RemoveAllListeners();
-            _audioSettings.SliderUpdate -= UpdateSlider;
         }
 
         /// <summary> Вызывается при изменении значения слайдера.</summary>
@@ -42,9 +40,9 @@ namespace FlavorfulStory.Audio
             _audioSettings.SetMixerValue(_volumeType, _slider.value);
         }
 
-        private void UpdateSlider()
+        public void UpdateSlider()
         {
-            _slider.value = _audioSettings.GetVolumeValueFromType(_volumeType);
+            GetComponent<Slider>().value = _audioSettings.GetVolumeValueFromType(_volumeType);
         }
     }
 }

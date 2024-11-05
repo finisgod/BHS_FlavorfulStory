@@ -17,7 +17,7 @@ namespace FlavorfulStory.Settings
         public static float SfxVolume
         {
             get => PlayerPrefs.GetFloat("SfxVolume");
-            private set => PlayerPrefs.SetFloat("MasterVolume", value);
+            private set => PlayerPrefs.SetFloat("SfxVolume", value);
         }
 
         /// <summary> Громкость музыки.</summary>

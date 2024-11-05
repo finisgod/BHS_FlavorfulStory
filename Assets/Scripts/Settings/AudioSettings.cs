@@ -1,8 +1,8 @@
-using FlavorfulStory.Saving;
 using FlavorfulStory.Settings;
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
 
 namespace FlavorfulStory.Audio
 {
@@ -26,7 +26,7 @@ namespace FlavorfulStory.Audio
         [SerializeField] private AudioMixer _audioMixer;
 
         /// <summary> Обновление слайдера.</summary>
-        public event Action SliderUpdate;
+        [SerializeField] private UnityEvent _sliderUpdate;
 
         /// <summary> При старте выставляем значения слайдера.</summary>
         private void Start()
@@ -39,6 +39,7 @@ namespace FlavorfulStory.Audio
             SetMixerValue(VolumeType.Master, GetVolumeValueFromType(VolumeType.Master));
             SetMixerValue(VolumeType.Music, GetVolumeValueFromType(VolumeType.Music));
             SetMixerValue(VolumeType.SFX, GetVolumeValueFromType(VolumeType.SFX));
+            _sliderUpdate.Invoke();
         }
 
         /// <summary> Установка значения параметра громкости определенного аудио канала.</summary>
