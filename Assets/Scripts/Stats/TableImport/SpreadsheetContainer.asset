@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b83e904c52854a01b8c6f90e7d14964, type: 3}
+  m_Name: SpreadsheetContainer
+  m_EditorClassIdentifier: 
+  foldoutImportGUI: 1
+  documentId: 1E6fuRVw5af0dCo0_Vhatp109S3XPkTN3i8I3EYPXooU
+  selectedTogglesIds:
+  - PlayerData
+  - NpcData
+  - Activities
+  - ExpToLevelUps
+  - HuntingParameters
+  - FishingParameters
+  - CultivationParameters
+  - AnimalFarmingParameters
+  - CollectingParameters
+  foldoutSerializationGUI: 0
+  serializationOutputPath: ../../Configs
+  serializationFileName: Configs.v0.1
+  serializationFormat: 0
+  content:
+    PlayerData:
+    - Name: Player
+      Health: 100
+      Energy: 80
+      Mana: 60
+      Strength: 20
+    NpcData:
+    - Name: npc1
+      Health: 100
+      Strength: 50
+    - Name: npc2
+      Health: 30
+      Strength: 30
+    - Name: npc3
+      Health: 1000
+      Strength: 1000
+    ExpToLevelUps:
+    - Name: Hunting
+      Level_1_2: 50
+      Level_2_3: 100
+      Level_3_4: 150
+      Level_4_5: 200
+      Level_5_6: 250
+    - Name: Collecting
+      Level_1_2: 100
+      Level_2_3: 200
+      Level_3_4: 300
+      Level_4_5: 400
+      Level_5_6: 500
+    - Name: Fishing
+      Level_1_2: 1
+      Level_2_3: 2
+      Level_3_4: 3
+      Level_4_5: 4
+      Level_5_6: 5
+    - Name: Cultivation
+      Level_1_2: 10
+      Level_2_3: 20
+      Level_3_4: 30
+      Level_4_5: 40
+      Level_5_6: 50
+    - Name: AnimalFarming
+      Level_1_2: 5
+      Level_2_3: 10
+      Level_3_4: 15
+      Level_4_5: 20
+      Level_5_6: 25
+    HuntingParameters:
+    - ParameterName: luck
+      lvl1: 1
+      lvl2: 2
+      lvl3: 3
+      lvl4: 4
+      lvl5: 5
+      lvl6: 10
+    CollectingParameters:
+    - ParameterName: abcd
+      lvl1: 1
+      lvl2: 2
+      lvl3: 3
+      lvl4: 4
+      lvl5: 5
+      lvl6: 100
+    FishingParameters:
+    - ParameterName: luck
+      lvl1: 1
+      lvl2: 2
+      lvl3: 3
+      lvl4: 4
+      lvl5: 5
+      lvl6: 10
+    CultivationParameters:
+    - ParameterName: luck
+      lvl1: 1
+      lvl2: 2
+      lvl3: 3
+      lvl4: 4
+      lvl5: 5
+      lvl6: 10
+    AnimalFarmingParameters:
+    - ParameterName: luck
+      lvl1: 1
+      lvl2: 2
+      lvl3: 3
+      lvl4: 4
+      lvl5: 5
+      lvl6: 10

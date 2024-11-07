@@ -5,54 +5,53 @@ using UnityEngine.EventSystems;
 
 namespace FlavorfulStory.UI
 {
-    /// <summary>  Класс, отвечающий за отрисовку количества энергии.</summary>
-    public class EnergyBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    /// <summary>  Класс, отвечающий за отрисовку количества маны.</summary>
+    public class ManaBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         /// <summary> Объект текста.</summary>
         [SerializeField] private TMP_Text _textObject;
         
         /// <summary> Объект игрока.</summary>
         [SerializeField] private GameObject _player;
-        
-        /// <summary> Компонент энергии.</summary>
-        private Energy _energy;
+                
+        /// <summary> Компонент маны.</summary>
+        private Mana _mana;
 
         /// <summary> Подписка на события.</summary>
         private void OnEnable()
         {
-            _energy.OnEnergyChanged += SetEnergyText;
+            _mana.OnManaChanged += SetManaText;
         }
 
-        /// <summary> Отписка от событий.</summary>
+        /// <summary> Отписка от события.</summary>
         private void OnDisable()
         {
-            _energy.OnEnergyChanged -= SetEnergyText;
+            _mana.OnManaChanged -= SetManaText;
         }
 
         private void Awake()
         {
-            _energy = _player.GetComponent<Energy>();
+            _mana = _player.GetComponent<Mana>();
         }
-        
+
         private void Start()
         {
-            SetEnergyText(_energy.CurrentEnergy);
+            SetManaText(_mana.CurrentMana);
             _textObject.gameObject.SetActive(false);
         }
 
         /// <summary> Установка текстового значения.</summary>
-        /// <param name="energy"> Текущее значение энергии.</param>
-        private void SetEnergyText(int energy)
+        /// <param name="mana"> Текущее значение маны.</param>
+        private void SetManaText(int mana)
         {
-            _textObject.text = energy.ToString();
+            _textObject.text = mana.ToString();
         }
-        
 
         /// <summary> Включение объекта при наведении на него курсора.</summary>
         /// <param name="eventData"> Информация ивента.</param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            SetEnergyText(_energy.CurrentEnergy);
+            SetManaText(_mana.CurrentMana);
             _textObject.gameObject.SetActive(true);
         }
 
