@@ -1,6 +1,5 @@
 using FlavorfulStory.Stats.TableImport;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace FlavorfulStory.Stats.CharacterStats
 {

@@ -1,3 +1,8 @@
+using System;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
+
 namespace FlavorfulStory.Stats.PlayerStats
 {
     /// <summary> Типы активностей.</summary>
@@ -10,3 +15,4 @@ namespace FlavorfulStory.Stats.PlayerStats
         AnimalFarming,
     }
 }
+

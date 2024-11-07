@@ -30,11 +30,12 @@ namespace FlavorfulStory.UI
         {
             _activitiesStats = _player.GetComponent<ActivitiesStats>();
         }
-        
+
         private void Start()
         {
             SetExpText();
         }
+        
         
         private void SetExpText()
         {

@@ -25,7 +25,8 @@ namespace FlavorfulStory.Stats.PlayerStats
         public Dictionary<ActivityType, List<int>> ActivitiesExpDict;
         
         /// <summary> Инициализация и заполнение списка и словаря.</summary>
-        private void Start()
+        private void Awake()  // туу закинул в эвейк, чтобы быстрее заполнялись значения,
+                              // так как в UI скрипте Start() быстрее отрабатывает и вылетает ошибка
         {
             ActivitiesExpToUpgrade = new List<List<int>>();
             ParseData();
@@ -34,17 +35,17 @@ namespace FlavorfulStory.Stats.PlayerStats
             SetupExp();
         }
         
-        // private void Update()
-        // {
-        //     if (Input.GetKeyDown(KeyCode.UpArrow))
-        //     {
-        //         GetExperience(ActivityType.Hunting, 5);
-        //         GetExperience(ActivityType.Collecting, 10);
-        //         GetExperience(ActivityType.Fishing, 15);
-        //         GetExperience(ActivityType.Cultivation, 20);
-        //         GetExperience(ActivityType.AnimalFarming, 25);
-        //     }
-        // }
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                GetExperience(ActivityType.Hunting, 5);
+                GetExperience(ActivityType.Collecting, 10);
+                GetExperience(ActivityType.Fishing, 15);
+                GetExperience(ActivityType.Cultivation, 20);
+                GetExperience(ActivityType.AnimalFarming, 25);
+            }
+        }
 
         /// <summary> Обработка получения опыта на конкретную активность.</summary>
         /// <param name="activityType"> Тип активности.</param>
