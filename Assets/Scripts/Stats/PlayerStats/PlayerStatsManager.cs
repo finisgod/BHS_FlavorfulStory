@@ -20,7 +20,7 @@ namespace FlavorfulStory.Stats.PlayerStats
         
         /// <summary> Компонент силы.</summary>
         private Strength _strengthComponent;
-    
+
         /// <summary> Получение компонентов.</summary>
         private void Awake()
         {
@@ -33,6 +33,7 @@ namespace FlavorfulStory.Stats.PlayerStats
         private void Start()
         {
             SetStats();
+            ResetStats();
         }
         
         /// <summary> Установка максимальных значений статов.</summary>
@@ -42,6 +43,13 @@ namespace FlavorfulStory.Stats.PlayerStats
             _energyComponent.MaxEnergy = _data.Content.PlayerData[0].Energy;
             _manaComponent.MaxMana = _data.Content.PlayerData[0].Mana;
             _strengthComponent.CurrentStrength = _data.Content.PlayerData[0].Strength;
+        }
+
+        public void ResetStats()
+        {
+            _healthComponent.CurrentHealth = _healthComponent.MaxHealth;
+            _energyComponent.CurrentEnergy = _energyComponent.MaxEnergy;
+            _manaComponent.CurrentMana = _manaComponent.MaxMana;
         }
     }
 }

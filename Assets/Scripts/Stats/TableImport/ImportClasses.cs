@@ -24,13 +24,14 @@ namespace FlavorfulStory.Stats.TableImport
     [Serializable]
     public class ExpToLevelUp
     {
-        public string Name;
-        public int Level_0_1;
-        public int Level_1_2;
-        public int Level_2_3;
-        public int Level_3_4;
-        public int Level_4_5;
+        public string Levels;
+        public int Hunting;
+        public int Collecting;
+        public int Fishing;
+        public int Cultivation;
+        public int AnimalFarming;
     }
+    
     
     [Serializable]
     public class Activity

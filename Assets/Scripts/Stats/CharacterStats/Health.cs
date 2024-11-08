@@ -16,7 +16,7 @@ namespace FlavorfulStory.Stats.CharacterStats
         public event Action<int> OnHealthChanged;
         
         /// <summary> Метод, устанавливающий и возвращающий текущее значение здоровья.</summary>
-        public int CurrentHealth { get; private set; }
+        public int CurrentHealth { get; set; }
         
         /// <summary> Метод, устанавливающий и возвращающий максимальное значение здоровья.</summary>
         public int MaxHealth { get; set; }

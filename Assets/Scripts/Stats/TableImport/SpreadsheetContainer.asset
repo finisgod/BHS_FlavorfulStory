@@ -46,36 +46,36 @@ MonoBehaviour:
       Health: 1000
       Strength: 1000
     ExpToLevelUps:
-    - Name: Hunting
-      Level_0_1: 50
-      Level_1_2: 100
-      Level_2_3: 150
-      Level_3_4: 200
-      Level_4_5: 250
-    - Name: Collecting
-      Level_0_1: 100
-      Level_1_2: 150
-      Level_2_3: 200
-      Level_3_4: 250
-      Level_4_5: 300
-    - Name: Fishing
-      Level_0_1: 150
-      Level_1_2: 200
-      Level_2_3: 250
-      Level_3_4: 300
-      Level_4_5: 350
-    - Name: Cultivation
-      Level_0_1: 200
-      Level_1_2: 250
-      Level_2_3: 300
-      Level_3_4: 350
-      Level_4_5: 400
-    - Name: AnimalFarming
-      Level_0_1: 25
-      Level_1_2: 75
-      Level_2_3: 125
-      Level_3_4: 175
-      Level_4_5: 225
+    - Levels: level2
+      Hunting: 50
+      Collecting: 100
+      Fishing: 150
+      Cultivation: 200
+      AnimalFarming: 250
+    - Levels: level3
+      Hunting: 100
+      Collecting: 150
+      Fishing: 200
+      Cultivation: 250
+      AnimalFarming: 300
+    - Levels: level4
+      Hunting: 150
+      Collecting: 200
+      Fishing: 250
+      Cultivation: 300
+      AnimalFarming: 350
+    - Levels: level5
+      Hunting: 200
+      Collecting: 250
+      Fishing: 300
+      Cultivation: 350
+      AnimalFarming: 400
+    - Levels: level6
+      Hunting: 250
+      Collecting: 1000
+      Fishing: 1000
+      Cultivation: 1000
+      AnimalFarming: 1000
     HuntingParameters:
     - ParameterName: luck
       lvl1: 1

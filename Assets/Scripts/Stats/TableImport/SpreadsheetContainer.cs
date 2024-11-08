@@ -18,7 +18,7 @@ namespace FlavorfulStory.Stats.TableImport
         
         [SpreadsheetPage("ExpToLevelUp")] 
         public List<ExpToLevelUp> ExpToLevelUps;
-        
+
         [SpreadsheetPage("Hunting")] 
         public List<Activity> HuntingParameters;
         

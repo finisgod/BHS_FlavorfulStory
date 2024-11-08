@@ -11,7 +11,7 @@ namespace FlavorfulStory.Stats.PlayerStats
         public event Action<int> OnEnergyChanged;
 
         /// <summary> Метод, устанавливающий и возвращающий текущее значение энергии.</summary>
-        public int CurrentEnergy { get; private set; }
+        public int CurrentEnergy { get; set; }
         
         /// <summary> Метод, устанавливающий и возвращающий максимальное значение энергии.</summary>
         public int MaxEnergy { get; set; }

@@ -5,5 +5,6 @@ namespace FlavorfulStory.Stats
     {
         /// <summary> Установка базовых значений.</summary>
         public void SetStats();
+        public void ResetStats();
     }
 }

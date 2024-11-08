@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FlavorfulStory.Stats.TableImport;
 using UnityEngine;
 
@@ -39,11 +40,8 @@ namespace FlavorfulStory.Stats.PlayerStats
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                GetExperience(ActivityType.Hunting, 5);
-                GetExperience(ActivityType.Collecting, 10);
-                GetExperience(ActivityType.Fishing, 15);
-                GetExperience(ActivityType.Cultivation, 20);
-                GetExperience(ActivityType.AnimalFarming, 25);
+                // ParseDataNew();
+                GetExperience(ActivityType.Hunting, 25);
             }
         }
 
@@ -56,29 +54,28 @@ namespace FlavorfulStory.Stats.PlayerStats
             
             var experience = ActivitiesExpDict[activityType][0];
             var level = ActivitiesExpDict[activityType][1];
-            var expToUpgrade = ActivitiesExpToUpgrade[(int)activityType][level];
 
+            if (level == ActivitiesExpToUpgrade[(int)activityType].Count)
+            {
+                ActivitiesExpDict[activityType][0] = ActivitiesExpToUpgrade[(int)activityType][^1];
+                return;
+            }
+            
+            var expToUpgrade = ActivitiesExpToUpgrade[(int)activityType][level];
             if (experience >= expToUpgrade)
             {
                 ActivitiesExpDict[activityType][0] -= expToUpgrade;
                 ActivitiesExpDict[activityType][1] += 1;
+                
+                if (ActivitiesExpDict[activityType][1] == ActivitiesExpToUpgrade[(int)activityType].Count)
+                {
+                    ActivitiesExpDict[activityType][1] = ActivitiesExpDict[activityType][1];
+                    ActivitiesExpDict[activityType][0] = ActivitiesExpToUpgrade[(int)activityType][level];
+                }
+
             }
             
             OnExperienceGained?.Invoke();
-        }
-        
-        /// <summary> Обработка информации из гугл таблиц.</summary>
-        private void ParseData()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                ActivitiesExpToUpgrade.Add(new List<int>());
-                ActivitiesExpToUpgrade[i].Add(_data.Content.ExpToLevelUps[i].Level_0_1);
-                ActivitiesExpToUpgrade[i].Add(_data.Content.ExpToLevelUps[i].Level_1_2);
-                ActivitiesExpToUpgrade[i].Add(_data.Content.ExpToLevelUps[i].Level_2_3);
-                ActivitiesExpToUpgrade[i].Add(_data.Content.ExpToLevelUps[i].Level_3_4);
-                ActivitiesExpToUpgrade[i].Add(_data.Content.ExpToLevelUps[i].Level_4_5);
-            }
         }
         
         /// <summary> Заполнение словаря.</summary>
@@ -87,6 +84,23 @@ namespace FlavorfulStory.Stats.PlayerStats
             foreach (ActivityType activityType in Enum.GetValues(typeof(ActivityType)))
             {
                 ActivitiesExpDict.Add(activityType, new List<int> {0, 0});
+            }
+        }
+
+        /// <summary> Обработка информации из гугл таблиц.</summary>
+        private void ParseData()
+        {
+            var propertyInfos = _data.Content.ExpToLevelUps[0].GetType().GetFields();
+            ActivitiesExpToUpgrade = new List<List<int>>();
+            
+            for (int i = 1; i < propertyInfos.Length; i++)
+            {
+                ActivitiesExpToUpgrade.Add(new List<int>());
+                foreach (var t in _data.Content.ExpToLevelUps)
+                {
+                    var info = propertyInfos[i].GetValue(t);
+                    ActivitiesExpToUpgrade[i-1].Add((int)info);
+                }
             }
         }
     }

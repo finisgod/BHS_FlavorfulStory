@@ -42,5 +42,10 @@ namespace FlavorfulStory.Stats.CharacterStats
                 }
             }
         }
+
+        public void ResetStats()
+        {
+            _healthComponent.CurrentHealth = _healthComponent.MaxHealth;
+        }
     }
 }
