@@ -1,8 +1,8 @@
 using System;
-using UnityEngine.Serialization;
 
 namespace FlavorfulStory.Stats.TableImport
 {
+    /// <summary> Характеристики персонажа.</summary>
     [Serializable]
     public class PlayerData
     {
@@ -13,6 +13,7 @@ namespace FlavorfulStory.Stats.TableImport
         public int Strength;
     }
     
+    /// <summary> Характеристики NPC.</summary>
     [Serializable]
     public class NpcData
     {
@@ -21,18 +22,21 @@ namespace FlavorfulStory.Stats.TableImport
         public int Strength;
     }
     
+    /// <summary> Количество опыта для перехода на новый уровень для каждой актвности.</summary>
     [Serializable]
     public class ExpToLevelUp
     {
         public string Levels;
-        public int Hunting;
         public int Collecting;
+        public int Forestry;
+        public int Mining;
+        public int Fighting;
         public int Fishing;
-        public int Cultivation;
-        public int AnimalFarming;
+        public int GhostCatching;
+        public int CrystalCultivation;
     }
     
-    
+    /// <summary> Параметры, которые увеличивают активности.</summary>
     [Serializable]
     public class Activity
     {

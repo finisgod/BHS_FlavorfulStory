@@ -9,7 +9,7 @@ namespace FlavorfulStory.Stats.PlayerStats
     /// <summary> Класс для взаимодействия со статистикой активностей.</summary>
     public class ActivitiesStats : MonoBehaviour
     {
-        /// <summary> Событие получения урона.</summary>
+        /// <summary> Событие получения опыта.</summary>
         public event Action OnExperienceGained;
         
         /// <summary> Информация из гугл таблицы.</summary>
@@ -26,7 +26,7 @@ namespace FlavorfulStory.Stats.PlayerStats
         public Dictionary<ActivityType, List<int>> ActivitiesExpDict;
         
         /// <summary> Инициализация и заполнение списка и словаря.</summary>
-        private void Awake()  // туу закинул в эвейк, чтобы быстрее заполнялись значения,
+        private void Awake()  // тут закинул в эвейк, чтобы быстрее заполнялись значения,
                               // так как в UI скрипте Start() быстрее отрабатывает и вылетает ошибка
         {
             ActivitiesExpToUpgrade = new List<List<int>>();
@@ -40,8 +40,7 @@ namespace FlavorfulStory.Stats.PlayerStats
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                // ParseDataNew();
-                GetExperience(ActivityType.Hunting, 25);
+                GetExperience(ActivityType.Forestry, 25);
             }
         }
 
@@ -78,7 +77,7 @@ namespace FlavorfulStory.Stats.PlayerStats
             OnExperienceGained?.Invoke();
         }
         
-        /// <summary> Заполнение словаря.</summary>
+        /// <summary> Заполнение словаря опыта.</summary>
         private void SetupExp()
         {
             foreach (ActivityType activityType in Enum.GetValues(typeof(ActivityType)))
@@ -90,15 +89,15 @@ namespace FlavorfulStory.Stats.PlayerStats
         /// <summary> Обработка информации из гугл таблиц.</summary>
         private void ParseData()
         {
-            var propertyInfos = _data.Content.ExpToLevelUps[0].GetType().GetFields();
+            var fields = _data.Content.ExpToLevelUps[0].GetType().GetFields();
             ActivitiesExpToUpgrade = new List<List<int>>();
             
-            for (int i = 1; i < propertyInfos.Length; i++)
+            for (int i = 1; i < fields.Length; i++)
             {
                 ActivitiesExpToUpgrade.Add(new List<int>());
                 foreach (var t in _data.Content.ExpToLevelUps)
                 {
-                    var info = propertyInfos[i].GetValue(t);
+                    var info = fields[i].GetValue(t);
                     ActivitiesExpToUpgrade[i-1].Add((int)info);
                 }
             }

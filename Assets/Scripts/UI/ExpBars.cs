@@ -7,9 +7,7 @@ using UnityEngine;
 
 namespace FlavorfulStory.UI
 {
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <summary> </summary>
     public class ExpBars : MonoBehaviour
     {
         [SerializeField] private List<TMP_Text> _textObjects;
@@ -25,7 +23,7 @@ namespace FlavorfulStory.UI
 
         private void OnDisable()
         {
-            _activitiesStats.OnExperienceGained += SetExpBar;
+            _activitiesStats.OnExperienceGained -= SetExpBar;
         }
 
         private void Awake()
@@ -41,7 +39,7 @@ namespace FlavorfulStory.UI
         
         private void SetExpBar()
         {
-            int i = 0;
+            var i = 0;
             foreach (ActivityType activityType in Enum.GetValues(typeof(ActivityType)))
             {
                 var level = _activitiesStats.ActivitiesExpDict[activityType][1];

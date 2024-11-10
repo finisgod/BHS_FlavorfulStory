@@ -21,6 +21,7 @@ namespace FlavorfulStory.Stats.PlayerStats
         {
             CurrentEnergy = MaxEnergy;
         }
+        
         /// <summary> Метод, вызываемый при увеличении энергии.</summary>
         /// <param name="amount"> Значение, на которое увеличивается энергия.</param>
         public void InstantIncrease(int amount)
@@ -29,9 +30,9 @@ namespace FlavorfulStory.Stats.PlayerStats
 
             OnEnergyChanged?.Invoke(CurrentEnergy);
         }
+        
         /// <summary> Метод, вызываемый при уменьшении энергии.</summary>
         /// <param name="amount"> Значение, на которое уменьшается энергия.</param>
-    
         public void InstantDecrease(int amount)
         {
             CurrentEnergy = Mathf.Clamp(CurrentEnergy - amount, 0, MaxEnergy);

@@ -42,7 +42,8 @@ namespace FlavorfulStory.Stats.CharacterStats
                 }
             }
         }
-
+        
+        /// <summary> Сбрасывание к максимальным характеристикам.</summary>
         public void ResetStats()
         {
             _healthComponent.CurrentHealth = _healthComponent.MaxHealth;
