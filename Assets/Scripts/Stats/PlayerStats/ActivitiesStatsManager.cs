@@ -1,19 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using FlavorfulStory.Stats.TableImport;
 using UnityEngine;
 
 namespace FlavorfulStory.Stats.PlayerStats
 {
     /// <summary> Класс для взаимодействия со статистикой активностей.</summary>
-    public class ActivitiesStats : MonoBehaviour
+    public class ActivitiesStatsManager : MonoBehaviour
     {
         /// <summary> Событие получения опыта.</summary>
         public event Action OnExperienceGained;
-        
-        /// <summary> Информация из гугл таблицы.</summary>
-        [SerializeField] private SpreadsheetContainer _data;
         
         /// <summary>
         /// Список для каждой активности, который содержит граничные значения опыта для перехода на другой уровень.
@@ -23,25 +19,19 @@ namespace FlavorfulStory.Stats.PlayerStats
         /// <summary>
         /// Словарь, который на каждую активность хранит текущее значение опыта и номер левела.
         /// </summary>
-        public Dictionary<ActivityType, List<int>> ActivitiesExpDict;
+        public Dictionary<ActivityType, List<int>> ActivitiesExpDict{get; private set;}
+
+        private PlayerDataParser _dataParser;
         
         /// <summary> Инициализация и заполнение списка и словаря.</summary>
         private void Awake()  // тут закинул в эвейк, чтобы быстрее заполнялись значения,
                               // так как в UI скрипте Start() быстрее отрабатывает и вылетает ошибка
         {
-            ActivitiesExpToUpgrade = new List<List<int>>();
-            ParseData();
+            _dataParser = GetComponent<PlayerDataParser>();
+            ActivitiesExpToUpgrade = _dataParser.ActivitiesExpToUpgrade;
 
             ActivitiesExpDict = new Dictionary<ActivityType, List<int>>();
             SetupExp();
-        }
-        
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                GetExperience(ActivityType.Forestry, 25);
-            }
         }
 
         /// <summary> Обработка получения опыта на конкретную активность.</summary>
@@ -83,23 +73,6 @@ namespace FlavorfulStory.Stats.PlayerStats
             foreach (ActivityType activityType in Enum.GetValues(typeof(ActivityType)))
             {
                 ActivitiesExpDict.Add(activityType, new List<int> {0, 0});
-            }
-        }
-
-        /// <summary> Обработка информации из гугл таблиц.</summary>
-        private void ParseData()
-        {
-            var fields = _data.Content.ExpToLevelUps[0].GetType().GetFields();
-            ActivitiesExpToUpgrade = new List<List<int>>();
-            
-            for (int i = 1; i < fields.Length; i++)
-            {
-                ActivitiesExpToUpgrade.Add(new List<int>());
-                foreach (var t in _data.Content.ExpToLevelUps)
-                {
-                    var info = fields[i].GetValue(t);
-                    ActivitiesExpToUpgrade[i-1].Add((int)info);
-                }
             }
         }
     }

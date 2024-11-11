@@ -15,19 +15,24 @@ MonoBehaviour:
   foldoutImportGUI: 1
   documentId: 1E6fuRVw5af0dCo0_Vhatp109S3XPkTN3i8I3EYPXooU
   selectedTogglesIds:
-  - PlayerData
-  - NpcData
   - Activities
-  - ExpToLevelUps
   - HuntingParameters
-  - FishingParameters
   - CultivationParameters
   - AnimalFarmingParameters
+  - NpcData
+  - PlayerData
+  - "\u0421rystal\u0421ultivationParameters"
   - CollectingParameters
+  - ExpToLevelUps
+  - FighthingParameters
+  - FishingParameters
+  - ForestryParameters
+  - GhostCatchingParameters
+  - MiningParameters
   foldoutSerializationGUI: 0
   serializationOutputPath: ../../Configs
   serializationFileName: Configs.v0.1
-  serializationFormat: 0
+  serializationFormat: 1
   content:
     PlayerData:
     - Name: Player
@@ -47,42 +52,37 @@ MonoBehaviour:
       Strength: 1000
     ExpToLevelUps:
     - Levels: level2
-      Hunting: 50
-      Collecting: 100
-      Fishing: 150
-      Cultivation: 200
-      AnimalFarming: 250
-    - Levels: level3
-      Hunting: 100
-      Collecting: 150
-      Fishing: 200
-      Cultivation: 250
-      AnimalFarming: 300
-    - Levels: level4
-      Hunting: 150
-      Collecting: 200
+      Collecting: 50
+      Forestry: 100
+      Mining: 150
+      Fighting: 200
       Fishing: 250
-      Cultivation: 300
-      AnimalFarming: 350
-    - Levels: level5
-      Hunting: 200
-      Collecting: 250
+      GhostCatching: 300
+      CrystalCultivation: 350
+    - Levels: level3
+      Collecting: 100
+      Forestry: 150
+      Mining: 200
+      Fighting: 250
       Fishing: 300
-      Cultivation: 350
-      AnimalFarming: 400
-    - Levels: level6
-      Hunting: 250
-      Collecting: 1000
-      Fishing: 1000
-      Cultivation: 1000
-      AnimalFarming: 1000
-    HuntingParameters:
-    - ParameterName: luck
-      lvl1: 1
-      lvl2: 2
-      lvl3: 3
-      lvl4: 4
-      lvl5: 5
+      GhostCatching: 350
+      CrystalCultivation: 400
+    - Levels: level4
+      Collecting: 150
+      Forestry: 200
+      Mining: 250
+      Fighting: 300
+      Fishing: 350
+      GhostCatching: 400
+      CrystalCultivation: 450
+    - Levels: level5
+      Collecting: 200
+      Forestry: 250
+      Mining: 300
+      Fighting: 350
+      Fishing: 400
+      GhostCatching: 450
+      CrystalCultivation: 500
     CollectingParameters:
     - ParameterName: abcd
       lvl1: 1
@@ -90,6 +90,27 @@ MonoBehaviour:
       lvl3: 3
       lvl4: 4
       lvl5: 5
+    ForestryParameters:
+    - ParameterName: abcd
+      lvl1: 1
+      lvl2: 2
+      lvl3: 3
+      lvl4: 4
+      lvl5: 5
+    MiningParameters:
+    - ParameterName: abcd
+      lvl1: 1
+      lvl2: 2
+      lvl3: 3
+      lvl4: 4
+      lvl5: 5
+    FighthingParameters:
+    - ParameterName: 
+      lvl1: 0
+      lvl2: 0
+      lvl3: 0
+      lvl4: 0
+      lvl5: 0
     FishingParameters:
     - ParameterName: luck
       lvl1: 1
@@ -97,17 +118,17 @@ MonoBehaviour:
       lvl3: 3
       lvl4: 4
       lvl5: 5
-    CultivationParameters:
-    - ParameterName: luck
+    GhostCatchingParameters:
+    - ParameterName: 
       lvl1: 1
       lvl2: 2
       lvl3: 3
       lvl4: 4
       lvl5: 5
-    AnimalFarmingParameters:
-    - ParameterName: luck
-      lvl1: 1
-      lvl2: 2
-      lvl3: 3
-      lvl4: 4
-      lvl5: 5
+    "\u0421rystal\u0421ultivationParameters":
+    - ParameterName: 
+      lvl1: 0
+      lvl2: 0
+      lvl3: 0
+      lvl4: 0
+      lvl5: 0

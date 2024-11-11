@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FlavorfulStory.Stats.CharacterStats;
 using FlavorfulStory.Stats.TableImport;
 using UnityEngine;
@@ -7,8 +8,6 @@ namespace FlavorfulStory.Stats.PlayerStats
     /// <summary> Менеджер статов игрока.</summary>
     public class PlayerStatsManager : MonoBehaviour, IStatsManager
     {
-        /// <summary> Информация из гугл таблицы.</summary>
-        [SerializeField] private SpreadsheetContainer _data;
         /// <summary> Компонент здоровья.</summary>
         private Health _healthComponent;
         
@@ -21,9 +20,12 @@ namespace FlavorfulStory.Stats.PlayerStats
         /// <summary> Компонент силы.</summary>
         private Strength _strengthComponent;
 
+        private PlayerDataParser _dataParser;
+
         /// <summary> Получение компонентов.</summary>
         private void Awake()
         {
+            _dataParser = GetComponent<PlayerDataParser>();
             _healthComponent = GetComponent<Health>();
             _energyComponent = GetComponent<Energy>();
             _manaComponent = GetComponent<Mana>();
@@ -39,12 +41,14 @@ namespace FlavorfulStory.Stats.PlayerStats
         /// <summary> Установка максимальных значений статов.</summary>
         public void SetStats()
         {
-            _healthComponent.MaxHealth = _data.Content.PlayerData[0].Health;
-            _energyComponent.MaxEnergy = _data.Content.PlayerData[0].Energy;
-            _manaComponent.MaxMana = _data.Content.PlayerData[0].Mana;
-            _strengthComponent.CurrentStrength = _data.Content.PlayerData[0].Strength;
+            List<PlayerData> data = _dataParser.PlayerData;
+            _healthComponent.MaxHealth = data[0].Health;
+            _energyComponent.MaxEnergy = data[0].Energy;
+            _manaComponent.MaxMana = data[0].Mana;
+            _strengthComponent.CurrentStrength = data[0].Strength;
         }
-
+        
+        /// <summary> Обновление значений.</summary>
         public void ResetStats()
         {
             _healthComponent.CurrentHealth = _healthComponent.MaxHealth;

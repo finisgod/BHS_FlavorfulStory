@@ -6,12 +6,6 @@ namespace FlavorfulStory.Stats.CharacterStats
     /// <summary> Класс, обеспечивающий взаимодействие со здоровьем персонажа.</summary>
     public class Health : MonoBehaviour, IIncreasable, IDecreasable
     {
-        /// <summary> Событие, вызываемое при получении урона.</summary>
-        public event Action<int> OnDamageTaken;
-        
-        /// <summary> Событие, вызываемое при лечении.</summary>
-        public event Action<int> OnHealed;
-        
         /// <summary> Событие, вызываемое при изменении здоровья.</summary>
         public event Action<int> OnHealthChanged;
         
@@ -33,7 +27,6 @@ namespace FlavorfulStory.Stats.CharacterStats
             CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, MaxHealth);
 
             OnHealthChanged?.Invoke(CurrentHealth);
-            OnHealed?.Invoke(amount);
         }
         /// <summary>  Метод, вызываемый для уменьшения здоровья.</summary>
         /// <param name="amount"> Значение, на которое уменьшается здоровье.</param>
@@ -42,7 +35,6 @@ namespace FlavorfulStory.Stats.CharacterStats
             CurrentHealth = Mathf.Clamp(CurrentHealth - amount, 0, MaxHealth);
 
             OnHealthChanged?.Invoke(CurrentHealth);
-            OnDamageTaken?.Invoke(amount);
         }
     }
 }

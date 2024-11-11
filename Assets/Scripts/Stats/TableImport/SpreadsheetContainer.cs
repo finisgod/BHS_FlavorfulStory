@@ -21,31 +21,31 @@ namespace FlavorfulStory.Stats.TableImport
         [SpreadsheetPage("ExpToLevelUp")] 
         public List<ExpToLevelUp> ExpToLevelUps;
         
-        /// <summary> Информация о растениеводстве.</summary>
+        /// <summary> Информация о собирательстве.</summary>
         [SpreadsheetPage("Collecting")] 
         public List<Activity> CollectingParameters;
         
-        /// <summary> Информация о растениеводстве.</summary>
+        /// <summary> Информация о лесничестве.</summary>
         [SpreadsheetPage("Forestry")] 
         public List<Activity> ForestryParameters;
 
-        /// <summary> Информация о растениеводстве.</summary>
+        /// <summary> Информация о шахтерстве.</summary>
         [SpreadsheetPage("Mining")] 
         public List<Activity> MiningParameters;
         
-        /// <summary> Информация о растениеводстве.</summary>
+        /// <summary> Информация о бое.</summary>
         [SpreadsheetPage("Fighthing")] 
         public List<Activity> FighthingParameters;
         
-        /// <summary> Информация о растениеводстве.</summary>
+        /// <summary> Информация о рыбалке.</summary>
         [SpreadsheetPage("Fishing")] 
         public List<Activity> FishingParameters;
         
-        /// <summary> Информация о растениеводстве.</summary>
+        /// <summary> Информация о ловле призраков.</summary>
         [SpreadsheetPage("GhostCatching")] 
         public List<Activity> GhostCatchingParameters;
 
-        /// <summary> Информация о растениеводстве.</summary>
+        /// <summary> Информация о выращивании кристаллов.</summary>
         [SpreadsheetPage("СrystalСultivation")] 
         public List<Activity> СrystalСultivationParameters;
     }
