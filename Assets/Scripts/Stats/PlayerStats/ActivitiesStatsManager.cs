@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using FlavorfulStory.Stats.TableImport;
 using UnityEngine;
+using FlavorfulStory.Saving;
 
 namespace FlavorfulStory.Stats.PlayerStats
 {
     /// <summary> Класс для взаимодействия со статистикой активностей.</summary>
-    public class ActivitiesStatsManager : MonoBehaviour
+    public class ActivitiesStatsManager : MonoBehaviour, ISaveable
     {
         /// <summary> Событие получения опыта.</summary>
         public event Action OnExperienceGained;
@@ -32,6 +32,15 @@ namespace FlavorfulStory.Stats.PlayerStats
 
             ActivitiesExpDict = new Dictionary<ActivityType, List<int>>();
             SetupExp();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                GetExperience(ActivityType.Collecting, 10);
+                GetExperience(ActivityType.CrystalCultivation, 25);
+            }
         }
 
         /// <summary> Обработка получения опыта на конкретную активность.</summary>
@@ -75,5 +84,35 @@ namespace FlavorfulStory.Stats.PlayerStats
                 ActivitiesExpDict.Add(activityType, new List<int> {0, 0});
             }
         }
+        
+        #region Saving
+        /// <summary>
+        /// 
+        /// </summary>
+        [System.Serializable]
+        private struct MoverSaveData
+        {
+            public List<List<int>> _ActivitiesExpToUpgrade;
+            public Dictionary<ActivityType, List<int>> _ActivitiesExpDict;
+        }
+
+        /// <summary> Фиксация состояния объекта при сохранении.</summary>
+        /// <returns> Возвращает объект, в котором фиксируется состояние.</returns>
+        public object CaptureState() => new MoverSaveData()
+        {
+            _ActivitiesExpToUpgrade = ActivitiesExpToUpgrade,
+            _ActivitiesExpDict = ActivitiesExpDict
+        };
+
+        /// <summary> Восстановление состояния объекта при загрузке.</summary>
+        /// <param name="state"> Объект состояния, который необходимо восстановить.</param>
+        public void RestoreState(object state)
+        {
+            var data = (MoverSaveData)state;
+            ActivitiesExpToUpgrade = data._ActivitiesExpToUpgrade;
+            ActivitiesExpDict = data._ActivitiesExpDict;
+            GetExperience(ActivityType.Collecting, 0);
+        }
+        #endregion
     }
 }

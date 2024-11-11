@@ -55,5 +55,40 @@ namespace FlavorfulStory.Stats.PlayerStats
             _energyComponent.CurrentEnergy = _energyComponent.MaxEnergy;
             _manaComponent.CurrentMana = _manaComponent.MaxMana;
         }
+        
+        #region Saving
+        /// <summary>
+        /// 
+        /// </summary>
+        [System.Serializable]
+        private struct MoverSaveData
+        {
+            public int Health;
+            public int Energy;
+            public int Mana;
+            public int Strength;
+        }
+
+        /// <summary> Фиксация состояния объекта при сохранении.</summary>
+        /// <returns> Возвращает объект, в котором фиксируется состояние.</returns>
+        public object CaptureState() => new MoverSaveData()
+        {
+            Health = _healthComponent.CurrentHealth,
+            Energy = _energyComponent.CurrentEnergy,
+            Mana = _manaComponent.CurrentMana,
+            Strength = _strengthComponent.CurrentStrength
+        };
+
+        /// <summary> Восстановление состояния объекта при загрузке.</summary>
+        /// <param name="state"> Объект состояния, который необходимо восстановить.</param>
+        public void RestoreState(object state)
+        {
+            var data = (MoverSaveData)state;
+            _healthComponent.CurrentHealth = data.Health;
+            _energyComponent.CurrentEnergy = data.Energy;
+            _manaComponent.CurrentMana = data.Mana;
+            _strengthComponent.CurrentStrength = data.Strength;
+        }
+        #endregion
     }
 }
