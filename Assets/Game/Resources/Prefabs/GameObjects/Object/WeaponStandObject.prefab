@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 199400832925353119}
   - component: {fileID: 2722614747286622243}
   - component: {fileID: 7514393424466648618}
-  - component: {fileID: 4999672726939810957}
   m_Layer: 0
   m_Name: WeaponStandObject
   m_TagString: Untagged
@@ -88,18 +87,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0.5}
---- !u!114 &4999672726939810957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1321143405724650720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1c0cff3a88c08341baca33f6159fb7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6001469242777255526
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +282,7 @@ MonoBehaviour:
     type: 3}
   _cellCounter: {fileID: 8951498812526970750, guid: 053f39bd3bdcd4b4282e637ca5cd51d7,
     type: 3}
+  _cellCounterCircle: {fileID: 0}
   width: 500
   heigh: 100
   cellWidth: 70

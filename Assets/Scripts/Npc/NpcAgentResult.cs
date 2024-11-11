@@ -1,4 +1,4 @@
-/// <summary>Enum для возврата состояний при взаимодействии с NavMeshAgent для NPC</summary>
+п»ї/// <summary>Enum РґР»СЏ РІРѕР·РІСЂР°С‚Р° СЃРѕСЃС‚РѕСЏРЅРёР№ РїСЂРё РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРё СЃ NavMeshAgent РґР»СЏ NPC</summary>
 public enum NpcAgentResult
 {
     eInvalidDestination = 0,

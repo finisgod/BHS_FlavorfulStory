@@ -1,4 +1,4 @@
-using FlavorfulStory.Saving;
+п»їusing FlavorfulStory.Saving;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,18 +22,18 @@ namespace FlavorfulStory.SceneManagement
             //yield return Fader.Instance.FadeIn(Fader.FadeInTime);
         }
 
-        /// <summary> Загрузка данных игры из файла.</summary>
+        /// <summary> Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РёРіСЂС‹ РёР· С„Р°Р№Р»Р°.</summary>
         public static void Load() => SavingSystem.Load(DefaultSaveFile);
         
-        /// <summary> Сохранение данных игры в файл.</summary>
+        /// <summary> РЎРѕС…СЂР°РЅРµРЅРёРµ РґР°РЅРЅС‹С… РёРіСЂС‹ РІ С„Р°Р№Р».</summary>
         public static void Save() => SavingSystem.Save(DefaultSaveFile);
 
-        /// <summary> Удаление сохранения данных игры.</summary>
+        /// <summary> РЈРґР°Р»РµРЅРёРµ СЃРѕС…СЂР°РЅРµРЅРёСЏ РґР°РЅРЅС‹С… РёРіСЂС‹.</summary>
         public static void Delete() => SavingSystem.Delete(DefaultSaveFile);
 
-        /// <summary> Существует ли сохраненный файл?</summary>
-        /// <returns> Возвращает True - если файл сохранения существует,
-        /// False - в противном случае.</returns>
+        /// <summary> РЎСѓС‰РµСЃС‚РІСѓРµС‚ Р»Рё СЃРѕС…СЂР°РЅРµРЅРЅС‹Р№ С„Р°Р№Р»?</summary>
+        /// <returns> Р’РѕР·РІСЂР°С‰Р°РµС‚ True - РµСЃР»Рё С„Р°Р№Р» СЃРѕС…СЂР°РЅРµРЅРёСЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚,
+        /// False - РІ РїСЂРѕС‚РёРІРЅРѕРј СЃР»СѓС‡Р°Рµ.</returns>
         public static bool SaveFileExist() =>
             System.IO.File.Exists(SavingSystem.GetPathFromSaveFile(DefaultSaveFile));
 

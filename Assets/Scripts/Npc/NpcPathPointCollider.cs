@@ -1,25 +1,25 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 namespace NPC
 {
-    /// <summary>Класс описывающий логику коллайдера у точки маршрута.</summary>
-    ///<remarks> Является переключателем, для установки точки "достигнутой" .</remarks>
+    /// <summary>РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°СЋС‰РёР№ Р»РѕРіРёРєСѓ РєРѕР»Р»Р°Р№РґРµСЂР° Сѓ С‚РѕС‡РєРё РјР°СЂС€СЂСѓС‚Р°.</summary>
+    ///<remarks> РЇРІР»СЏРµС‚СЃСЏ РїРµСЂРµРєР»СЋС‡Р°С‚РµР»РµРј, РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё С‚РѕС‡РєРё "РґРѕСЃС‚РёРіРЅСѓС‚РѕР№" .</remarks>
     public class NpcPathPointCollider : MonoBehaviour
     {
         #region Fields
-        /// <summary>PathPoint на котором висит коллайдер.</summary>
+        /// <summary>PathPoint РЅР° РєРѕС‚РѕСЂРѕРј РІРёСЃРёС‚ РєРѕР»Р»Р°Р№РґРµСЂ.</summary>
         private NpcPathPoint _pathPoint;
         #endregion
 
         #region Methods
-        /// <summary>Метод вызывающийся при старте скрипта.</summary>
+        /// <summary>РњРµС‚РѕРґ РІС‹Р·С‹РІР°СЋС‰РёР№СЃСЏ РїСЂРё СЃС‚Р°СЂС‚Рµ СЃРєСЂРёРїС‚Р°.</summary>
         public void Start()
         {
             _pathPoint = GetComponent<NpcPathPoint>();
         }
 
-        /// <summary>Метод вызывающийся при входе в коллайдер объекта на котором этот скрипт висит .</summary>
-        /// <param name="other"> Коллайдер входящего объекта.</param>
+        /// <summary>РњРµС‚РѕРґ РІС‹Р·С‹РІР°СЋС‰РёР№СЃСЏ РїСЂРё РІС…РѕРґРµ РІ РєРѕР»Р»Р°Р№РґРµСЂ РѕР±СЉРµРєС‚Р° РЅР° РєРѕС‚РѕСЂРѕРј СЌС‚РѕС‚ СЃРєСЂРёРїС‚ РІРёСЃРёС‚ .</summary>
+        /// <param name="other"> РљРѕР»Р»Р°Р№РґРµСЂ РІС…РѕРґСЏС‰РµРіРѕ РѕР±СЉРµРєС‚Р°.</param>
         private void OnTriggerEnter(Collider other) 
         {
             if (other.gameObject.CompareTag("Npc"))

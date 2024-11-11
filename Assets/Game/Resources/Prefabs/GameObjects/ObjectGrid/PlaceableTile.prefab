@@ -210,7 +210,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3191024735587632963
 MonoBehaviour:
@@ -221,6 +221,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4977235479144235382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb344fd5a3ab1f04a9b404b9740fb691, type: 3}
+  m_Script: {fileID: 11500000, guid: bf8a0419d3291a74c82a8685dd0b828f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TileObject: {fileID: 0}
+  IsBisy: 0

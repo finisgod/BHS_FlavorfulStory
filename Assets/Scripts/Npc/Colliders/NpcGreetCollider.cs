@@ -1,40 +1,47 @@
-using UnityEngine;
+п»їusing UnityEngine;
+using UnityEngine.AI;
 
 namespace NPC
 {
-    /// <summary> Класс, описывающий логику поворота NPC к главному персонажу при встрече.</summary>
-    public class FaceToFaceCollider : MonoBehaviour //все коллайдеры оптимизировать. Много лишних действий в OnTriggerEnter / Stay
+    /// <summary> РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°СЋС‰РёР№ Р»РѕРіРёРєСѓ РїРѕРІРѕСЂРѕС‚Р° NPC Рє РіР»Р°РІРЅРѕРјСѓ РїРµСЂСЃРѕРЅР°Р¶Сѓ РїСЂРё РІСЃС‚СЂРµС‡Рµ.</summary>
+    public class NpcGreetCollider : MonoBehaviour //РІСЃРµ РєРѕР»Р»Р°Р№РґРµСЂС‹ РѕРїС‚РёРјРёР·РёСЂРѕРІР°С‚СЊ. РњРЅРѕРіРѕ Р»РёС€РЅРёС… РґРµР№СЃС‚РІРёР№ РІ OnTriggerEnter / Stay
     {
-        /// <summary>RigidBody принадлежащий NPC .</summary>
-        [SerializeField] private Rigidbody _rb;
+        /// <summary>RigidBody РїСЂРёРЅР°РґР»РµР¶Р°С‰РёР№ NPC .</summary>
+        private Rigidbody _rb;
 
-        /// <summary>Скорость вращения NPC .</summary>
+        /// <summary>РЎРєРѕСЂРѕСЃС‚СЊ РІСЂР°С‰РµРЅРёСЏ NPC .</summary>
         [SerializeField] private float _rotationSpeed;
 
-        /// <summary>Котролллер NPC.</summary>
-        [SerializeField] private NpcController _npc;
+        /// <summary>РљРѕС‚СЂРѕР»Р»Р»РµСЂ NPC.</summary>
+        private NpcController _targetNpcController;
 
-        /// <summary>Метод вызывающийся при нахождении в коллайдере объекта на котором этот скрипт висит .</summary>
-        /// <param name="other"> Коллайдер входящего объекта.</param>
+        /// <summary> РњРµС‚РѕРґ РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё .</summary>
+        private void Start()
+        {
+            _targetNpcController = GetComponent<NpcController>();
+            _rb = GetComponent<Rigidbody>();
+        }
+
+        /// <summary>РњРµС‚РѕРґ РІС‹Р·С‹РІР°СЋС‰РёР№СЃСЏ РїСЂРё РЅР°С…РѕР¶РґРµРЅРёРё РІ РєРѕР»Р»Р°Р№РґРµСЂРµ РѕР±СЉРµРєС‚Р° РЅР° РєРѕС‚РѕСЂРѕРј СЌС‚РѕС‚ СЃРєСЂРёРїС‚ РІРёСЃРёС‚ .</summary>
+        /// <param name="other"> РљРѕР»Р»Р°Р№РґРµСЂ РІС…РѕРґСЏС‰РµРіРѕ РѕР±СЉРµРєС‚Р°.</param>
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.tag == "Player")
             {
-                //Debug.Log("NPC Hello Collider: " + WorldTime.GetCurrentTime().ToString());
-                _npc.StopMoving();
+                _targetNpcController.StopMoving();
                 Vector3 dir = other.gameObject.transform.position - this.gameObject.transform.position;
                 float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
                 Quaternion rotation = Quaternion.Euler(0, angle, 0);
                 _rb.gameObject.transform.rotation = Quaternion.Lerp(_rb.rotation, rotation, _rotationSpeed * Time.deltaTime);
             }
         }
-        /// <summary>Метод вызывающийся при выходе из коллайдера объекта на котором этот скрипт висит .</summary>
-        /// <param name="other"> Коллайдер входящего объекта.</param>
+        /// <summary>РњРµС‚РѕРґ РІС‹Р·С‹РІР°СЋС‰РёР№СЃСЏ РїСЂРё РІС‹С…РѕРґРµ РёР· РєРѕР»Р»Р°Р№РґРµСЂР° РѕР±СЉРµРєС‚Р° РЅР° РєРѕС‚РѕСЂРѕРј СЌС‚РѕС‚ СЃРєСЂРёРїС‚ РІРёСЃРёС‚ .</summary>
+        /// <param name="other"> РљРѕР»Р»Р°Р№РґРµСЂ РІС…РѕРґСЏС‰РµРіРѕ РѕР±СЉРµРєС‚Р°.</param>
         private void OnTriggerExit(Collider other)
         {
             if (other.gameObject.tag == "Player")
             {
-                _npc.StartMoving();
+                _targetNpcController.StartMoving();
             }
         }
     }
