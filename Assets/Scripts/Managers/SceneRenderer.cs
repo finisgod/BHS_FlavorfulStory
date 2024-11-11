@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,8 +16,8 @@ public class SceneRenderer : MonoBehaviour
                 }          
         }
     }
-    /// <summary>Метод для включения мешей на сцене .</summary>
-    /// <param name="sceneName"> . Имя сцены</param>
+    /// <summary>РњРµС‚РѕРґ РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ РјРµС€РµР№ РЅР° СЃС†РµРЅРµ .</summary>
+    /// <param name="sceneName"> . РРјСЏ СЃС†РµРЅС‹</param>
     public void SceneRenderOn(string sceneName)
     {
         Debug.Log(sceneName + " Render On");
@@ -38,8 +38,8 @@ public class SceneRenderer : MonoBehaviour
         }
     }
 
-    /// <summary>Метод для отключения мешей на сцене .</summary>
-    /// <param name="sceneName"> . Имя сцены</param>
+    /// <summary>РњРµС‚РѕРґ РґР»СЏ РѕС‚РєР»СЋС‡РµРЅРёСЏ РјРµС€РµР№ РЅР° СЃС†РµРЅРµ .</summary>
+    /// <param name="sceneName"> . РРјСЏ СЃС†РµРЅС‹</param>
     public void SceneRenderOff(string sceneName)
     {
         Debug.Log(sceneName + " Render Off");

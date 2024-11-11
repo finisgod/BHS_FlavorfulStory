@@ -1,24 +1,27 @@
-using NPC;
+п»їusing NPC;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-/// <summary> Класс, описывающий логику работы порталов.</summary>
-public class InstancePortalCollider : MonoBehaviour //все коллайдеры оптимизировать. Много лишних действий в OnTriggerEnter / Stay
+/// <summary> РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°СЋС‰РёР№ Р»РѕРіРёРєСѓ СЂР°Р±РѕС‚С‹ РїРѕСЂС‚Р°Р»РѕРІ.</summary>
+public class InstancePortalCollider : MonoBehaviour //РІСЃРµ РєРѕР»Р»Р°Р№РґРµСЂС‹ РѕРїС‚РёРјРёР·РёСЂРѕРІР°С‚СЊ. РњРЅРѕРіРѕ Р»РёС€РЅРёС… РґРµР№СЃС‚РІРёР№ РІ OnTriggerEnter / Stay
 {
-    /// <summary> Точка телепортации. </summary>
+    /// <summary> РўРѕС‡РєР° С‚РµР»РµРїРѕСЂС‚Р°С†РёРё. </summary>
     [SerializeField] NPC.NpcPathPoint destination;
-    /// <summary> Префаб загрузочного экрана.</summary>
-    //[SerializeField] GameObject loadingScreen;
-    /// <summary> Флаг завершения телепортации.</summary>
+    /// <summary> РџСЂРµС„Р°Р± Р·Р°РіСЂСѓР·РѕС‡РЅРѕРіРѕ СЌРєСЂР°РЅР°.</summary>
+    [SerializeField] GameObject loadingScreen;
+    /// <summary> Р¤Р»Р°Рі Р·Р°РІРµСЂС€РµРЅРёСЏ С‚РµР»РµРїРѕСЂС‚Р°С†РёРё.</summary>
     public bool isTeleporting = false;
+    /// <summary>РЎРїРёСЃРѕРє РѕР±СЉРµРєС‚РѕРІ UI РѕР±СЉРµРєС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ СЃРєСЂС‹РІР°СЋС‚СЃСЏ РїСЂРё РїР°СѓР·Рµ.</summary>
+    [SerializeField] private List<GameObject> _disableObjects;
 
-    /// <summary> Свойство, возвращающее точку телепортации.</summary>
+    /// <summary> РЎРІРѕР№СЃС‚РІРѕ, РІРѕР·РІСЂР°С‰Р°СЋС‰РµРµ С‚РѕС‡РєСѓ С‚РµР»РµРїРѕСЂС‚Р°С†РёРё.</summary>
     public NPC.NpcPathPoint Destination
     {
         get { return destination; }
     }
 
-    /// <summary>Метод вызывающийся при нахождении в коллайдере объекта на котором этот скрипт висит .</summary>
-    /// <param name="other"> Коллайдер входящего объекта.</param>
+    /// <summary>РњРµС‚РѕРґ РІС‹Р·С‹РІР°СЋС‰РёР№СЃСЏ РїСЂРё РЅР°С…РѕР¶РґРµРЅРёРё РІ РєРѕР»Р»Р°Р№РґРµСЂРµ РѕР±СЉРµРєС‚Р° РЅР° РєРѕС‚РѕСЂРѕРј СЌС‚РѕС‚ СЃРєСЂРёРїС‚ РІРёСЃРёС‚ .</summary>
+    /// <param name="other"> РљРѕР»Р»Р°Р№РґРµСЂ РІС…РѕРґСЏС‰РµРіРѕ РѕР±СЉРµРєС‚Р°.</param>
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -27,7 +30,7 @@ public class InstancePortalCollider : MonoBehaviour //все коллайдеры оптимизиров
             {
                 if (destination != this.GetComponent<NpcPathPoint>())
                 {
-                    //StartCoroutine(LoadScreen());
+                    StartCoroutine(LoadScreen());
                     destination.GetComponentInChildren<InstancePortalCollider>().isTeleporting = true;
                     other.GetComponentInChildren<Rigidbody>().MovePosition(destination.Coordinate);
                 }
@@ -35,8 +38,8 @@ public class InstancePortalCollider : MonoBehaviour //все коллайдеры оптимизиров
         }
     }
 
-    /// <summary>Метод вызывающийся при выходе из коллайдера объекта на котором этот скрипт висит .</summary>
-    /// <param name="other"> Коллайдер входящего объекта.</param>
+    /// <summary>РњРµС‚РѕРґ РІС‹Р·С‹РІР°СЋС‰РёР№СЃСЏ РїСЂРё РІС‹С…РѕРґРµ РёР· РєРѕР»Р»Р°Р№РґРµСЂР° РѕР±СЉРµРєС‚Р° РЅР° РєРѕС‚РѕСЂРѕРј СЌС‚РѕС‚ СЃРєСЂРёРїС‚ РІРёСЃРёС‚ .</summary>
+    /// <param name="other"> РљРѕР»Р»Р°Р№РґРµСЂ РІС…РѕРґСЏС‰РµРіРѕ РѕР±СЉРµРєС‚Р°.</param>
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -45,13 +48,14 @@ public class InstancePortalCollider : MonoBehaviour //все коллайдеры оптимизиров
         }
     }
 
-    /*
-    /// <summary> Метод-корутина для включения загрузочного экрана.</summary>
+    
+    /// <summary> РњРµС‚РѕРґ-РєРѕСЂСѓС‚РёРЅР° РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ Р·Р°РіСЂСѓР·РѕС‡РЅРѕРіРѕ СЌРєСЂР°РЅР°.</summary>
     IEnumerator LoadScreen()
     {
         float Duration = 2;
         float LoadScreenTimer = 0;
         loadingScreen.SetActive(true);
+        DeactivateObjects(_disableObjects);
         while (LoadScreenTimer < Duration)
         {
             //Debug.Log("CORUTINE STARTED");
@@ -60,6 +64,22 @@ public class InstancePortalCollider : MonoBehaviour //все коллайдеры оптимизиров
         }
         //Debug.Log("CORUTINE ENDED");
         loadingScreen.SetActive(false);
+        ActivateObjects(_disableObjects);
     }
-    */
+
+    private void DeactivateObjects(List<GameObject> objects)
+    {
+        foreach (GameObject obj in objects)
+        {
+            obj.SetActive(false);
+        }
+    }
+    private void ActivateObjects(List<GameObject> objects)
+    {
+        foreach (GameObject obj in objects)
+        {
+            obj.SetActive(true);
+        }
+    }
+
 }

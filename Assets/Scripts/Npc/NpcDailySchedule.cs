@@ -1,46 +1,51 @@
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 namespace NPC
 {
-    /// <summary>Базовый класс для расписаний NPC. Включает в себя Лист из Маршрутов и соответствующий им List с ожидаемым временем его окончания (по GlobalWorldTime) </summary>
-    public class NpcDailySchedule : MonoBehaviour //Подумать как в инспекторе соединить два листа в 1
+    /// <summary>Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ СЂР°СЃРїРёСЃР°РЅРёР№ NPC. Р’РєР»СЋС‡Р°РµС‚ РІ СЃРµР±СЏ Р›РёСЃС‚ РёР· РњР°СЂС€СЂСѓС‚РѕРІ Рё СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РёРј List СЃ РѕР¶РёРґР°РµРјС‹Рј РІСЂРµРјРµРЅРµРј РµРіРѕ РѕРєРѕРЅС‡Р°РЅРёСЏ (РїРѕ GlobalWorldTime) </summary>
+    public class NpcDailySchedule : MonoBehaviour //РџРѕРґСѓРјР°С‚СЊ РєР°Рє РІ РёРЅСЃРїРµРєС‚РѕСЂРµ СЃРѕРµРґРёРЅРёС‚СЊ РґРІР° Р»РёСЃС‚Р° РІ 1
     {
         #region Fields
-        /// <summary>List из Маршрутов</summary>
-        private List<NpcRoute> _targetRoutesList; //В инспекторе создавать строго по возрастанию времени
-        /// <summary>List с ожидаемым временем окончания маршрутов(по GlobalWorldTime).</summary>
-        private List<float> _targetRouteTimeList; //В инспекторе создавать строго по возрастанию времени
-        /// <summary> идентификатор данного расписания.</summary>
+        /// <summary>List РёР· РњР°СЂС€СЂСѓС‚РѕРІ</summary>
+        private List<NpcRoute> _targetRoutesList; //Р’ РёРЅСЃРїРµРєС‚РѕСЂРµ СЃРѕР·РґР°РІР°С‚СЊ СЃС‚СЂРѕРіРѕ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ РІСЂРµРјРµРЅРё
+        /// <summary>List СЃ РѕР¶РёРґР°РµРјС‹Рј РІСЂРµРјРµРЅРµРј РѕРєРѕРЅС‡Р°РЅРёСЏ РјР°СЂС€СЂСѓС‚РѕРІ(РїРѕ GlobalWorldTime).</summary>
+        private List<float> _targetRouteTimeList; //Р’ РёРЅСЃРїРµРєС‚РѕСЂРµ СЃРѕР·РґР°РІР°С‚СЊ СЃС‚СЂРѕРіРѕ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ РІСЂРµРјРµРЅРё
+        /// <summary> РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РґР°РЅРЅРѕРіРѕ СЂР°СЃРїРёСЃР°РЅРёСЏ.</summary>
         [SerializeField] private string _tag;
-        /// <summary> контроллер NPC к которому прикреплено расписание.</summary>
+        /// <summary> РєРѕРЅС‚СЂРѕР»Р»РµСЂ NPC Рє РєРѕС‚РѕСЂРѕРјСѓ РїСЂРёРєСЂРµРїР»РµРЅРѕ СЂР°СЃРїРёСЃР°РЅРёРµ.</summary>
         private NpcController _targetNpcController;
         #endregion
 
         #region Methods
-        /// <summary> В данном методе контролируется время и сопоставляется с расписанием.</summary>
+        /// <summary> Р’ РґР°РЅРЅРѕРј РјРµС‚РѕРґРµ РєРѕРЅС‚СЂРѕР»РёСЂСѓРµС‚СЃСЏ РІСЂРµРјСЏ Рё СЃРѕРїРѕСЃС‚Р°РІР»СЏРµС‚СЃСЏ СЃ СЂР°СЃРїРёСЃР°РЅРёРµРј.</summary>
         private void Update()
         {
             NpcRoute route = null;
             if (_targetRouteTimeList.Count > 0)
             {
-                float predictedTime = _targetRouteTimeList[0] - NpcRouteTimePredictor.PredictTime(_targetNpcController.Position, _targetRoutesList[0]);
-                if (WorldTime.GetCurrentTime() > predictedTime) route = _targetRoutesList[0];        
+                if (!_targetNpcController.IsOnRoute)
+                {
+                    float predictedTime = _targetRouteTimeList[0] - NpcRouteTimePredictor.PredictTime(_targetNpcController.Position, _targetRoutesList[0]);
+                    Debug.Log("Predicted Route Time " + WorldTime.GetCurrentTime().ToString() + "/" + predictedTime.ToString());
+                    if (WorldTime.GetCurrentTime() > predictedTime) route = _targetRoutesList[0];
+                }
             }
             if (route != null)
             {
+                Debug.Log("Send to route " + route.name);
                 _targetNpcController.SendNpcOnRoute(route);
                 _targetRouteTimeList.RemoveAt(_targetRoutesList.IndexOf(route));
                 _targetRoutesList.Remove(route);  
             }
         }
-        /// <summary> Метод для инициализации расписания.</summary>
+        /// <summary> РњРµС‚РѕРґ РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё СЂР°СЃРїРёСЃР°РЅРёСЏ.</summary>
         private void Start()
         {
             _targetNpcController = GetComponent<NpcController>();
         }
-        /// <summary> Метод для инициализации расписания в новый день.</summary>
+        /// <summary> РњРµС‚РѕРґ РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё СЂР°СЃРїРёСЃР°РЅРёСЏ РІ РЅРѕРІС‹Р№ РґРµРЅСЊ.</summary>
         public void NewDaySchedule(List<NpcRoute> routes , List<float> times)
         {
             _targetRoutesList = new List<NpcRoute>();

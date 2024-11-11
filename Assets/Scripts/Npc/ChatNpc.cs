@@ -1,16 +1,16 @@
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using UnityEngine;
 
 namespace NPC
 {
-    /// <summary>Класс описывающий логику NPC с диалогами .</summary>
+    /// <summary>РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°СЋС‰РёР№ Р»РѕРіРёРєСѓ NPC СЃ РґРёР°Р»РѕРіР°РјРё .</summary>
     public class ChatNpc : Npc, INpcIteractive
     {
-        /// <summary>Словарь с фразами .</summary>
+        /// <summary>РЎР»РѕРІР°СЂСЊ СЃ С„СЂР°Р·Р°РјРё .</summary>
         Dictionary<string, string> phrases;
 
-        /// <summary>Метод для получения фразы по ключу  .</summary>
-        /// <param name="phraseKey"> . Ключ нужной фразы</param>
+        /// <summary>РњРµС‚РѕРґ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ С„СЂР°Р·С‹ РїРѕ РєР»СЋС‡Сѓ  .</summary>
+        /// <param name="phraseKey"> . РљР»СЋС‡ РЅСѓР¶РЅРѕР№ С„СЂР°Р·С‹</param>
         public string GetPhrase(string phraseKey)
         {
             if (phrases.ContainsKey(phraseKey))
@@ -18,7 +18,7 @@ namespace NPC
             return "";
         }
 
-        /// <summary>Метод для запуска взаимодействия с NPC. Реализация интерфейса IIteractiveNpc .</summary>
+        /// <summary>РњРµС‚РѕРґ РґР»СЏ Р·Р°РїСѓСЃРєР° РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ NPC. Р РµР°Р»РёР·Р°С†РёСЏ РёРЅС‚РµСЂС„РµР№СЃР° IIteractiveNpc .</summary>
         public void Interact()
         {
             //Debug.Log("Hi, I'm " + this.Name);

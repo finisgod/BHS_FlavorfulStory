@@ -1,12 +1,12 @@
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using UnityEngine;
 
 namespace NPC
 {
-    /// <summary>Класс для расчета предполагаемой длительности маршрута</summary>
+    /// <summary>РљР»Р°СЃСЃ РґР»СЏ СЂР°СЃС‡РµС‚Р° РїСЂРµРґРїРѕР»Р°РіР°РµРјРѕР№ РґР»РёС‚РµР»СЊРЅРѕСЃС‚Рё РјР°СЂС€СЂСѓС‚Р°</summary>
     public class NpcRouteTimePredictor
     {
-        private const float _factor = 350f; //Расчитать нужное значение
+        private const float _factor = 100f; //Р Р°СЃС‡РёС‚Р°С‚СЊ РЅСѓР¶РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ
         public static float PredictTime(Vector3 currentPosition, NpcRoute targetRoute)
         {
             float predictedTime = 0f;

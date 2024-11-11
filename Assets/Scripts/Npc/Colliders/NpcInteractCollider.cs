@@ -1,12 +1,12 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 namespace NPC
 {
-    /// <summary> Класс описывающий коллайдер-триггер для взаимодействия с интерактивным NPC.</summary>
-    public class NpcInteractCollider : MonoBehaviour //все коллайдеры оптимизировать. Много лишних действий в OnTriggerEnter / Stay
+    /// <summary> РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°СЋС‰РёР№ РєРѕР»Р»Р°Р№РґРµСЂ-С‚СЂРёРіРіРµСЂ РґР»СЏ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ РёРЅС‚РµСЂР°РєС‚РёРІРЅС‹Рј NPC.</summary>
+    public class NpcInteractCollider : MonoBehaviour //РІСЃРµ РєРѕР»Р»Р°Р№РґРµСЂС‹ РѕРїС‚РёРјРёР·РёСЂРѕРІР°С‚СЊ. РњРЅРѕРіРѕ Р»РёС€РЅРёС… РґРµР№СЃС‚РІРёР№ РІ OnTriggerEnter / Stay
     {
-        /// <summary>Метод вызывающийся при нахождении в коллайдере объекта на котором этот скрипт висит .</summary>
-        /// <param name="other"> Коллайдер входящего объекта.</param>
+        /// <summary>РњРµС‚РѕРґ РІС‹Р·С‹РІР°СЋС‰РёР№СЃСЏ РїСЂРё РЅР°С…РѕР¶РґРµРЅРёРё РІ РєРѕР»Р»Р°Р№РґРµСЂРµ РѕР±СЉРµРєС‚Р° РЅР° РєРѕС‚РѕСЂРѕРј СЌС‚РѕС‚ СЃРєСЂРёРїС‚ РІРёСЃРёС‚ .</summary>
+        /// <param name="other"> РљРѕР»Р»Р°Р№РґРµСЂ РІС…РѕРґСЏС‰РµРіРѕ РѕР±СЉРµРєС‚Р°.</param>
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.tag == "Player")

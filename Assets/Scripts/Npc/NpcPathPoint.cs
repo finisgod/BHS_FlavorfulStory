@@ -1,24 +1,24 @@
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using UnityEngine;
 
 namespace NPC
 {
-    /// <summary>Класс - точка для маршрутов NPC. По умолчанию является "Пулом" из 1 точки</summary>
+    /// <summary>РљР»Р°СЃСЃ - С‚РѕС‡РєР° РґР»СЏ РјР°СЂС€СЂСѓС‚РѕРІ NPC. РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ СЏРІР»СЏРµС‚СЃСЏ "РџСѓР»РѕРј" РёР· 1 С‚РѕС‡РєРё</summary>
     public class NpcPathPoint : MonoBehaviour
     {
         #region Fields
-        /// <summary>Является ли точка порталом для перемещения между инстансами (флаг).</summary>
-        [SerializeField] private bool _isInstancePortal; //В будущем унести логику порталов в отдельный класс
-        /// <summary>Имя инстанса на котором расположена эта точка.</summary>
-        [SerializeField] private string _instanceName; //В будущем унести логику порталов в отдельный класс
-        /// <summary>Координата точки.</summary>
+        /// <summary>РЇРІР»СЏРµС‚СЃСЏ Р»Рё С‚РѕС‡РєР° РїРѕСЂС‚Р°Р»РѕРј РґР»СЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ РјРµР¶РґСѓ РёРЅСЃС‚Р°РЅСЃР°РјРё (С„Р»Р°Рі).</summary>
+        [SerializeField] private bool _isInstancePortal; //Р’ Р±СѓРґСѓС‰РµРј СѓРЅРµСЃС‚Рё Р»РѕРіРёРєСѓ РїРѕСЂС‚Р°Р»РѕРІ РІ РѕС‚РґРµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ
+        /// <summary>РРјСЏ РёРЅСЃС‚Р°РЅСЃР° РЅР° РєРѕС‚РѕСЂРѕРј СЂР°СЃРїРѕР»РѕР¶РµРЅР° СЌС‚Р° С‚РѕС‡РєР°.</summary>
+        [SerializeField] private string _instanceName; //Р’ Р±СѓРґСѓС‰РµРј СѓРЅРµСЃС‚Рё Р»РѕРіРёРєСѓ РїРѕСЂС‚Р°Р»РѕРІ РІ РѕС‚РґРµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ
+        /// <summary>РљРѕРѕСЂРґРёРЅР°С‚Р° С‚РѕС‡РєРё.</summary>
         private Vector3 _coordinate;
-        /// <summary>Динамический список из имен NPC, кто прошел эту точку. После завершения маршрута данный NPC пропадет из списка</summary>
-        private List<string> _achievedByNpcList;
-        #endregion
+        /// <summary>Р”РёРЅР°РјРёС‡РµСЃРєРёР№ СЃРїРёСЃРѕРє РёР· РёРјРµРЅ NPC, РєС‚Рѕ РїСЂРѕС€РµР» СЌС‚Сѓ С‚РѕС‡РєСѓ. РџРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ РјР°СЂС€СЂСѓС‚Р° РґР°РЅРЅС‹Р№ NPC РїСЂРѕРїР°РґРµС‚ РёР· СЃРїРёСЃРєР°</summary>
+        [SerializeField] private List<string> _achievedByNpcList;
+        #endregion 
 
         #region Properties
-        /// <summary>Свойство для получения координаты точки. Readonly .</summary>
+        /// <summary>РЎРІРѕР№СЃС‚РІРѕ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РєРѕРѕСЂРґРёРЅР°С‚С‹ С‚РѕС‡РєРё. Readonly .</summary>
         public Vector3 Coordinate
         {
             get
@@ -30,7 +30,7 @@ namespace NPC
                 _coordinate = value;
             }
         }
-        /// <summary>Свойство возвращающее true/false в зависимости от того, является ли точка порталом между инстансами. Readonly .</summary>
+        /// <summary>РЎРІРѕР№СЃС‚РІРѕ РІРѕР·РІСЂР°С‰Р°СЋС‰РµРµ true/false РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‚РѕРіРѕ, СЏРІР»СЏРµС‚СЃСЏ Р»Рё С‚РѕС‡РєР° РїРѕСЂС‚Р°Р»РѕРј РјРµР¶РґСѓ РёРЅСЃС‚Р°РЅСЃР°РјРё. Readonly .</summary>
         public bool IsInstancePortal
         {
             get
@@ -38,8 +38,8 @@ namespace NPC
                 return _isInstancePortal;
             }
         }
-        /// <summary>Свойство возвращающее точку назначения портала между инстансами. Readonly .</summary>
-        public NpcPathPoint PortalDestination //В будущем унести логику порталов в отдельный класс
+        /// <summary>РЎРІРѕР№СЃС‚РІРѕ РІРѕР·РІСЂР°С‰Р°СЋС‰РµРµ С‚РѕС‡РєСѓ РЅР°Р·РЅР°С‡РµРЅРёСЏ РїРѕСЂС‚Р°Р»Р° РјРµР¶РґСѓ РёРЅСЃС‚Р°РЅСЃР°РјРё. Readonly .</summary>
+        public NpcPathPoint PortalDestination //Р’ Р±СѓРґСѓС‰РµРј СѓРЅРµСЃС‚Рё Р»РѕРіРёРєСѓ РїРѕСЂС‚Р°Р»РѕРІ РІ РѕС‚РґРµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ
         {
             get
             {
@@ -47,8 +47,8 @@ namespace NPC
                 return null;
             }
         }
-        /// <summary>Имя инстанса на котором расположена точка. Readonly .</summary>
-        public string InstanceName //В будущем унести логику порталов в отдельный класс
+        /// <summary>РРјСЏ РёРЅСЃС‚Р°РЅСЃР° РЅР° РєРѕС‚РѕСЂРѕРј СЂР°СЃРїРѕР»РѕР¶РµРЅР° С‚РѕС‡РєР°. Readonly .</summary>
+        public string InstanceName //Р’ Р±СѓРґСѓС‰РµРј СѓРЅРµСЃС‚Рё Р»РѕРіРёРєСѓ РїРѕСЂС‚Р°Р»РѕРІ РІ РѕС‚РґРµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ
         {
             get
             {
@@ -58,8 +58,8 @@ namespace NPC
         #endregion
 
         #region Methods
-        /// <summary>Метод старта объекта. Для инициализаций.</summary>
-        private void Awake() //Awake для того, чтобы к моменту Start() все ссылки на PathPoint получали уже инициализированную позицию
+        /// <summary>РњРµС‚РѕРґ СЃС‚Р°СЂС‚Р° РѕР±СЉРµРєС‚Р°. Р”Р»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёР№.</summary>
+        private void Awake() //Awake РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ Рє РјРѕРјРµРЅС‚Сѓ Start() РІСЃРµ СЃСЃС‹Р»РєРё РЅР° PathPoint РїРѕР»СѓС‡Р°Р»Рё СѓР¶Рµ РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅСѓСЋ РїРѕР·РёС†РёСЋ
         {
             _coordinate = this.transform.position;
         }
@@ -67,17 +67,17 @@ namespace NPC
         {
             _achievedByNpcList = new List<string>();
         }
-        /// <summary>Метод возвращающий true/false в зависимости от достижения точки NPC.</summary>
+        /// <summary>РњРµС‚РѕРґ РІРѕР·РІСЂР°С‰Р°СЋС‰РёР№ true/false РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РґРѕСЃС‚РёР¶РµРЅРёСЏ С‚РѕС‡РєРё NPC.</summary>
         public bool IsNpcAchieved(string npcIdentifier)
         {
             return _achievedByNpcList.Contains(npcIdentifier);
         }
-        /// <summary>Метод для удаления NPC из списка прошедших точку (вызывается после завершения маршрута).</summary>
+        /// <summary>РњРµС‚РѕРґ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ NPC РёР· СЃРїРёСЃРєР° РїСЂРѕС€РµРґС€РёС… С‚РѕС‡РєСѓ (РІС‹Р·С‹РІР°РµС‚СЃСЏ РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ РјР°СЂС€СЂСѓС‚Р°).</summary>
         public bool RemoveNpcAchieved(string npcIdentifier)
         {
             return _achievedByNpcList.Remove(npcIdentifier);
         }
-        /// <summary>Метод для добавления NPC в список прошедших точку (вызывается после завершения маршрута).</summary>
+        /// <summary>РњРµС‚РѕРґ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ NPC РІ СЃРїРёСЃРѕРє РїСЂРѕС€РµРґС€РёС… С‚РѕС‡РєСѓ (РІС‹Р·С‹РІР°РµС‚СЃСЏ РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ РјР°СЂС€СЂСѓС‚Р°).</summary>
         public bool SetNpcAchieved(string npcIdentifier)
         {
             if (_achievedByNpcList.Contains(npcIdentifier)) return false;

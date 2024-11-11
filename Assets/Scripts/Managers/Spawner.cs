@@ -1,9 +1,8 @@
-using Unity.VisualScripting;
+п»їusing Unity.VisualScripting;
 using UnityEngine;
-/// <summary> Класс для спавна объектов.</summary>
+/// <summary> РљР»Р°СЃСЃ РґР»СЏ СЃРїР°РІРЅР° РѕР±СЉРµРєС‚РѕРІ.</summary>
 public class Spawner : MonoBehaviour //Singleton
 {
-    [SerializeField] GameObject world;
     public static Spawner instance;
     private void Start()
     {
@@ -16,11 +15,5 @@ public class Spawner : MonoBehaviour //Singleton
         UnityEngine.Object spawnedObject = Instantiate(Resources.Load(prefabName), position, new Quaternion(0.0f, 0.0f, 0.0f, 0.0f), parent);
         GameObject gameObject = spawnedObject.GameObject();
         return gameObject;
-    }
-    public void SpawnToWorld(string name, Vector3 position)
-    {
-        string prefabName = "Prefabs/GameObjects/" + name;
-        Debug.Log(prefabName);
-        Instantiate(Resources.Load(prefabName), position, new Quaternion(0.0f, 0.0f, 0.0f, 0.0f), world.transform);
     }
 }

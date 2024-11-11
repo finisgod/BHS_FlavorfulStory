@@ -1,8 +1,8 @@
-using TMPro;
+п»їusing TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-/// <summary> Класс-стартер сцены для верного порядка инициализаций (на будущее).</summary>
+/// <summary> РљР»Р°СЃСЃ-СЃС‚Р°СЂС‚РµСЂ СЃС†РµРЅС‹ РґР»СЏ РІРµСЂРЅРѕРіРѕ РїРѕСЂСЏРґРєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёР№ (РЅР° Р±СѓРґСѓС‰РµРµ).</summary>
 public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]TMP_Text textObject;

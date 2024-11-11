@@ -1,10 +1,10 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace NPC
 {
-    /// <summary>Вспомогательная структура для восстановления позиции NPC в проивзольной точке маршрута </summary>
+    /// <summary>Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РїРѕР·РёС†РёРё NPC РІ РїСЂРѕРёРІР·РѕР»СЊРЅРѕР№ С‚РѕС‡РєРµ РјР°СЂС€СЂСѓС‚Р° </summary>
     public struct Vector3OnScene
     {
         public string Name;
@@ -15,21 +15,30 @@ namespace NPC
             Position = position;
         }
     }
-    /// <summary>Базовый класс для маршрута NPC. Включает в себя List из PathPoint в порядке очередности их достижения </summary>
+    /// <summary>Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ РјР°СЂС€СЂСѓС‚Р° NPC. Р’РєР»СЋС‡Р°РµС‚ РІ СЃРµР±СЏ List РёР· PathPoint РІ РїРѕСЂСЏРґРєРµ РѕС‡РµСЂРµРґРЅРѕСЃС‚Рё РёС… РґРѕСЃС‚РёР¶РµРЅРёСЏ </summary>
     public class NpcRoute : MonoBehaviour
     {
         #region Fields
-        /// <summary>Список точек в порядке очередности их достижения </summary>
+        /// <summary>РЎРїРёСЃРѕРє С‚РѕС‡РµРє РІ РїРѕСЂСЏРґРєРµ РѕС‡РµСЂРµРґРЅРѕСЃС‚Рё РёС… РґРѕСЃС‚РёР¶РµРЅРёСЏ </summary>
         [SerializeField] private List<NpcPathPoint> _routePoints;
+        /// <summary>РќР°Р·РІР°РЅРёРµ РјР°СЂС€СЂСѓС‚Р° </summary>
+        [SerializeField] private string _routeName;
         #endregion
 
         #region Properties
-        /// <summary>Список точек в порядке очередности их достижения </summary>
+        /// <summary>РЎРїРёСЃРѕРє С‚РѕС‡РµРє РІ РїРѕСЂСЏРґРєРµ РѕС‡РµСЂРµРґРЅРѕСЃС‚Рё РёС… РґРѕСЃС‚РёР¶РµРЅРёСЏ </summary>
         public List<NpcPathPoint> Points
         {
             get
             {
                 return _routePoints;
+            }
+        }
+        public string RouteName
+        {
+            get
+            {
+                return _routeName;
             }
         }
         public double Length
@@ -55,7 +64,7 @@ namespace NPC
         #endregion
 
         #region Methods
-        /// <summary>Возвращает true/false если NPC прошел/не прошел весь маршрут </summary>
+        /// <summary>Р’РѕР·РІСЂР°С‰Р°РµС‚ true/false РµСЃР»Рё NPC РїСЂРѕС€РµР»/РЅРµ РїСЂРѕС€РµР» РІРµСЃСЊ РјР°СЂС€СЂСѓС‚ </summary>
         public bool IsAchieved(string npcIdentifier)
         {
             foreach (NpcPathPoint point in Points)
@@ -64,16 +73,16 @@ namespace NPC
             }
             return true;
         }
-        /// <summary>Выдает текущую точку для следования. </summary>
+        /// <summary>Р’С‹РґР°РµС‚ С‚РµРєСѓС‰СѓСЋ С‚РѕС‡РєСѓ РґР»СЏ СЃР»РµРґРѕРІР°РЅРёСЏ. </summary>
         public NpcPathPoint GetRoutePoint(string npcIdentifier)
         {
             foreach (NpcPathPoint point in Points)
             {
                 if (!point.IsNpcAchieved(npcIdentifier)) return point;
             }
-            return null;//default value. Таких ситуаций при корректной работы логики маршрутов быть не должно
+            return null;//default value. РўР°РєРёС… СЃРёС‚СѓР°С†РёР№ РїСЂРё РєРѕСЂСЂРµРєС‚РЅРѕР№ СЂР°Р±РѕС‚С‹ Р»РѕРіРёРєРё РјР°СЂС€СЂСѓС‚РѕРІ Р±С‹С‚СЊ РЅРµ РґРѕР»Р¶РЅРѕ
         }
-        /// <summary>Устанавливает все точки маршрута в исходное состояние для указанного npc</summary>
+        /// <summary>РЈСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РІСЃРµ С‚РѕС‡РєРё РјР°СЂС€СЂСѓС‚Р° РІ РёСЃС…РѕРґРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РґР»СЏ СѓРєР°Р·Р°РЅРЅРѕРіРѕ npc</summary>
         public void Commit(string npcIdentifier)
         {
             foreach (NpcPathPoint point in Points)
@@ -82,7 +91,7 @@ namespace NPC
             }
         }
         //Restore Route Logic
-        /// <summary>Получение координаты маршрута по величине factor (0.0 -> 1.0). 0% - 100% </summary>
+        /// <summary>РџРѕР»СѓС‡РµРЅРёРµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РјР°СЂС€СЂСѓС‚Р° РїРѕ РІРµР»РёС‡РёРЅРµ factor (0.0 -> 1.0). 0% - 100% </summary>
         public Vector3 GetPositionByFactor(double factor)
         {
             List<Vector3> path = GetPath(100, GetPathPointsByList());
@@ -99,7 +108,7 @@ namespace NPC
             if (pathIndex > 0 && pathIndex < path.Count) return path[pathIndex];
             else return path[path.Count - 1];
         }
-        /// <summary>Преобразование коллекции точек вида NpcPathPoint в вспомогательный тип Vector3OnScene</summary>
+        /// <summary>РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РєРѕР»Р»РµРєС†РёРё С‚РѕС‡РµРє РІРёРґР° NpcPathPoint РІ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ С‚РёРї Vector3OnScene</summary>
         private List<Vector3OnScene> GetPathPointsByList()
         {
             List<Vector3OnScene> path = new List<Vector3OnScene>();
@@ -109,7 +118,7 @@ namespace NPC
             }
             return path;
         }
-        /// <summary>Разбиение маршрута на количество промежуточных точек прямо пропорциональное значению accuracy</summary>
+        /// <summary>Р Р°Р·Р±РёРµРЅРёРµ РјР°СЂС€СЂСѓС‚Р° РЅР° РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹С… С‚РѕС‡РµРє РїСЂСЏРјРѕ РїСЂРѕРїРѕСЂС†РёРѕРЅР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёСЋ accuracy</summary>
         private List<Vector3> GetPath(float accuracy, List<Vector3OnScene> inputList)
         {
             List<Vector3> resultList = new List<Vector3>();

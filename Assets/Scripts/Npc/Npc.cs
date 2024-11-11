@@ -1,18 +1,18 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.AI;
 
 namespace NPC
 {
-    /// <summary>Базовый класс для NPC. Включает в себя логику UNITY AI NavMeshAgent</summary>
+    /// <summary>Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ NPC. Р’РєР»СЋС‡Р°РµС‚ РІ СЃРµР±СЏ Р»РѕРіРёРєСѓ UNITY AI NavMeshAgent</summary>
     public class Npc : MonoBehaviour
     {
         #region Fields
-        /// <summary>Уникальное Имя для NPC.</summary>
+        /// <summary>РЈРЅРёРєР°Р»СЊРЅРѕРµ РРјСЏ РґР»СЏ NPC.</summary>
         [SerializeField] private string _name;
         #endregion
 
         #region Properties
-        /// <summary>Свойство для получения имени NPC.</summary>
+        /// <summary>РЎРІРѕР№СЃС‚РІРѕ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РёРјРµРЅРё NPC.</summary>
         public string Name
         {
             get

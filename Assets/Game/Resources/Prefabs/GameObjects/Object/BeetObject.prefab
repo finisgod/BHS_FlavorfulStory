@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2949443929173781340}
   - component: {fileID: 322759147047705967}
   - component: {fileID: 8109418533789468025}
-  - component: {fileID: -5309302984011658843}
   - component: {fileID: 2949787233553401987}
   m_Layer: 0
   m_Name: BeetObject
@@ -107,18 +106,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.30548018, y: 0.36617607, z: 0.44055036}
   m_Center: {x: 0.0019076879, y: 0.11207461, z: -0.079545006}
---- !u!114 &-5309302984011658843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7381642944633882984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a25c6baf9d62ea44db56f1b0763ec91f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2949787233553401987
 MonoBehaviour:
   m_ObjectHideFlags: 0

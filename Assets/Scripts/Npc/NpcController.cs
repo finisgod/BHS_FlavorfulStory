@@ -1,26 +1,32 @@
-using Unity.VisualScripting;
+п»їusing Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 namespace NPC
 {
-    /// <summary>Класс описывающий логику передвижения NPC.</summary>
+    /// <summary>РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°СЋС‰РёР№ Р»РѕРіРёРєСѓ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ NPC.</summary>
     public class NpcController : MonoBehaviour
     {
         #region Fields
-        /// <summary>Базовая точка для агента UNITY AI NavMeshAgent (точка спавна).</summary>
+        /// <summary>Р‘Р°Р·РѕРІР°СЏ С‚РѕС‡РєР° РґР»СЏ Р°РіРµРЅС‚Р° UNITY AI NavMeshAgent (С‚РѕС‡РєР° СЃРїР°РІРЅР°).</summary>
         [SerializeField] private NpcPathPoint _basePoint;
-        /// <summary> NPC к которому прикреплен контроллер.</summary>
+        /// <summary> NPC Рє РєРѕС‚РѕСЂРѕРјСѓ РїСЂРёРєСЂРµРїР»РµРЅ РєРѕРЅС‚СЂРѕР»Р»РµСЂ.</summary>
         private Npc _targetNpc;
-        /// <summary> Текущий маршрут NPC.</summary>
+        /// <summary> РўРµРєСѓС‰РёР№ РјР°СЂС€СЂСѓС‚ NPC.</summary>
         private NpcRoute _targetNpcRoute;
-        /// <summary>Агент UNITY AI NavMeshAgent.</summary>
+        /// <summary>РђРіРµРЅС‚ UNITY AI NavMeshAgent.</summary>
         private NavMeshAgent _navMeshAgent;
+        /// <summary> РђРЅРёРјР°С‚РѕСЂ NPC.</summary>
+        private Animator _animator;
+        /// <summary> РўРІРµСЂРґРѕРµ С‚РµР»Рѕ.</summary>
+        private Rigidbody _rigidbody;
+        /// <summary> РўРІРµСЂРґРѕРµ С‚РµР»Рѕ.</summary>
+        private bool _IsOnRoute;
         #endregion
 
         #region Properties
-        /// <summary>Свойство для получения экземпляра агента UNITY AI NavMeshAgent. Readonly .</summary>
+        /// <summary>РЎРІРѕР№СЃС‚РІРѕ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ СЌРєР·РµРјРїР»СЏСЂР° Р°РіРµРЅС‚Р° UNITY AI NavMeshAgent. Readonly .</summary>
         public NavMeshAgent NavMeshAgent
         {
             get
@@ -28,7 +34,7 @@ namespace NPC
                 return _navMeshAgent;
             }
         }
-        /// <summary>Свойство для получения базовой точки NPC.</summary>
+        /// <summary>РЎРІРѕР№СЃС‚РІРѕ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ Р±Р°Р·РѕРІРѕР№ С‚РѕС‡РєРё NPC.</summary>
         public Vector3 BasePoint
         {
             get
@@ -40,7 +46,7 @@ namespace NPC
                 _basePoint.Coordinate = value;
             }
         }
-        /// <summary>Возвращает текущую позицию NPC.</summary>
+        /// <summary>Р’РѕР·РІСЂР°С‰Р°РµС‚ С‚РµРєСѓС‰СѓСЋ РїРѕР·РёС†РёСЋ NPC.</summary>
         public Vector3 Position
         {
             get
@@ -48,19 +54,35 @@ namespace NPC
                 return this.gameObject.transform.position;
             }
         }
+        public bool IsOnRoute
+        {
+            get
+            {
+                return _IsOnRoute;
+            }
+            set
+            {
+                _IsOnRoute = value;
+            }
+        }
         #endregion
 
         #region Methods
-        /// <summary> Метод для инициализации NPC контроллера .</summary>
+        /// <summary> РњРµС‚РѕРґ РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё NPC РєРѕРЅС‚СЂРѕР»Р»РµСЂР° .</summary>
         private void Start()
         {
+            _IsOnRoute = false;
             _targetNpc = GetComponent<Npc>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            _rigidbody = GetComponent<Rigidbody>();
+            _animator = GetComponent<Animator>();
             this.ToBasePoint();
+            WorldTime.DayEndedEvent += this.ToBasePoint;
         }
-        /// <summary> Метод для обновления контроллера .</summary>
+        /// <summary> РњРµС‚РѕРґ РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ РєРѕРЅС‚СЂРѕР»Р»РµСЂР° .</summary>
         private void Update()
         {
+            AnimateMovement(NavMeshAgent.velocity.normalized.magnitude);
             //Debug.Log(WorldTime.GetCurrentTime().ToString());
             //OffMeshLink logic
             if (NavMeshAgent.isOnOffMeshLink)
@@ -80,21 +102,27 @@ namespace NPC
                 {
                     if (NavMeshAgent.destination != point.Coordinate)
                         SetDestination(point.Coordinate);
+                    IsOnRoute = true;
+                }
+                else
+                {
+                    IsOnRoute = false;
                 }
             }
         }
-        /// <summary> Метод для отправки NPC по маршруту.</summary>
+        /// <summary> РњРµС‚РѕРґ РґР»СЏ РѕС‚РїСЂР°РІРєРё NPC РїРѕ РјР°СЂС€СЂСѓС‚Сѓ.</summary>
         public void SendNpcOnRoute(NpcRoute route)
         {            
             if (_targetNpcRoute != null) _targetNpcRoute.Commit(_targetNpc.Name);
             _targetNpcRoute = route;
+            _targetNpcRoute.Commit(_targetNpc.Name); //РЎР±СЂРѕСЃ С‚РѕС‡РµРє РјР°СЂС€СЂСѓС‚Р° РєРѕС‚РѕСЂС‹Рµ NPC РјРѕРі Р·Р°С†РµРїРёС‚СЊ
         }
-        /// <summary> Метод для отправки NPC по маршруту.</summary>
+        /// <summary> РњРµС‚РѕРґ РґР»СЏ РѕС‚РїСЂР°РІРєРё NPC РїРѕ РјР°СЂС€СЂСѓС‚Сѓ.</summary>
         public void ResetNpcRoute()
         {
             _targetNpcRoute = null;
         }
-        /// <summary>Метод указания точки для движения NPC.</summary>
+        /// <summary>РњРµС‚РѕРґ СѓРєР°Р·Р°РЅРёСЏ С‚РѕС‡РєРё РґР»СЏ РґРІРёР¶РµРЅРёСЏ NPC.</summary>
         public NpcAgentResult SetDestination(Vector3 transform)
         {
             if (!NavMeshAgent.enabled) return NpcAgentResult.eAgentIsDisabled;
@@ -106,21 +134,21 @@ namespace NPC
             else return NpcAgentResult.eInvalidDestination;
         }
 
-        /// <summary>Метод для перемещения NPC в строго указанную точку.</summary>
+        /// <summary>РњРµС‚РѕРґ РґР»СЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ NPC РІ СЃС‚СЂРѕРіРѕ СѓРєР°Р·Р°РЅРЅСѓСЋ С‚РѕС‡РєСѓ.</summary>
         public void Warp(Vector3 position)
         {
             Vector3 destination = NavMeshAgent.destination;
             NavMeshAgent.Warp(position);
-            NavMeshAgent.SetDestination(destination);
+            //NavMeshAgent.SetDestination(destination);
         }
 
-        /// <summary>Метод для перемещения NPC в базовую точку.</summary>
+        /// <summary>РњРµС‚РѕРґ РґР»СЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ NPC РІ Р±Р°Р·РѕРІСѓСЋ С‚РѕС‡РєСѓ.</summary>
         public void ToBasePoint()
         {
             this.Warp(BasePoint);
         }
 
-        /// <summary>Метод остановки NPC.</summary>
+        /// <summary>РњРµС‚РѕРґ РѕСЃС‚Р°РЅРѕРІРєРё NPC.</summary>
         public void StopMoving()
         {
             if (NavMeshAgent.enabled)
@@ -129,13 +157,20 @@ namespace NPC
             }
         }
 
-        /// <summary>Метод продолжения движения NPC.</summary>
+        /// <summary>РњРµС‚РѕРґ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ РґРІРёР¶РµРЅРёСЏ NPC.</summary>
         public void StartMoving()
         {
             if (NavMeshAgent.enabled)
             {
                 NavMeshAgent.isStopped = false;
             }
+        }
+        /// <summary> РђРЅРёРјРёСЂРѕРІР°С‚СЊ РїРµСЂРµРґРІРёР¶РµРЅРёРµ.</summary>
+        /// <param name="directionMagnitude"> Р’РµР»РёС‡РёРЅР° РІРµРєС‚РѕСЂР° РЅР°РїСЂР°РІР»РµРЅРёСЏ.</param>
+        private void AnimateMovement(float speed)
+        {
+            const float DampTime = 0.2f; // Р—РЅР°С‡РµРЅРёРµ РїРѕР»СѓС‡РµРЅРѕ СЌРјРїРёСЂРёС‡РµСЃРєРё
+            _animator.SetFloat("Speed", speed, DampTime, Time.deltaTime);
         }
         #endregion
     }

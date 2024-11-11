@@ -1,4 +1,4 @@
-/// <summary> Интерфейс, задающий методы интерактивных NPC.</summary>
+п»ї/// <summary> РРЅС‚РµСЂС„РµР№СЃ, Р·Р°РґР°СЋС‰РёР№ РјРµС‚РѕРґС‹ РёРЅС‚РµСЂР°РєС‚РёРІРЅС‹С… NPC.</summary>
 public interface INpcIteractive
 {
     public void Interact();

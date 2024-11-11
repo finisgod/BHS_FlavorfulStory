@@ -1,17 +1,17 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 namespace FlavorfulStory.Saving
 {
-    /// <summary> Сериализуемый Unity Vector3.</summary>
-    /// <remarks> Стандартный Unity Vector3 нельзя сериализовать. Для сериализации сделана эта надстройка.</remarks>
+    /// <summary> РЎРµСЂРёР°Р»РёР·СѓРµРјС‹Р№ Unity Vector3.</summary>
+    /// <remarks> РЎС‚Р°РЅРґР°СЂС‚РЅС‹Р№ Unity Vector3 РЅРµР»СЊР·СЏ СЃРµСЂРёР°Р»РёР·РѕРІР°С‚СЊ. Р”Р»СЏ СЃРµСЂРёР°Р»РёР·Р°С†РёРё СЃРґРµР»Р°РЅР° СЌС‚Р° РЅР°РґСЃС‚СЂРѕР№РєР°.</remarks>
     [System.Serializable]
     public class SerializableVector3
     {
-        /// <summary> Координата вектора.</summary>
+        /// <summary> РљРѕРѕСЂРґРёРЅР°С‚Р° РІРµРєС‚РѕСЂР°.</summary>
         private float x, y, z;
 
-        /// <summary> Конструктор, который по стандартному Vector3 создает сериализуемый вектор.</summary>
-        /// <param name="vector"> Стандартный Unity Vector3</param>
+        /// <summary> РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ, РєРѕС‚РѕСЂС‹Р№ РїРѕ СЃС‚Р°РЅРґР°СЂС‚РЅРѕРјСѓ Vector3 СЃРѕР·РґР°РµС‚ СЃРµСЂРёР°Р»РёР·СѓРµРјС‹Р№ РІРµРєС‚РѕСЂ.</summary>
+        /// <param name="vector"> РЎС‚Р°РЅРґР°СЂС‚РЅС‹Р№ Unity Vector3</param>
         public SerializableVector3(Vector3 vector)
         {
             x = vector.x;
@@ -19,8 +19,8 @@ namespace FlavorfulStory.Saving
             z = vector.z;
         }
 
-        /// <summary> Приведение сериализуемого Vector3 к стандартному из Unity.</summary>
-        /// <returns> Возвращает Unity Vector3.</returns>
+        /// <summary> РџСЂРёРІРµРґРµРЅРёРµ СЃРµСЂРёР°Р»РёР·СѓРµРјРѕРіРѕ Vector3 Рє СЃС‚Р°РЅРґР°СЂС‚РЅРѕРјСѓ РёР· Unity.</summary>
+        /// <returns> Р’РѕР·РІСЂР°С‰Р°РµС‚ Unity Vector3.</returns>
         public Vector3 ToVector() => new(x, y, z);
     }
 }

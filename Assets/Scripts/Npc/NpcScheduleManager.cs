@@ -1,24 +1,24 @@
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using UnityEngine;
 
 namespace NPC
 {
-    /// <summary>Базовый класс для расписаний NPC. Включает в себя Лист из Маршрутов и соответствующий им List с ожидаемым временем его окончания (по GlobalWorldTime) </summary>
-    public class NpcScheduleManager : MonoBehaviour //Подумать как в инспекторе соединить два листа в 1
+    /// <summary>Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ СЂР°СЃРїРёСЃР°РЅРёР№ NPC. Р’РєР»СЋС‡Р°РµС‚ РІ СЃРµР±СЏ Р›РёСЃС‚ РёР· РњР°СЂС€СЂСѓС‚РѕРІ Рё СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РёРј List СЃ РѕР¶РёРґР°РµРјС‹Рј РІСЂРµРјРµРЅРµРј РµРіРѕ РѕРєРѕРЅС‡Р°РЅРёСЏ (РїРѕ GlobalWorldTime) </summary>
+    public class NpcScheduleManager : MonoBehaviour //РџРѕРґСѓРјР°С‚СЊ РєР°Рє РІ РёРЅСЃРїРµРєС‚РѕСЂРµ СЃРѕРµРґРёРЅРёС‚СЊ РґРІР° Р»РёСЃС‚Р° РІ 1
     {
         #region Fields
-        /// <summary>List из Маршрутов</summary>
-        [SerializeField] private List<NpcRoute> _targetRoutesList; //В инспекторе создавать строго по возрастанию времени
-        /// <summary>List с ожидаемым временем окончания маршрутов(по GlobalWorldTime).</summary>
-        [SerializeField] private List<float> _targetRouteTimeList; //В инспекторе создавать строго по возрастанию времени
-        /// <summary> NPC к которому прикреплено расписание.</summary>
+        /// <summary>List РёР· РњР°СЂС€СЂСѓС‚РѕРІ</summary>
+        [SerializeField] private List<NpcRoute> _targetRoutesList; //Р’ РёРЅСЃРїРµРєС‚РѕСЂРµ СЃРѕР·РґР°РІР°С‚СЊ СЃС‚СЂРѕРіРѕ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ РІСЂРµРјРµРЅРё
+        /// <summary>List СЃ РѕР¶РёРґР°РµРјС‹Рј РІСЂРµРјРµРЅРµРј РѕРєРѕРЅС‡Р°РЅРёСЏ РјР°СЂС€СЂСѓС‚РѕРІ(РїРѕ GlobalWorldTime).</summary>
+        [SerializeField] private List<float> _targetRouteTimeList; //Р’ РёРЅСЃРїРµРєС‚РѕСЂРµ СЃРѕР·РґР°РІР°С‚СЊ СЃС‚СЂРѕРіРѕ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ РІСЂРµРјРµРЅРё
+        /// <summary> NPC Рє РєРѕС‚РѕСЂРѕРјСѓ РїСЂРёРєСЂРµРїР»РµРЅРѕ СЂР°СЃРїРёСЃР°РЅРёРµ.</summary>
         private Npc _targetNpc;
         /// <summary>.</summary>
-        private NpcDailySchedule _dailySchedule; //В инспекторе создавать строго по возрастанию времени
+        private NpcDailySchedule _dailySchedule; //Р’ РёРЅСЃРїРµРєС‚РѕСЂРµ СЃРѕР·РґР°РІР°С‚СЊ СЃС‚СЂРѕРіРѕ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ РІСЂРµРјРµРЅРё
         #endregion
 
         #region Methods
-        /// <summary> В данном методе контролируется время и сопоставляется с расписанием.</summary>
+        /// <summary> Р’ РґР°РЅРЅРѕРј РјРµС‚РѕРґРµ РєРѕРЅС‚СЂРѕР»РёСЂСѓРµС‚СЃСЏ РІСЂРµРјСЏ Рё СЃРѕРїРѕСЃС‚Р°РІР»СЏРµС‚СЃСЏ СЃ СЂР°СЃРїРёСЃР°РЅРёРµРј.</summary>
         private void Start()
         {
             _targetNpc = GetComponent<Npc>();
@@ -26,7 +26,7 @@ namespace NPC
             WorldTime.DayEndedEvent += OnDayChanged;
             _dailySchedule.NewDaySchedule(_targetRoutesList, _targetRouteTimeList);
         }
-        /// <summary> Вызывается при старте нового дня.</summary>
+        /// <summary> Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё СЃС‚Р°СЂС‚Рµ РЅРѕРІРѕРіРѕ РґРЅСЏ.</summary>
         public void OnDayChanged() 
         {
             foreach (var route in _targetRoutesList)
