@@ -22,12 +22,15 @@ namespace FlavorfulStory.Stats.PlayerStats
         public Dictionary<ActivityType, List<int>> ActivitiesExpDict{get; private set;}
 
         private PlayerDataParser _dataParser;
-        
-        /// <summary> Инициализация и заполнение списка и словаря.</summary>
-        private void Awake()  // тут закинул в эвейк, чтобы быстрее заполнялись значения,
-                              // так как в UI скрипте Start() быстрее отрабатывает и вылетает ошибка
+
+        private void Awake()
         {
             _dataParser = GetComponent<PlayerDataParser>();
+        }
+
+        /// <summary> Инициализация и заполнение списка и словаря.</summary>
+        private void Start()
+        {
             ActivitiesExpToUpgrade = _dataParser.ActivitiesExpToUpgrade;
 
             ActivitiesExpDict = new Dictionary<ActivityType, List<int>>();

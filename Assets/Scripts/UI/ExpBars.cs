@@ -52,7 +52,9 @@ namespace FlavorfulStory.UI
             foreach (ActivityType activityType in Enum.GetValues(typeof(ActivityType)))
             {
                 var level = _activitiesStatsManager.ActivitiesExpDict[activityType][1];
-                if (level == _activitiesStatsManager.ActivitiesExpToUpgrade[i].Count)
+                var maxLevel = _activitiesStatsManager.ActivitiesExpToUpgrade[i].Count;
+                
+                if (level == maxLevel)
                 {
                     _textObjects[i].text = "Max level";
                     _imageObjects[i].fillAmount = 1;
