@@ -11,7 +11,8 @@ namespace FlavorfulStory.Inventory.PickupSystem
         {
             if (other.CompareTag("Player"))
             {
-                GetComponent<Pickup>().PickUpItem();
+                var pickup = GetComponent<Pickup>();
+                if (pickup.CanBePickedUp) pickup.PickUpItem();
             }
         }
     }

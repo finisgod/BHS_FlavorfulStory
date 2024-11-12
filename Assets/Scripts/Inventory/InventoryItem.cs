@@ -58,7 +58,7 @@ namespace FlavorfulStory.Inventory
         #endregion
 
         /// <summary> Заспавнить предмет Pickup на сцене.</summary>
-        /// <param name="spawnPosition"> Позиция на сцене, где нужно заспавнить.</param>
+        /// <param name="spawnPosition"> Позиция спавна предмета.</param>
         /// <returns> Возвращает ссылку на заспавненный предмет Pickup.</returns>
         public Pickup SpawnPickup(Vector3 spawnPosition)
         {

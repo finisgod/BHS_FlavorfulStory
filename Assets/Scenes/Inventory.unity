@@ -245,6 +245,7 @@ GameObject:
   - component: {fileID: 212571412}
   - component: {fileID: 212571411}
   - component: {fileID: 212571419}
+  - component: {fileID: 212571421}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -419,6 +420,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 4
   _rotateSpeed: 4
+--- !u!114 &212571421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212571409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3a970a862f6824fbdca652389c28ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &371575964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,7 +1017,7 @@ PrefabInstance:
     - target: {fileID: 6571177256017942537, guid: b7a58d4c54fbce54f8fcd204f439a8c9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.502
       objectReference: {fileID: 0}
     - target: {fileID: 6571177256017942537, guid: b7a58d4c54fbce54f8fcd204f439a8c9,
         type: 3}
@@ -2411,7 +2424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1917406135}
   m_Layer: 0
-  m_Name: -----Environment-------
+  m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3022,7 +3035,7 @@ PrefabInstance:
     - target: {fileID: 6571177256017942537, guid: b7a58d4c54fbce54f8fcd204f439a8c9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.394
       objectReference: {fileID: 0}
     - target: {fileID: 6571177256017942537, guid: b7a58d4c54fbce54f8fcd204f439a8c9,
         type: 3}

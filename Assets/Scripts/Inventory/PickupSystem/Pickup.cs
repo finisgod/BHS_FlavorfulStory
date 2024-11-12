@@ -11,14 +11,14 @@ namespace FlavorfulStory.Inventory.PickupSystem
         [SerializeField, Range(0f, 5f), Tooltip("Радиус подбора предмета.")]
         private float _pickupRadius;
 
-        /// <summary> Предмет инвентаря.</summary>
-        private InventoryItem _item;
-
         /// <summary> Инвентарь игрока.</summary>
         private Inventory _inventory;
 
         /// <summary> Может быть подобран?</summary>
-        private bool CanBePickedUp => _inventory.HasSpaceFor(_item);
+        public bool CanBePickedUp => _inventory.HasSpaceFor(Item);
+
+        /// <summary> Предмет инвентаря.</summary>
+        [field: SerializeField] public InventoryItem Item { get; private set; }
 
         /// <summary> Инициализация компонента.</summary>
         private void Awake()
@@ -31,13 +31,13 @@ namespace FlavorfulStory.Inventory.PickupSystem
         /// <param name="item">The type of item this prefab represents.</param>
         public void Setup(InventoryItem item)
         {
-            _item = item;
+            Item = item;
         }
 
         /// <summary> Подобрать предмет.</summary>
         public void PickUpItem()
         {
-            bool foundSlot = _inventory.TryAddToFirstEmptySlot(_item);
+            bool foundSlot = _inventory.TryAddToFirstEmptySlot(Item);
             if (foundSlot) Destroy(gameObject);
         }
 
