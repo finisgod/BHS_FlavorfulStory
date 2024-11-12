@@ -1,4 +1,5 @@
 ﻿using FlavorfulStory.Saving;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary> Глобальное игровое время.</summary>
@@ -18,6 +19,11 @@ public class WorldTime : MonoBehaviour, ISaveable
     /// 
     /// </summary>
     [SerializeField] public float nightTime = 72000f;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [SerializeField] public float dayDuration = 86400f;
 
     /// <summary>
     /// 
@@ -49,8 +55,21 @@ public class WorldTime : MonoBehaviour, ISaveable
     /// </summary>
     public static event DayEndHandler DayEndedEvent;
 
-    public void Awake()
+    private List<string> daysConst;
+    private int currentDay = 0;
+    public string currentDayString = "Mon";
+    public float Tick {  get { return tick; } } 
+
+    public void Start()
     {
+        daysConst = new List<string>();
+        daysConst.Add("Mon");
+        daysConst.Add("Tue");
+        daysConst.Add("Wed");
+        daysConst.Add("Thu");
+        daysConst.Add("Fri");
+        daysConst.Add("Sat");
+        daysConst.Add("Sun");
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -71,17 +90,20 @@ public class WorldTime : MonoBehaviour, ISaveable
     {
         //consts
         float dayInterval = nightTime - dayTime;
-        float nightInterval = 86400 - dayInterval; //ToDo: Убрать хардкод
+        float nightInterval = dayDuration - dayInterval; //ToDo: Убрать хардкод
         float nightTickMultiplier = dayInterval / nightInterval;
         //
 
         _currentTime += tick;
+        //Debug.Log(_currentTime.ToString());
 
         if (_currentTime < dayTime || _currentTime > nightTime) isDay = false;
         else isDay = true;
 
-        if (_currentTime > 86400) 
-        { 
+        if (_currentTime > dayDuration) 
+        {
+            currentDay++;
+            currentDayString = daysConst[(int)currentDay%7];
             _currentTime = 0;
             DayEndedEvent?.Invoke(); 
         }

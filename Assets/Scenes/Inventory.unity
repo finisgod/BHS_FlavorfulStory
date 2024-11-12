@@ -240,12 +240,12 @@ GameObject:
   - component: {fileID: 212571417}
   - component: {fileID: 212571416}
   - component: {fileID: 212571420}
-  - component: {fileID: 212571414}
   - component: {fileID: 212571413}
   - component: {fileID: 212571412}
   - component: {fileID: 212571411}
   - component: {fileID: 212571419}
   - component: {fileID: 212571421}
+  - component: {fileID: 212571422}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -315,21 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12c75f34e01ffd46880948260478848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPosition: {x: 0, y: 0, z: 0}
   Health: 100
   Energy: 100
---- !u!114 &212571414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212571409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07f350fedb6969147a1b4693eb2d00c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &212571416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 4
   _rotateSpeed: 4
+  _keyForWalking: 304
 --- !u!114 &212571421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +420,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3a970a862f6824fbdca652389c28ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &212571422
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212571409}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &371575964
 GameObject:
   m_ObjectHideFlags: 0

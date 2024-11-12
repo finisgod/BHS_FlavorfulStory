@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using UnityEngine;
 
 namespace FlavorfulStory.Saving
 {
-    /// <summary> Сохраняемый объект.</summary>
+    /// <summary> РЎРѕС…СЂР°РЅСЏРµРјС‹Р№ РѕР±СЉРµРєС‚.</summary>
     [ExecuteAlways]
     public class SaveableEntity : MonoBehaviour
     {
@@ -13,8 +13,8 @@ namespace FlavorfulStory.Saving
         /// <summary> GUID.</summary>
         public string UniqueIdentifier => _uniqueIdentifier;
 
-        /// <summary> Фиксация состояния объекта при сохранении.</summary>
-        /// <returns> Возвращает объект, в котором фиксируется состояние.</returns>
+        /// <summary> Р¤РёРєСЃР°С†РёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РѕР±СЉРµРєС‚Р° РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё.</summary>
+        /// <returns> Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕР±СЉРµРєС‚, РІ РєРѕС‚РѕСЂРѕРј С„РёРєСЃРёСЂСѓРµС‚СЃСЏ СЃРѕСЃС‚РѕСЏРЅРёРµ.</returns>
         public object CaptureState()
         {
             var state = new Dictionary<string, object>();
@@ -25,11 +25,13 @@ namespace FlavorfulStory.Saving
             return state;
         }
 
-        /// <summary> Восстановление состояния объекта при загрузке.</summary>
-        /// <param name="state"> Объект состояния, который необходимо восстановить.</param>
+        /// <summary> Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ РѕР±СЉРµРєС‚Р° РїСЂРё Р·Р°РіСЂСѓР·РєРµ.</summary>
+        /// <param name="state"> РћР±СЉРµРєС‚ СЃРѕСЃС‚РѕСЏРЅРёСЏ, РєРѕС‚РѕСЂС‹Р№ РЅРµРѕР±С…РѕРґРёРјРѕ РІРѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ.</param>
         public void RestoreState(object state)
         {
-            var stateDict = (Dictionary<string, object>)state;
+            var stateDict = state as Dictionary<string, object>;
+            if (stateDict == null) return;
+
             foreach (ISaveable saveable in GetComponents<ISaveable>())
             {
                 string typeString = saveable.GetType().ToString();
@@ -42,21 +44,21 @@ namespace FlavorfulStory.Saving
 
         #region Setting GUID
 #if UNITY_EDITOR
-        /// <summary> База данных GUID всех сохраняемых объектов на сцене.</summary>
+        /// <summary> Р‘Р°Р·Р° РґР°РЅРЅС‹С… GUID РІСЃРµС… СЃРѕС…СЂР°РЅСЏРµРјС‹С… РѕР±СЉРµРєС‚РѕРІ РЅР° СЃС†РµРЅРµ.</summary>
         private static readonly Dictionary<string, SaveableEntity> _saveableEntityDatabase = new();
 
-        /// <summary> Является ли объект префабом?</summary>
-        /// <remarks> В префабах не должен выставляться GUID.</remarks>
+        /// <summary> РЇРІР»СЏРµС‚СЃСЏ Р»Рё РѕР±СЉРµРєС‚ РїСЂРµС„Р°Р±РѕРј?</summary>
+        /// <remarks> Р’ РїСЂРµС„Р°Р±Р°С… РЅРµ РґРѕР»Р¶РµРЅ РІС‹СЃС‚Р°РІР»СЏС‚СЊСЃСЏ GUID.</remarks>
         private bool IsPrefab => string.IsNullOrEmpty(gameObject.scene.path);
 
-        /// <summary> Установка GUID.</summary>
+        /// <summary> РЈСЃС‚Р°РЅРѕРІРєР° GUID.</summary>
         private void Update()
         {
             if (Application.IsPlaying(gameObject) || IsPrefab) return;
             SetUniqueIdentifier();
         }
 
-        /// <summary> Выставление GUID сущности на сцене.</summary>
+        /// <summary> Р’С‹СЃС‚Р°РІР»РµРЅРёРµ GUID СЃСѓС‰РЅРѕСЃС‚Рё РЅР° СЃС†РµРЅРµ.</summary>
         private void SetUniqueIdentifier()
         {
             var serializedObject = new UnityEditor.SerializedObject(this);
@@ -69,9 +71,9 @@ namespace FlavorfulStory.Saving
             _saveableEntityDatabase[property.stringValue] = this;
         }
 
-        /// <summary> Является ли GUID уникальным?</summary>
-        /// <param name="candidate"> Кандидат для проверки.</param>
-        /// <returns> Возвращает True - если GUID является уникальным, False - в противном случае.</returns>
+        /// <summary> РЇРІР»СЏРµС‚СЃСЏ Р»Рё GUID СѓРЅРёРєР°Р»СЊРЅС‹Рј?</summary>
+        /// <param name="candidate"> РљР°РЅРґРёРґР°С‚ РґР»СЏ РїСЂРѕРІРµСЂРєРё.</param>
+        /// <returns> Р’РѕР·РІСЂР°С‰Р°РµС‚ True - РµСЃР»Рё GUID СЏРІР»СЏРµС‚СЃСЏ СѓРЅРёРєР°Р»СЊРЅС‹Рј, False - РІ РїСЂРѕС‚РёРІРЅРѕРј СЃР»СѓС‡Р°Рµ.</returns>
         private bool IsUnique(string candidate)
         {
             if (!_saveableEntityDatabase.ContainsKey(candidate) || _saveableEntityDatabase[candidate] == this)

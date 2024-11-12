@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -6,16 +6,18 @@ using UnityEngine.SceneManagement;
 
 namespace FlavorfulStory.Saving
 {
-    /// <summary> Система сохранений.</summary>
+    /// <summary> РЎРёСЃС‚РµРјР° СЃРѕС…СЂР°РЅРµРЅРёР№.</summary>
     public class SavingSystem : MonoBehaviour
     {
         #region Public Methods
-        /// <summary> Загрузка последней сцены.</summary>
-        /// <param name="saveFile"> Название файла с сохранением.</param>
-        /// <returns> Корутина, которая запускает асинхронную подгрузку сцены.</returns>
+        /// <summary> Р—Р°РіСЂСѓР·РєР° РїРѕСЃР»РµРґРЅРµР№ СЃС†РµРЅС‹.</summary>
+        /// <param name="saveFile"> РќР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р° СЃ СЃРѕС…СЂР°РЅРµРЅРёРµРј.</param>
+        /// <returns> РљРѕСЂСѓС‚РёРЅР°, РєРѕС‚РѕСЂР°СЏ Р·Р°РїСѓСЃРєР°РµС‚ Р°СЃРёРЅС…СЂРѕРЅРЅСѓСЋ РїРѕРґРіСЂСѓР·РєСѓ СЃС†РµРЅС‹.</returns>
         public static System.Collections.IEnumerator LoadLastScene(string saveFile)
         {
             Dictionary<string, object> state = LoadFile(saveFile);
+            if (state == null) yield break;
+
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
             if (state.ContainsKey("lastSceneBuildIndex"))
             {
@@ -25,34 +27,36 @@ namespace FlavorfulStory.Saving
             RestoreState(state);
         }
 
-        /// <summary> Сохранение состояния текущей сцены в заданном файле сохранения.</summary>
-        /// <param name="saveFile"> Название файла, куда необходимо сохранить данные.</param>
+        /// <summary> РЎРѕС…СЂР°РЅРµРЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ С‚РµРєСѓС‰РµР№ СЃС†РµРЅС‹ РІ Р·Р°РґР°РЅРЅРѕРј С„Р°Р№Р»Рµ СЃРѕС…СЂР°РЅРµРЅРёСЏ.</summary>
+        /// <param name="saveFile"> РќР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р°, РєСѓРґР° РЅРµРѕР±С…РѕРґРёРјРѕ СЃРѕС…СЂР°РЅРёС‚СЊ РґР°РЅРЅС‹Рµ.</param>
         public static void Save(string saveFile)
         {
             Dictionary<string, object> state = LoadFile(saveFile);
+            if (state == null) return;
+
             CaptureState(state);
             SaveFile(saveFile, state);
         }
 
-        /// <summary> Загрузка текущего состояния сцены из заданного файла сохранения.</summary>
-        /// <param name="saveFile"> Название файла, откуда необходимо загружать данные.</param>
+        /// <summary> Р—Р°РіСЂСѓР·РєР° С‚РµРєСѓС‰РµРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ СЃС†РµРЅС‹ РёР· Р·Р°РґР°РЅРЅРѕРіРѕ С„Р°Р№Р»Р° СЃРѕС…СЂР°РЅРµРЅРёСЏ.</summary>
+        /// <param name="saveFile"> РќР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р°, РѕС‚РєСѓРґР° РЅРµРѕР±С…РѕРґРёРјРѕ Р·Р°РіСЂСѓР¶Р°С‚СЊ РґР°РЅРЅС‹Рµ.</param>
         public static void Load(string saveFile) => RestoreState(LoadFile(saveFile));
 
-        /// <summary> Удаление файла сохранения.</summary>
-        /// <param name="saveFile"> Название файла, который необходимо удалить.</param>
+        /// <summary> РЈРґР°Р»РµРЅРёРµ С„Р°Р№Р»Р° СЃРѕС…СЂР°РЅРµРЅРёСЏ.</summary>
+        /// <param name="saveFile"> РќР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р°, РєРѕС‚РѕСЂС‹Р№ РЅРµРѕР±С…РѕРґРёРјРѕ СѓРґР°Р»РёС‚СЊ.</param>
         public static void Delete(string saveFile) => File.Delete(GetPathFromSaveFile(saveFile));
 
-        /// <summary> Получение пути до сохраненного файла.</summary>
-        /// <param name="saveFile"> Название файла сохранения.</param>
-        /// <returns> Возвращает путь до сохраненного файла.</returns>
+        /// <summary> РџРѕР»СѓС‡РµРЅРёРµ РїСѓС‚Рё РґРѕ СЃРѕС…СЂР°РЅРµРЅРЅРѕРіРѕ С„Р°Р№Р»Р°.</summary>
+        /// <param name="saveFile"> РќР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р° СЃРѕС…СЂР°РЅРµРЅРёСЏ.</param>
+        /// <returns> Р’РѕР·РІСЂР°С‰Р°РµС‚ РїСѓС‚СЊ РґРѕ СЃРѕС…СЂР°РЅРµРЅРЅРѕРіРѕ С„Р°Р№Р»Р°.</returns>
         public static string GetPathFromSaveFile(string saveFile) =>
             Path.Combine(Application.persistentDataPath, saveFile + ".sav");
         #endregion
 
         #region Private Methods
-        /// <summary> Загрузка данных из файла.</summary>
-        /// <param name="saveFile"> Название файла сохранения.</param>
-        /// <returns> Возвращает словарь названия и объекта.</returns>
+        /// <summary> Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°.</summary>
+        /// <param name="saveFile"> РќР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р° СЃРѕС…СЂР°РЅРµРЅРёСЏ.</param>
+        /// <returns> Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃР»РѕРІР°СЂСЊ РЅР°Р·РІР°РЅРёСЏ Рё РѕР±СЉРµРєС‚Р°.</returns>
         private static Dictionary<string, object> LoadFile(string saveFile)
         {
             string path = GetPathFromSaveFile(saveFile);
@@ -61,13 +65,13 @@ namespace FlavorfulStory.Saving
             using (FileStream stream = File.Open(path, FileMode.Open))
             {
                 var formatter = new BinaryFormatter();
-                return (Dictionary<string, object>)formatter.Deserialize(stream);
+                return formatter.Deserialize(stream) as Dictionary<string, object>;
             }
         }
 
-        /// <summary> Сохранение данных в файл.</summary>
-        /// <param name="saveFile"> Название файла сохранения.</param>
-        /// <param name="state"> Состояние, которое необходимо записать в файл.</param>
+        /// <summary> РЎРѕС…СЂР°РЅРµРЅРёРµ РґР°РЅРЅС‹С… РІ С„Р°Р№Р».</summary>
+        /// <param name="saveFile"> РќР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р° СЃРѕС…СЂР°РЅРµРЅРёСЏ.</param>
+        /// <param name="state"> РЎРѕСЃС‚РѕСЏРЅРёРµ, РєРѕС‚РѕСЂРѕРµ РЅРµРѕР±С…РѕРґРёРјРѕ Р·Р°РїРёСЃР°С‚СЊ РІ С„Р°Р№Р».</param>
         private static void SaveFile(string saveFile, object state)
         {
             string path = GetPathFromSaveFile(saveFile);
@@ -79,8 +83,8 @@ namespace FlavorfulStory.Saving
             }
         }
 
-        /// <summary> Фиксация состояний всех объектов при сохранении.</summary>
-        /// <param name="state"> Словарь, содержащий состояния всех объектов, которые необходимо зафиксировать.</param>
+        /// <summary> Р¤РёРєСЃР°С†РёСЏ СЃРѕСЃС‚РѕСЏРЅРёР№ РІСЃРµС… РѕР±СЉРµРєС‚РѕРІ РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё.</summary>
+        /// <param name="state"> РЎР»РѕРІР°СЂСЊ, СЃРѕРґРµСЂР¶Р°С‰РёР№ СЃРѕСЃС‚РѕСЏРЅРёСЏ РІСЃРµС… РѕР±СЉРµРєС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ РЅРµРѕР±С…РѕРґРёРјРѕ Р·Р°С„РёРєСЃРёСЂРѕРІР°С‚СЊ.</param>
         private static void CaptureState(Dictionary<string, object> state)
         {
             foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
@@ -90,10 +94,12 @@ namespace FlavorfulStory.Saving
             state["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex;
         }
 
-        /// <summary> Восстановление состояний всех объектов при загрузке.</summary>
-        /// <param name="state"> Словарь, содержащий состояния всех объектов, которые необходимо загрузить.</param>
+        /// <summary> Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёР№ РІСЃРµС… РѕР±СЉРµРєС‚РѕРІ РїСЂРё Р·Р°РіСЂСѓР·РєРµ.</summary>
+        /// <param name="state"> РЎР»РѕРІР°СЂСЊ, СЃРѕРґРµСЂР¶Р°С‰РёР№ СЃРѕСЃС‚РѕСЏРЅРёСЏ РІСЃРµС… РѕР±СЉРµРєС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ РЅРµРѕР±С…РѕРґРёРјРѕ Р·Р°РіСЂСѓР·РёС‚СЊ.</param>
         private static void RestoreState(Dictionary<string, object> state)
         {
+            if (state == null) return;
+
             foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
             {
                 string id = saveable.UniqueIdentifier;

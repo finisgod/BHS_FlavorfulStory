@@ -1,10 +1,10 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectRendererCollider : MonoBehaviour
 {
-    /// <summary> Триггер выхода из коллайдера, прикрепленного к сетке GridObject.</summary>
+    /// <summary> РўСЂРёРіРіРµСЂ РІС‹С…РѕРґР° РёР· РєРѕР»Р»Р°Р№РґРµСЂР°, РїСЂРёРєСЂРµРїР»РµРЅРЅРѕРіРѕ Рє СЃРµС‚РєРµ GridObject.</summary>
     private void OnTriggerStay(Collider other)
     {
         MeshRenderer mr = null;
@@ -13,7 +13,7 @@ public class ObjectRendererCollider : MonoBehaviour
             mr.enabled = true;
     }
 
-    /// <summary> Триггер выхода из коллайдера, прикрепленного к сетке GridObject.</summary>
+    /// <summary> РўСЂРёРіРіРµСЂ РІС‹С…РѕРґР° РёР· РєРѕР»Р»Р°Р№РґРµСЂР°, РїСЂРёРєСЂРµРїР»РµРЅРЅРѕРіРѕ Рє СЃРµС‚РєРµ GridObject.</summary>
     private void OnTriggerExit(Collider other)
     {
         MeshRenderer mr = null;

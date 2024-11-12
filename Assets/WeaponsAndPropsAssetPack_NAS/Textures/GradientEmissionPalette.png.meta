@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/WeaponsAndPropsAssetPack_NAS/Textures/GradientEmissionPalette.png.meta
 guid: cfc2fa5bea2b2fb40903e504d4f85c79
+========
+guid: 240efe9002d9e7a44b9f2a592f357102
+>>>>>>>> 358fab11ed2610032ced92122e8c949680c8ba8f:Assets/Scenes/TestLevelDesign/Terrain/TerrainSampleAssets/Textures/Terrain/Heather_MaskMap.tif.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -7,7 +11,11 @@ TextureImporter:
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+<<<<<<<< HEAD:Assets/WeaponsAndPropsAssetPack_NAS/Textures/GradientEmissionPalette.png.meta
     sRGBTexture: 1
+========
+    sRGBTexture: 0
+>>>>>>>> 358fab11ed2610032ced92122e8c949680c8ba8f:Assets/Scenes/TestLevelDesign/Terrain/TerrainSampleAssets/Textures/Terrain/Heather_MaskMap.tif.meta
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -21,7 +29,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
-  streamingMipmaps: 0
+  streamingMipmaps: 1
   streamingMipmapsPriority: 0
   vTOnly: 0
   ignoreMasterTextureLimit: 0
@@ -34,7 +42,11 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 1
+<<<<<<<< HEAD:Assets/WeaponsAndPropsAssetPack_NAS/Textures/GradientEmissionPalette.png.meta
     aniso: 1
+========
+    aniso: 4
+>>>>>>>> 358fab11ed2610032ced92122e8c949680c8ba8f:Assets/Scenes/TestLevelDesign/Terrain/TerrainSampleAssets/Textures/Terrain/Heather_MaskMap.tif.meta
     mipBias: 0
     wrapU: 0
     wrapV: 0
@@ -81,8 +93,8 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
+    textureFormat: 25
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -90,6 +102,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+<<<<<<<< HEAD:Assets/WeaponsAndPropsAssetPack_NAS/Textures/GradientEmissionPalette.png.meta
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -103,17 +116,21 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+========
+    buildTarget: PS4
+>>>>>>>> 358fab11ed2610032ced92122e8c949680c8ba8f:Assets/Scenes/TestLevelDesign/Terrain/TerrainSampleAssets/Textures/Terrain/Heather_MaskMap.tif.meta
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
+    textureFormat: 25
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+<<<<<<<< HEAD:Assets/WeaponsAndPropsAssetPack_NAS/Textures/GradientEmissionPalette.png.meta
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -127,10 +144,13 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Windows Store Apps
+========
+    buildTarget: Server
+>>>>>>>> 358fab11ed2610032ced92122e8c949680c8ba8f:Assets/Scenes/TestLevelDesign/Terrain/TerrainSampleAssets/Textures/Terrain/Heather_MaskMap.tif.meta
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
