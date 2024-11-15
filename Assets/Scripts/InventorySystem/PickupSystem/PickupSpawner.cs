@@ -9,6 +9,7 @@ namespace FlavorfulStory.InventorySystem.PickupSystem
     {
         /// <summary> Предмет инвентаря.</summary>
         [SerializeField] private InventoryItem _item;
+        [SerializeField] private int _number = 1;
 
         /// <summary> Собран ли предмет?</summary>
         private bool IsItemCollected => GetPickup() == null;
@@ -28,7 +29,7 @@ namespace FlavorfulStory.InventorySystem.PickupSystem
         /// <summary> Заспавнить предмет на сцену.</summary>
         private void SpawnPickup()
         {
-            var spawnedPickup = _item.SpawnPickup(transform.position);
+            var spawnedPickup = _item.SpawnPickup(transform.position, _number);
             spawnedPickup.transform.SetParent(transform);
         }
 

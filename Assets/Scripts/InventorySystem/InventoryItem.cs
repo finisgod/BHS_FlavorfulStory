@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FlavorfulStory.InventorySystem
 {
-    /// <summary> ScriptableObject, представляющий любой предмет, 
+    /// <summary> ScriptableObject, представляющий предмет, 
     /// который может быть помещен в инвентарь.</summary>
     [CreateAssetMenu(menuName = ("FlavorfulStory/Inventory/Item"))]
     public class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
@@ -35,20 +35,19 @@ namespace FlavorfulStory.InventorySystem
         [Tooltip("Можно ли поместить несколько предметов одного типа в один слот инвентаря?")]
         [field: SerializeField] public bool IsStackable { get; private set; }
 
-        //[SerializeField] private int _count;
-
         /// <summary> База данных всех предметов игры.</summary>
         private static Dictionary<string, InventoryItem> _itemDatabase;
         #endregion
 
         /// <summary> Заспавнить предмет Pickup на сцене.</summary>
         /// <param name="spawnPosition"> Позиция спавна предмета.</param>
+        /// <param name="number"> Количество предметов.</param>
         /// <returns> Возвращает ссылку на заспавненный предмет Pickup.</returns>
-        public Pickup SpawnPickup(Vector3 spawnPosition)
+        public Pickup SpawnPickup(Vector3 spawnPosition, int number)
         {
             var pickup = Instantiate(_pickup);
             pickup.transform.position = spawnPosition;
-            pickup.Setup(this);
+            pickup.Setup(this, number);
             return pickup;
         }
 
@@ -69,7 +68,7 @@ namespace FlavorfulStory.InventorySystem
             _itemDatabase = new();
 
             // Загрузка все ресурсов с типом InventoryItem по всему проекту.
-            var items = Resources.LoadAll<InventoryItem>("");
+            var items = Resources.LoadAll<InventoryItem>(string.Empty);
             foreach (var item in items)
             {
                 if (_itemDatabase.ContainsKey(item.ItemID))

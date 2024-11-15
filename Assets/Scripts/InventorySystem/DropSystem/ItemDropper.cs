@@ -14,10 +14,11 @@ namespace FlavorfulStory.InventorySystem.DropSystem
         private List<Pickup> _droppedItems = new();
 
         /// <summary> Создание pickup в определенной позиции.</summary>
-        /// <param name="item">The item type for the pickup.</param>
-        public void DropItem(InventoryItem item)
+        /// <param name="item"> Предмет, который необходимо заспавнить.</param>
+        /// <param name="number"> Количество предметов.</param>
+        public void DropItem(InventoryItem item , int number)
         {
-            SpawnPickup(item, GetDropPosition());
+            SpawnPickup(item, number, GetDropPosition());
         }
 
         /// <summary> Получить позицию для спавна предмета.</summary>
@@ -31,10 +32,11 @@ namespace FlavorfulStory.InventorySystem.DropSystem
 
         /// <summary> Заспавнить предмет Pickup на сцене.</summary>
         /// <param name="item"> Предмет, который необходимо заспавнить.</param>
+        /// <param name="number"> Количество предметов.</param>
         /// <param name="spawnPosition"> Позиция спавна предмета.</param>
-        public void SpawnPickup(InventoryItem item, Vector3 spawnPosition)
+        public void SpawnPickup(InventoryItem item, int number, Vector3 spawnPosition)
         {
-            var pickup = item.SpawnPickup(spawnPosition);
+            var pickup = item.SpawnPickup(spawnPosition, number);
             _droppedItems.Add(pickup);
         }
 
@@ -48,6 +50,9 @@ namespace FlavorfulStory.InventorySystem.DropSystem
 
             /// <summary> Позиция выпадшего предмета.</summary>
             public SerializableVector3 Position;
+
+            /// <summary> Количество выпавших предметов.</summary>
+            public int Number;
         }
 
         /// <summary> Фиксация состояния объекта при сохранении.</summary>
@@ -60,6 +65,7 @@ namespace FlavorfulStory.InventorySystem.DropSystem
             {
                 droppedItemsList[i].ItemID = _droppedItems[i].Item.ItemID;
                 droppedItemsList[i].Position = new SerializableVector3(_droppedItems[i].transform.position);
+                droppedItemsList[i].Number = _droppedItems[i].Number;
             }
             return droppedItemsList;
         }
@@ -84,7 +90,8 @@ namespace FlavorfulStory.InventorySystem.DropSystem
             {
                 var pickupItem = InventoryItem.GetItemFromID(item.ItemID);
                 Vector3 position = item.Position.ToVector();
-                SpawnPickup(pickupItem, position);
+                int number = item.Number;
+                SpawnPickup(pickupItem, number, position);
             }
         }
         #endregion

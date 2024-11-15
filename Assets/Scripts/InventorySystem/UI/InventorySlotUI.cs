@@ -22,7 +22,7 @@ namespace FlavorfulStory.InventorySystem.UI
         {
             _inventory = inventory;
             _index = index;
-            _icon.SetItem(inventory.GetItemInSlot(index));
+            _icon.SetItem(inventory.GetItemInSlot(index), inventory.GetNumberInSlot(index));
         }
 
         /// <summary> Получить максимально допустимое количество элементов.</summary>
@@ -40,7 +40,7 @@ namespace FlavorfulStory.InventorySystem.UI
         /// <param name="number">Количество элементов.</param>
         public void AddItems(InventoryItem item, int number)
         {
-            _inventory.TryAddItemToSlot(_index, item);
+            _inventory.TryAddItemToSlot(_index, item, number);
         }
 
         /// <summary> Получить предмет, который в данный момент находится в этом источнике.</summary>
@@ -49,14 +49,14 @@ namespace FlavorfulStory.InventorySystem.UI
 
         /// <summary> Получить количество предметов.</summary>
         /// <returns> Возвращает количество предметов.</returns>
-        public int GetNumber() => 1;
+        public int GetNumber() => _inventory.GetNumberInSlot(_index);
 
         /// <summary> Удалить заданное количество предметов из источника.</summary>
         /// <param name="number"> Количество предметов, которое необходимо удалить.</param>
         /// <remarks> Значение number не должно превышать число, возвращаемое с помощью "GetNumber".</remarks>
         public void RemoveItems(int number)
         {
-            _inventory.RemoveFromSlot(_index);
+            _inventory.RemoveFromSlot(_index, number);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace FlavorfulStory.Control
             
             // DEBUG
             if (Input.GetKeyDown(KeyCode.Space))
-                GetComponent<ItemDropper>().DropItem(InventoryItem.GetItemFromID("368f7b2d-c83a-4fc0-a12c-921aa67a4beb"));
+                GetComponent<ItemDropper>().DropItem(InventoryItem.GetItemFromID("ca9e19dc-3f88-4f9a-9074-a70acfc5ea0f"), 1);
         }
 
         private void InteractWithMovement()

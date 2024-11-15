@@ -7,18 +7,20 @@ namespace FlavorfulStory.InventorySystem.PickupSystem
     [RequireComponent(typeof(SphereCollider))]
     public class Pickup : MonoBehaviour
     {
-        [Header("Параметры для регулировки")]
         [SerializeField, Range(0f, 5f), Tooltip("Радиус подбора предмета.")]
         private float _pickupRadius;
 
         /// <summary> Инвентарь игрока.</summary>
         private Inventory _inventory;
 
-        /// <summary> Может быть подобран?</summary>
-        public bool CanBePickedUp => _inventory.HasSpaceFor(Item);
-
         /// <summary> Предмет инвентаря.</summary>
         [field: SerializeField] public InventoryItem Item { get; private set; }
+
+        /// <summary> Количество предметов.</summary>
+        public int Number { get; private set; }
+
+        /// <summary> Может быть подобран?</summary>
+        public bool CanBePickedUp => _inventory.HasSpaceFor(Item);
 
         /// <summary> Инициализация компонента.</summary>
         private void Awake()
@@ -28,16 +30,18 @@ namespace FlavorfulStory.InventorySystem.PickupSystem
         }
 
         /// <summary> Установить необходимые данные после создания префаба.</summary>
-        /// <param name="item">The type of item this prefab represents.</param>
-        public void Setup(InventoryItem item)
+        /// <param name="item"> Предмет, который нужно установить.</param>
+        /// <param name="number"> Количество предметов.</param>
+        public void Setup(InventoryItem item, int number)
         {
             Item = item;
+            Number = number;
         }
 
         /// <summary> Подобрать предмет.</summary>
-        public void PickUpItem()
+        public void PickupItem()
         {
-            bool foundSlot = _inventory.TryAddToFirstEmptySlot(Item);
+            bool foundSlot = _inventory.TryAddToFirstEmptySlot(Item, Number);
             if (foundSlot) Destroy(gameObject);
         }
 
