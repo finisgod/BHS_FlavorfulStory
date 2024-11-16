@@ -51,6 +51,11 @@ namespace FlavorfulStory.Saving
         /// <returns> Возвращает путь до сохраненного файла.</returns>
         public static string GetPathFromSaveFile(string saveFile) =>
             Path.Combine(Application.persistentDataPath, saveFile + ".sav");
+
+        /// <summary> Существует ли сохраненный файл?</summary>
+        /// <param name="saveFile"> Название файла сохранения.</param>
+        /// <returns> Возвращает True - если файл сохранения существует, False - в противном случае.</returns>
+        public static bool SaveFileExists(string saveFile) => File.Exists(GetPathFromSaveFile(saveFile));
         #endregion
 
         #region Private Methods

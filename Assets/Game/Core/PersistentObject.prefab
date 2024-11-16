@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 6339259484890852040}
   - component: {fileID: 398872383379544660}
   m_Layer: 0
-  m_Name: SavingSystem
+  m_Name: Saving
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   _saveKey: 107
   _loadKey: 108
   _deleteKey: 127
+  _firstUploadedScene: 1
 --- !u!1 &2542404306187911792
 GameObject:
   m_ObjectHideFlags: 0
