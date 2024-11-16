@@ -1,7 +1,6 @@
 ﻿using FlavorfulStory.Saving;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace FlavorfulStory.SceneManagement
 {
@@ -13,19 +12,12 @@ namespace FlavorfulStory.SceneManagement
 
         private const string DefaultSaveFile = "Save";
 
-        /// <summary> �������� �� ������� ����� ������� ����?</summary>
-        /// <returns> ���������� True - ���� ������� ����� - ������� ����, False - � ��������� ������.</returns>
-        private static bool IsCurrentSceneMainMenu() => SceneManager.GetActiveScene().buildIndex == 0;
+        /// <summary> Продолжить игру.</summary>
+        /// <remarks> Вызывается из главного меню.</remarks>
+        public void ContinueGame() => StartCoroutine(LoadLastScene());
 
-        /// <summary> ��������� ��������� �����, ���� �� ��������� � ������� ����.</summary>
-        private void Awake()
-        {
-            if (IsCurrentSceneMainMenu()) return;
-            StartCoroutine(LoadLastScene());
-        }
-
-        /// <summary> �������� ��������� �����.</summary>
-        /// <returns> ���������� �������� ��������� �����.</returns>
+        /// <summary> Загрузить последнюю сцену.</summary>
+        /// <returns> Возвращает корутину, которая запускает послендюю сцену.</returns>
         public static IEnumerator LoadLastScene()
         {
             yield return SavingSystem.LoadLastScene(DefaultSaveFile);
@@ -35,7 +27,7 @@ namespace FlavorfulStory.SceneManagement
 
         /// <summary> Загрузка данных игры из файла.</summary>
         public static void Load() => SavingSystem.Load(DefaultSaveFile);
-        
+
         /// <summary> Сохранение данных игры в файл.</summary>
         public static void Save() => SavingSystem.Save(DefaultSaveFile);
 

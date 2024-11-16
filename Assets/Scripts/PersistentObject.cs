@@ -1,0 +1,26 @@
+using FlavorfulStory.SceneManagement;
+using UnityEngine;
+
+namespace FlavorfulStory
+{
+    /// <summary> Альтернатива использованию паттерна Singleton.</summary>
+    public class PersistentObject : MonoBehaviour
+    {
+        /// <summary> Синглтон.</summary>
+        public static PersistentObject Instance { get; private set; }
+
+        private void Awake()
+        {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+        }
+
+        /// <summary> Получить ссылку на SavingWrapper.</summary>
+        /// <returns> Возвращает ссылку на SavingWrapper.</returns>
+        public SavingWrapper GetSavingWrapper() => GetComponentInChildren<SavingWrapper>();
+    }
+}
