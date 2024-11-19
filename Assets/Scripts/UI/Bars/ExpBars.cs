@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 
-namespace FlavorfulStory.UI
+namespace FlavorfulStory.UI.Bars
 {
     /// <summary> </summary>
     public class ExpBars : MonoBehaviour
@@ -17,7 +17,7 @@ namespace FlavorfulStory.UI
         [SerializeField] private List<Image> _imageObjects;
         
         /// <summary> Игрок.</summary>
-        [SerializeField] private GameObject _player;
+        private GameObject _player;
         
         /// <summary> Менеджер активностей.</summary>
         private ActivitiesStatsManager _activitiesStatsManager;
@@ -37,6 +37,7 @@ namespace FlavorfulStory.UI
         /// <summary> Получение компонента.</summary>
         private void Awake()
         {
+            _player = GameObject.FindGameObjectWithTag("Player");
             _activitiesStatsManager = _player.GetComponent<ActivitiesStatsManager>();
         }
         

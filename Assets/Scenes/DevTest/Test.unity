@@ -324,7 +324,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textObject: {fileID: 2002785016}
-  _player: {fileID: 348892099}
 --- !u!114 &55084448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,6 +934,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8933640073073563364, guid: 50bac7ab5e92c0c42b2f011229fcb264,
+        type: 3}
+      propertyPath: _rotateSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -943,12 +947,6 @@ PrefabInstance:
 --- !u!4 &348892098 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4994206146913357757, guid: 50bac7ab5e92c0c42b2f011229fcb264,
-    type: 3}
-  m_PrefabInstance: {fileID: 348892097}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &348892099 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5075500785383677502, guid: 50bac7ab5e92c0c42b2f011229fcb264,
     type: 3}
   m_PrefabInstance: {fileID: 348892097}
   m_PrefabAsset: {fileID: 0}
@@ -2956,7 +2954,6 @@ MonoBehaviour:
   - {fileID: 11431447}
   - {fileID: 790846059}
   - {fileID: 1763434843}
-  _player: {fileID: 348892099}
 --- !u!1 &1066369603
 GameObject:
   m_ObjectHideFlags: 0
@@ -5493,7 +5490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textObject: {fileID: 1127833873}
-  _player: {fileID: 348892099}
 --- !u!114 &1753693924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5659,7 +5655,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textObject: {fileID: 137217604}
-  _player: {fileID: 348892099}
 --- !u!114 &1767964931
 MonoBehaviour:
   m_ObjectHideFlags: 0

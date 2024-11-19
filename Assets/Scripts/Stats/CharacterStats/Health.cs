@@ -4,37 +4,31 @@ using UnityEngine;
 namespace FlavorfulStory.Stats.CharacterStats
 {
     /// <summary> Класс, обеспечивающий взаимодействие со здоровьем персонажа.</summary>
-    public class Health : MonoBehaviour, IIncreasable, IDecreasable
+    public class Health : BaseStat
     {
-        /// <summary> Событие, вызываемое при изменении здоровья.</summary>
+        /// <summary> Событие изменения здоровья.</summary>
         public event Action<int> OnHealthChanged;
         
-        /// <summary> Метод, устанавливающий и возвращающий текущее значение здоровья.</summary>
-        public int CurrentHealth { get; set; }
-        
-        /// <summary> Метод, устанавливающий и возвращающий максимальное значение здоровья.</summary>
-        public int MaxHealth { get; set; }
-
         /// <summary> Присвоение текущего здоровья максимальном.</summary>
         private void Start()
         {
-            CurrentHealth = MaxHealth;
+            CurrentValue = MaxValue; // TODO: изменить к системе сохранений
         }
         /// <summary> Метод, вызываемый для увеличения здоровья.</summary>
-        /// <param name="amount"> Значение, на которое увеличивается здоровье.</param>
-        public void InstantIncrease(int amount)
+        /// <param name="healthToRestore"> Значение, на которое увеличивается здоровье.</param>
+        public void Heal(int healthToRestore)
         {
-            CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, MaxHealth);
+            CurrentValue = Mathf.Clamp(CurrentValue + healthToRestore, 0, MaxValue);
 
-            OnHealthChanged?.Invoke(CurrentHealth);
+            OnHealthChanged?.Invoke(CurrentValue);
         }
-        /// <summary>  Метод, вызываемый для уменьшения здоровья.</summary>
-        /// <param name="amount"> Значение, на которое уменьшается здоровье.</param>
-        public void InstantDecrease(int amount)
+        /// <summary> Метод, вызываемый для уменьшения здоровья.</summary>
+        /// <param name="damage"> Значение, на которое уменьшается здоровье.</param>
+        public void TakeDamage(int damage)
         {
-            CurrentHealth = Mathf.Clamp(CurrentHealth - amount, 0, MaxHealth);
+            CurrentValue = Mathf.Clamp(CurrentValue - damage, 0, MaxValue);
 
-            OnHealthChanged?.Invoke(CurrentHealth);
+            OnHealthChanged?.Invoke(CurrentValue);
         }
     }
 }

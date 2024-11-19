@@ -11,18 +11,16 @@ namespace FlavorfulStory.Stats.PlayerStats
         /// <summary> Событие получения опыта.</summary>
         public event Action OnExperienceGained;
         
-        /// <summary>
-        /// Список для каждой активности, который содержит граничные значения опыта для перехода на другой уровень.
-        /// </summary>
+        /// <summary> Список для каждой активности, который содержит граничные значения опыта для перехода на другой уровень.</summary>
         public List<List<int>> ActivitiesExpToUpgrade;
         
-        /// <summary>
-        /// Словарь, который на каждую активность хранит текущее значение опыта и номер левела.
-        /// </summary>
+        /// <summary> Словарь, который на каждую активность хранит текущее значение опыта и номер левела. </summary>
         public Dictionary<ActivityType, List<int>> ActivitiesExpDict{get; private set;}
 
+        /// <summary> Парсер информации.</summary>
         private PlayerDataParser _dataParser;
 
+        /// <summary> Получение компонента.</summary>
         private void Awake()
         {
             _dataParser = GetComponent<PlayerDataParser>();
@@ -34,16 +32,7 @@ namespace FlavorfulStory.Stats.PlayerStats
             ActivitiesExpToUpgrade = _dataParser.ActivitiesExpToUpgrade;
 
             ActivitiesExpDict = new Dictionary<ActivityType, List<int>>();
-            SetupExp();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                GetExperience(ActivityType.Collecting, 10);
-                GetExperience(ActivityType.CrystalCultivation, 25);
-            }
+            SetExpDict();
         }
 
         /// <summary> Обработка получения опыта на конкретную активность.</summary>
@@ -70,17 +59,15 @@ namespace FlavorfulStory.Stats.PlayerStats
                 
                 if (ActivitiesExpDict[activityType][1] == ActivitiesExpToUpgrade[(int)activityType].Count)
                 {
-                    ActivitiesExpDict[activityType][1] = ActivitiesExpDict[activityType][1];
                     ActivitiesExpDict[activityType][0] = ActivitiesExpToUpgrade[(int)activityType][level];
                 }
-
             }
             
             OnExperienceGained?.Invoke();
         }
         
         /// <summary> Заполнение словаря опыта.</summary>
-        private void SetupExp()
+        private void SetExpDict()
         {
             foreach (ActivityType activityType in Enum.GetValues(typeof(ActivityType)))
             {
@@ -89,11 +76,9 @@ namespace FlavorfulStory.Stats.PlayerStats
         }
         
         #region Saving
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <summary> Значения, которые нужно созранить.</summary>
         [System.Serializable]
-        private struct MoverSaveData
+        private struct ExpSaveData
         {
             public List<List<int>> _ActivitiesExpToUpgrade;
             public Dictionary<ActivityType, List<int>> _ActivitiesExpDict;
@@ -101,7 +86,7 @@ namespace FlavorfulStory.Stats.PlayerStats
 
         /// <summary> Фиксация состояния объекта при сохранении.</summary>
         /// <returns> Возвращает объект, в котором фиксируется состояние.</returns>
-        public object CaptureState() => new MoverSaveData()
+        public object CaptureState() => new ExpSaveData()
         {
             _ActivitiesExpToUpgrade = ActivitiesExpToUpgrade,
             _ActivitiesExpDict = ActivitiesExpDict
@@ -111,7 +96,7 @@ namespace FlavorfulStory.Stats.PlayerStats
         /// <param name="state"> Объект состояния, который необходимо восстановить.</param>
         public void RestoreState(object state)
         {
-            var data = (MoverSaveData)state;
+            var data = (ExpSaveData)state;
             ActivitiesExpToUpgrade = data._ActivitiesExpToUpgrade;
             ActivitiesExpDict = data._ActivitiesExpDict;
             GetExperience(ActivityType.Collecting, 0);

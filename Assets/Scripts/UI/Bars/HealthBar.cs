@@ -3,59 +3,45 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace FlavorfulStory.UI
+namespace FlavorfulStory.UI.Bars
 {
     /// <summary>  Класс, отвечающий за отрисовку количества здоровья.</summary>
-    public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class HealthBar : BaseBar, IPointerEnterHandler, IPointerExitHandler
     {
-        /// <summary> Объект текста.</summary>
-        [SerializeField] private TMP_Text _textObject;
-        
-        /// <summary> Объект игрока.</summary>
-        [SerializeField] private GameObject _player;
-        
         /// <summary> Компонент здоровья.</summary>
         private Health _health;
 
         /// <summary> Подписка на события.</summary>
         private void OnEnable()
         {
-            _health.OnHealthChanged += SetHealthText;
+            _health.OnHealthChanged += SetBarText;
         }
 
         /// <summary> Отписка от события.</summary>
         private void OnDisable()
         {
-            _health.OnHealthChanged -= SetHealthText;
+            _health.OnHealthChanged -= SetBarText;
         }
 
         private void Awake()
         {
-            _health = _player.GetComponent<Health>();
+            Player = GameObject.FindGameObjectWithTag("Player");
+            _health = Player.GetComponent<Health>();
         }
 
         private void Start()
         {
-            SetHealthText(_health.CurrentHealth);
+            SetBarText(_health.CurrentValue);
             _textObject.gameObject.SetActive(false);
         }
         
-        /// <summary> Установка текстового значения.</summary>
-        /// <param name="health"> Текущее значение энергии.</param>
-        private void SetHealthText(int health)
-        {
-            _textObject.text = health.ToString();
-        }
-        
-
         /// <summary> Включение объекта при наведении на него курсора.</summary>
         /// <param name="eventData"> Информация ивента.</param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            SetHealthText(_health.CurrentHealth);
+            SetBarText(_health.CurrentValue);
             _textObject.gameObject.SetActive(true);
         }
-
         
         /// <summary> Выключение объекта при наведении на него курсора.</summary>
         /// <param name="eventData"> Информация ивента.</param>

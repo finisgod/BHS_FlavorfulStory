@@ -4,7 +4,7 @@ using UnityEngine;
 namespace FlavorfulStory.Stats.CharacterStats
 {
     /// <summary> Менеджер статов персонажа.</summary>
-    public class NpcStatsManager : MonoBehaviour, IStatsManager
+    public class NpcStats : MonoBehaviour
     {
         /// <summary> Имя NPC.</summary>
         [SerializeField] private string _name;
@@ -18,35 +18,31 @@ namespace FlavorfulStory.Stats.CharacterStats
         /// <summary> Компонент силы.</summary>
         private Strength _strengthComponent;
 
+        /// <summary> Получение компонентов.</summary>
         private void Awake()
         {
             _healthComponent = GetComponent<Health>();
             _strengthComponent = GetComponent<Strength>();
         }
 
+        /// <summary> Установка значений для НПС.</summary>
         private void Start()
         {
             SetStats();
         }
 
         /// <summary> Установка статов для персонажа.</summary>
-        public void SetStats()
+        private void SetStats()
         {
             foreach (var data in _data.Content.NpcData)
             {
                 if (data.Name == _name)
                 {
-                    _healthComponent.MaxHealth = data.Health;
+                    _healthComponent.MaxValue = data.Health;
                     _strengthComponent.CurrentStrength = data.Strength;
                     break;
                 }
             }
-        }
-        
-        /// <summary> Сбрасывание к максимальным характеристикам.</summary>
-        public void ResetStats()
-        {
-            _healthComponent.CurrentHealth = _healthComponent.MaxHealth;
         }
     }
 }
