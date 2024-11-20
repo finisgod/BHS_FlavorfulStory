@@ -331,9 +331,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefabs:
-  - {fileID: 2372578312373825406, guid: dfae786ef1c024878bd2575a018e52fe, type: 3}
-  - {fileID: 8764015956575599599, guid: 6db2caaab97e74bbda56c9ac5edd4398, type: 3}
-  - {fileID: 5301632196814645791, guid: a15dcda1321754c8e88c0d3d13936a55, type: 3}
+  - {fileID: 998481779033040971, guid: 178e7ae6762f8394d96f21d2ce5996f9, type: 3}
+  - {fileID: 786163568506373850, guid: a3ad7782f4e9e27498d3e7083e36c86d, type: 3}
 --- !u!65 &817402180
 BoxCollider:
   m_ObjectHideFlags: 0

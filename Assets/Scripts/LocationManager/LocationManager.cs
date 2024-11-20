@@ -15,7 +15,6 @@ namespace FlavorfulStory.LocationManager
         private void Awake()
         {
             _player = GameObject.FindGameObjectWithTag("Player");
-            _objects = GameObject.FindGameObjectsWithTag("Interactable");
         }
 
         private void Start()
@@ -40,8 +39,6 @@ namespace FlavorfulStory.LocationManager
 
         private void Interact()
         {
-            if (_objects == null) return;
-
             GameObject nearestObject = FindNearestObject();
             if (nearestObject != null)
             {
@@ -52,7 +49,7 @@ namespace FlavorfulStory.LocationManager
         
         private GameObject FindNearestObject()
         {
-            RaycastHit[] hits = Physics.SphereCastAll(_player.transform.position, _radius, Vector3.zero, _radius, LayerMask.GetMask("Interactable"));
+            RaycastHit[] hits = Physics.SphereCastAll(_player.transform.position, _radius, Vector3.one, _radius, LayerMask.GetMask("Interactable"));
             Debug.Log(hits.Length);
             
             
@@ -61,8 +58,6 @@ namespace FlavorfulStory.LocationManager
 
             foreach (var hit in hits)
             {
-                if (!_objects.Contains(hit.transform.gameObject)) continue;
-                
                 float distance = Vector3.Distance(hit.transform.position, _player.transform.position);
                 if (distance < minDistance)
                 {
@@ -73,11 +68,9 @@ namespace FlavorfulStory.LocationManager
 
             if (closest != null)
             {
-                Debug.Log(_objects.Length + ": " + closest.name);
                 return closest;
             }
-
-            Debug.Log(_objects.Length);
+            
             return null;
         }
         
