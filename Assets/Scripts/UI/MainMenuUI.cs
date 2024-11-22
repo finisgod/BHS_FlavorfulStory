@@ -1,6 +1,8 @@
+using FlavorfulStory.SceneManagement;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FlavorfulStory.UI
 {
@@ -70,6 +72,12 @@ namespace FlavorfulStory.UI
         /// <summary> Продолжить игру.</summary>
         public void OnClickContinue() =>
             PersistentObject.Instance.GetSavingWrapper().ContinueGame();
+
+        /// <summary> Вернуться в главное меню.</summary>
+        public void OnClickReturnToMainMenu()
+        {
+            SceneManager.LoadScene(SceneType.MainMenu.ToString());
+        }
 
         /// <summary> Выйти из игры.</summary>
         public void OnClickQuit() => Application.Quit();

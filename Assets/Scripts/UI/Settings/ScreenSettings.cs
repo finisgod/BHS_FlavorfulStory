@@ -1,93 +1,118 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-/// <summary>
-/// Класс, отвечающий за настройки разрешения и режима окна, в котором будет находится игра.
-/// </summary>
-public class ScreenSettings : MonoBehaviour
-{
-    /// <summary>Ссылка на выпадающий список с разрешениями.</summary>
-    [SerializeField] private TMP_Dropdown _screenModeDropdown;
-    /// <summary>Ссылка на выпадающий список с типами окна.</summary>
-    [SerializeField] private TMP_Dropdown _resolutionDropdown;
-    /// <summary>Метод, для получения и установки максимального значения обновления монитора.</summary>
-    private double MaxRefreshRate { get; set; }
-    /// <summary>Список разрешений.</summary>
-    private readonly List<Resolution> _resolutions = new();
-    /// <summary>Список режимов окна.</summary>
-    private List<string> _screenModeOptions = new() {
-        "Окно",
-        "Полный экран",
-    };
-    /// <summary>Инициализация разрешений и рижемов окна и обновление значений в выпадаюзих списках.</summary>
-    private void Start()
-    {
-        InitializeResolutions();
-        InitializeScreenModes();
-        UpdateDropdownValues();
-    }
-    /// <summary>Метод для обновления значений выпадающих списков.</summary>
-    private void UpdateDropdownValues()
-    {
-        _resolutionDropdown.RefreshShownValue();
-        _screenModeDropdown.RefreshShownValue();
-    }
-    /// <summary>Метод для получения всех поддерживаемых разрешений экрана и добавления их в соответствующий выпадающий список.</summary>
-    private void InitializeResolutions()
-    {
-        var allResolutions = Screen.resolutions;
-        MaxRefreshRate = allResolutions[^1].refreshRateRatio.value;
-        var uniqueResolutions = new List<string>();
 
-        foreach (var resolution in allResolutions)
+namespace FlavorfulStory.Settings
+{
+    /// <summary> Настройки разрешения и режима окна.</summary>
+    public class ScreenSettings : MonoBehaviour
+    {
+        /// <summary> Выпадающий список с типами окна.</summary>
+        [SerializeField] private TMP_Dropdown _resolutionDropdown;
+
+        /// <summary> Выпадающий список с разрешениями.</summary>
+        [SerializeField] private TMP_Dropdown _screenModeDropdown;
+
+        /// <summary> Список разрешений.</summary>
+        private readonly List<Resolution> _resolutions = new();
+
+        /// <summary> Список режимов окна.</summary>
+        private readonly List<string> _screenModeOptions = new() {
+            "Окно",
+            "Полный экран",
+        };
+
+        /// <summary> Вызывается при включении объекта.</summary>
+        private void OnEnable()
         {
-            if (resolution.refreshRateRatio.value == MaxRefreshRate)
+            _resolutionDropdown.onValueChanged.AddListener(delegate
             {
-                uniqueResolutions.Add($"{resolution.width}x{resolution.height}");
-                _resolutions.Add(resolution);
+                ResolutionOptionChanged();
+            });
+
+            _screenModeDropdown.onValueChanged.AddListener(delegate
+            {
+                ScreenModeChanged();
+            });
+        }
+
+        /// <summary> Срабатывает при выборе пользователя в выпадающем списке разрещений.</summary>
+        private void ResolutionOptionChanged()
+        {
+            Resolution resolution = _resolutions[_resolutionDropdown.value];
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode);
+        }
+
+        /// <summary> Срабатывает при выборе пользователя в выпадающем списке режимов окна.</summary>
+        private void ScreenModeChanged()
+        {
+            switch (_screenModeDropdown.value)
+            {
+                case 0:
+                    Screen.fullScreenMode = FullScreenMode.Windowed;
+                    break;
+                case 1:
+                    Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                    break;
             }
         }
 
-        _resolutionDropdown.ClearOptions();
-        _resolutionDropdown.AddOptions(uniqueResolutions);
-        _resolutionDropdown.value = uniqueResolutions.Count - 1;
-        _resolutionDropdown.RefreshShownValue();
-    }
-    /// <summary>Метод для получения всех поддерживаемых режимов экрана и добавления их в соответствующий выпадающий список.</summary>
-    private void InitializeScreenModes()
-    {
-        _screenModeDropdown.ClearOptions();
-
-        List<string> _screenModeDropdownOptions = _screenModeOptions;
-        _screenModeDropdown.AddOptions(_screenModeDropdownOptions);
-
-        _screenModeDropdown.value = 1;
-        Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-
-        _screenModeDropdown.RefreshShownValue();
-    }
-    /// <summary>Метод для установки выбранного разрешения экрана.</summary>
-    private void SetResolution(int width, int height)
-    {
-        Screen.SetResolution(width, height, Screen.fullScreenMode);
-    }
-    /// <summary>Метод, слушающий выбор пользователя в выпадающем списке разрещений.</summary>
-    public void OnResolutionOptionChanged()
-    {
-        Resolution resolution = _resolutions[_resolutionDropdown.value];
-        SetResolution(resolution.width, resolution.height);
-    }
-    /// <summary>Метод, слушающий выбор пользователя в выпадающем списке режимов окна.</summary>
-    public void OnScreenModeChanged()
-    {
-        switch (_screenModeDropdown.value)
+        /// <summary> Вызывается при отключении объекта.</summary>
+        private void OnDisable()
         {
-            case 0:
-                Screen.fullScreenMode = FullScreenMode.Windowed;
-                break;
-            case 1:
-                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                break;
+            _resolutionDropdown.onValueChanged.RemoveAllListeners();
+            _screenModeDropdown.onValueChanged.RemoveAllListeners();
+        }
+
+        /// <summary> Инициализация разрешений и рижемов окна и обновление значений в выпадаюзих списках.</summary>
+        private void Start()
+        {
+            InitializeResolutions();
+            InitializeScreenModes();
+            UpdateDropdownValues();
+        }
+
+        /// <summary> Получения всех поддерживаемых разрешений экрана и добавления их в соответствующий выпадающий список.</summary>
+        private void InitializeResolutions()
+        {
+            Resolution[] allResolutions = Screen.resolutions;
+            double maxRefreshRate = allResolutions[^1].refreshRateRatio.value;
+            var uniqueResolutions = new List<string>();
+
+            foreach (var resolution in allResolutions)
+            {
+                if (resolution.refreshRateRatio.value == maxRefreshRate)
+                {
+                    uniqueResolutions.Add($"{resolution.width}x{resolution.height}");
+                    _resolutions.Add(resolution);
+                }
+            }
+
+            _resolutionDropdown.ClearOptions();
+            _resolutionDropdown.AddOptions(uniqueResolutions);
+            _resolutionDropdown.value = uniqueResolutions.Count - 1;
+            _resolutionDropdown.RefreshShownValue();
+        }
+
+        /// <summary> Получение всех поддерживаемых режимов экрана и добавления их в соответствующий выпадающий список.</summary>
+        private void InitializeScreenModes()
+        {
+            _screenModeDropdown.ClearOptions();
+
+            List<string> _screenModeDropdownOptions = _screenModeOptions;
+            _screenModeDropdown.AddOptions(_screenModeDropdownOptions);
+
+            _screenModeDropdown.value = 1;
+            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+
+            _screenModeDropdown.RefreshShownValue();
+        }
+
+        /// <summary> Обновление значений выпадающих списков.</summary>
+        private void UpdateDropdownValues()
+        {
+            _resolutionDropdown.RefreshShownValue();
+            _screenModeDropdown.RefreshShownValue();
         }
     }
 }

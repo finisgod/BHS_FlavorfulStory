@@ -2,11 +2,12 @@
 
 namespace FlavorfulStory.UI
 {
-    /// <summary> Переключатель вкладок.</summary>
-    public class TabSwitcher : MonoBehaviour
+    /// <summary> Переключатель вкладки при нажатии на клавишу.</summary>
+    public class KeySwitcher : MonoBehaviour
     {
         /// <summary> Клавиша переключения.</summary>
         [SerializeField] private KeyCode _switchKey;
+
         /// <summary> Вкладка, которую необходимо переключать.</summary>
         [SerializeField] private GameObject _tab;
 

@@ -24,7 +24,7 @@ namespace FlavorfulStory.SceneManagement
         }
 
         /// <summary> Начать новую игру.</summary>
-        /// <param name="saveFile"> Название для файла сохранения.</param>
+        /// <param name="saveFile"> Название файла сохранения.</param>
         public void StartNewGame(string saveFile)
         {
             if (string.IsNullOrEmpty(saveFile)) return;
@@ -33,16 +33,15 @@ namespace FlavorfulStory.SceneManagement
             StartCoroutine(LoadFirstScene());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="saveFile"></param>
-        private static void SetCurrentSave(string saveFile) => PlayerPrefs.SetString(CurrentSaveKey, saveFile);
+        /// <summary> Установить текущее сохранение.</summary>
+        /// <param name="saveFile"> Название файла сохранения.</param>
+        private static void SetCurrentSave(string saveFile)
+        {
+            PlayerPrefs.SetString(CurrentSaveKey, saveFile);
+        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <summary> Получить текущее сохранение.</summary>
+        /// <returns> Возвращает название текущего сохранения.</returns>
         private static string GetCurrentSave() => PlayerPrefs.GetString(CurrentSaveKey);
 
         /// <summary> Загрузить первую сцену.</summary>

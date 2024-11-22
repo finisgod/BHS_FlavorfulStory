@@ -10,7 +10,7 @@ namespace FlavorfulStory.Core
     {
         /// <summary> Префаб, который создается только один раз и сохраняется между сценами.</summary>
         [Tooltip("Префаб, который создается только один раз и сохраняется между сценами.")]
-        [SerializeField] private PersistentObject _persistentObjectsPrefab;
+        [SerializeField] private GameObject _persistentObjectsPrefab;
 
         /// <summary> Был ли заспавнен?</summary>
         private bool _hasSpawned;
@@ -27,7 +27,7 @@ namespace FlavorfulStory.Core
         /// <summary> Создание постоянного объекта.</summary>
         private void SpawnPersistentObject()
         {
-            GameObject persistentObject = Instantiate(_persistentObjectsPrefab.gameObject);
+            var persistentObject = Instantiate(_persistentObjectsPrefab);
             DontDestroyOnLoad(persistentObject);
         }
     }

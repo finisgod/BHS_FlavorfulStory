@@ -6,6 +6,7 @@ namespace FlavorfulStory.InventorySystem
 {
     /// <summary> ScriptableObject, представляющий предмет, 
     /// который может быть помещен в инвентарь.</summary>
+    // TODO: сделать абстрактным, когда все типы предметов будут реализованы
     [CreateAssetMenu(menuName = ("FlavorfulStory/Inventory/Item"))]
     public class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
     {
