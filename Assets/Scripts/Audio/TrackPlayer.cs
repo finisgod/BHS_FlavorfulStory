@@ -5,13 +5,20 @@ using UnityEngine;
 namespace FlavorfulStory.Audio
 {
     /// <summary> Проигрыватель треков.</summary>
+    [RequireComponent(typeof(AudioSource))]
     public class TrackPlayer : MonoBehaviour
     {
-        /// <summary> Ссылка на аудиоисточник.</summary>
-        [SerializeField] private AudioSource _source;
-
         /// <summary> Список аудиоклипов для песен.</summary>
         [SerializeField] private List<AudioClip> _tracks;
+
+        /// <summary> Аудиоисточник.</summary>
+        private AudioSource _source;
+
+        /// <summary> Инициализация полей.</summary>
+        private void Awake()
+        {
+            _source = GetComponent<AudioSource>();
+        }
 
         /// <summary> Метод для старта воспроизведения музыки.</summary>
         private void Start()

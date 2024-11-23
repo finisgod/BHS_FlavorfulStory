@@ -1,5 +1,4 @@
-﻿using FlavorfulStory.SceneManagement;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace FlavorfulStory.Core
 {
