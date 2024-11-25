@@ -43,7 +43,7 @@ namespace FlavorfulStory.LocationManager
             if (nearestObject != null)
             {
                 AppearanceSwitcher appearanceSwitcher = nearestObject.GetComponent<AppearanceSwitcher>();
-                appearanceSwitcher.ChangePrefab();
+                appearanceSwitcher.ChangeAppearance();
             }
         }
         

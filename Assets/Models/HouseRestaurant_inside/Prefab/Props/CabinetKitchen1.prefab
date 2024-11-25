@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3814311257724378446}
+  - component: {fileID: 7841346918838147664}
   m_Layer: 0
   m_Name: CabinetKitchen1
   m_TagString: Untagged
@@ -32,6 +33,27 @@ Transform:
   - {fileID: 4092529680330962617}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7841346918838147664
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396180893603991937}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.40664822, y: 1.0784842, z: 0.6489867}
+  m_Center: {x: 0.033394188, y: 0.0001975894, z: -0.015026152}
 --- !u!1001 &4557976468212404562
 PrefabInstance:
   m_ObjectHideFlags: 0

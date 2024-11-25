@@ -1,26 +1,23 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FlavorfulStory.LocationManager
 {
     public class AppearanceSwitcher : MonoBehaviour
     {
-        [SerializeField] private GameObject[] _prefabs;
+        [SerializeField] private Transform[] _gameObjects;
+        private int _currentStateIndex;
         
-        private GameObject _currentPrefab;
-        private int _currentPrefabIndex;
-
         private void Start()
         {
-            _currentPrefabIndex = 0;
-            _currentPrefab = Instantiate(_prefabs[_currentPrefabIndex], transform.position, Quaternion.identity, transform);
+            _currentStateIndex = 0;
         }
 
-        public void ChangePrefab()
+        public void ChangeAppearance()
         {
-            _currentPrefabIndex = _currentPrefabIndex == _prefabs.Length - 1 ? _prefabs.Length - 1 : _currentPrefabIndex + 1;
-            
-            Destroy(_currentPrefab);
-            _currentPrefab = Instantiate(_prefabs[_currentPrefabIndex], transform.position, Quaternion.identity, transform);
+            _gameObjects[_currentStateIndex].gameObject.SetActive(false);
+            _currentStateIndex = _currentStateIndex == _gameObjects.Length - 1 ? _gameObjects.Length - 1 : _currentStateIndex + 1;
+            _gameObjects[_currentStateIndex].gameObject.SetActive(true);
         }
     }
 }
