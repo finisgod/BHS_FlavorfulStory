@@ -1,17 +1,17 @@
-using System;
 using UnityEngine;
 
 namespace FlavorfulStory.LocationManager
 {
-    public class InteractableObject : MonoBehaviour, IInteractable
+    [RequireComponent(typeof(Outline))]
+    public class InteractableObject : MonoBehaviour
     {
         private Outline _outline;
-        private AppearanceSwitcher _appearanceSwitcher;
+        protected AppearanceSwitcher _appearanceSwitcher;
 
         private void Awake()
         {
             _outline = GetComponent<Outline>();
-            _appearanceSwitcher = transform.parent.GetComponent<AppearanceSwitcher>();
+            _appearanceSwitcher = GetComponentInParent<AppearanceSwitcher>();
         }
 
         private void Start()
@@ -34,7 +34,7 @@ namespace FlavorfulStory.LocationManager
             _outline.enabled = false;
         }
 
-        public void Interact()
+        protected virtual void Interact()
         {
             _appearanceSwitcher.ChangeAppearance();
         }
