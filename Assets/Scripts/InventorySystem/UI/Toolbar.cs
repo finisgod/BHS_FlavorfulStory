@@ -11,16 +11,30 @@ namespace FlavorfulStory.InventorySystem.UI
         /// <summary> Индекс выбранного предмета.</summary>
         private int _selectedItemIndex = 0;
 
+        public ToolbarSlotUI SelectedItem => _slots[_selectedItemIndex];
+
         /// <summary> Инициализация полей.</summary>
         private void Awake()
         {
             _slots = GetComponentsInChildren<ToolbarSlotUI>();
             _slots[_selectedItemIndex].Select();
+
+            Inventory.GetPlayerInventory().InventoryUpdated += RedrawToolbar;
         }
 
-        public ToolbarSlotUI GetSelectedItem()
+        /// <summary> При старте перерисовываем инвентарь.</summary>
+        private void Start()
         {
-            return _slots[_selectedItemIndex];
+            RedrawToolbar();
+        }
+
+        /// <summary> Перерисовать инвентарь.</summary>
+        private void RedrawToolbar()
+        {
+            foreach (var slot in _slots)
+            {
+                slot.Redraw();
+            }
         }
 
         /// <summary> Выбрать предмет на панели.</summary>

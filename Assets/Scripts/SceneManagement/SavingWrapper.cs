@@ -60,6 +60,31 @@ namespace FlavorfulStory.SceneManagement
             //yield return Fader.Instance.FadeIn(Fader.FadeInTime);
         }
 
+        /// <summary> Загрузить сцену по названию.</summary>
+        /// <param name="sceneName"> Название сцены.</param>
+        /// <returns> Возвращает корутину, которая загружает сцену по названию.</returns>
+        public static IEnumerator LoadSceneAsyncByName(string sceneName)
+        {
+            yield return SceneManager.LoadSceneAsync(sceneName);
+        }
+
+        /// <summary> Загрузить сцену по названию.</summary>
+        /// <param name="sceneName"> Название сцены.</param>
+        /// <returns> Возвращает корутину, которая загружает сцену по названию.</returns>
+        public static void LoadSceneByName(string sceneName)
+        {
+           SceneManager.LoadScene(sceneName);
+        }
+
+        /// <summary> Загрузка данных игры из файла.</summary>
+        public static void Load() => SavingSystem.Load(GetCurrentSave());
+
+        /// <summary> Сохранение данных игры в файл.</summary>
+        public static void Save() => SavingSystem.Save(GetCurrentSave());
+
+        /// <summary> Удаление сохранения данных игры.</summary>
+        public static void Delete() => SavingSystem.Delete(GetCurrentSave());
+
         #region Debug
 #if UNITY_EDITOR
         [SerializeField] private KeyCode _saveKey;
@@ -72,15 +97,6 @@ namespace FlavorfulStory.SceneManagement
             if (Input.GetKeyDown(_loadKey)) Load();
             if (Input.GetKeyDown(_deleteKey)) Delete();
         }
-
-        /// <summary> Загрузка данных игры из файла.</summary>
-        public static void Load() => SavingSystem.Load(GetCurrentSave());
-
-        /// <summary> Сохранение данных игры в файл.</summary>
-        public static void Save() => SavingSystem.Save(GetCurrentSave());
-
-        /// <summary> Удаление сохранения данных игры.</summary>
-        public static void Delete() => SavingSystem.Delete(GetCurrentSave());
 #endif
         #endregion
     }

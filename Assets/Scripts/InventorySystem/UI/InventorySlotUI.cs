@@ -15,6 +15,11 @@ namespace FlavorfulStory.InventorySystem.UI
         /// <summary> Инвентарь.</summary>
         private Inventory _inventory;
 
+        private void Awake()
+        {
+            _inventory = Inventory.GetPlayerInventory();
+        }
+
         /// <summary> Установить значения класса.</summary>
         /// <param name="inventory"> Инвентарь.</param>
         /// <param name="index"> Индекс слота в инвентаре.</param>

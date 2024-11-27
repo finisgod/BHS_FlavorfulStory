@@ -2285,6 +2285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entryPoint: {fileID: 6764848798582235217}
+  _tabButtons: []
 --- !u!1 &3958386741557143328
 GameObject:
   m_ObjectHideFlags: 0
@@ -4902,7 +4903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f245326b3f348a4dbfdc3ac8c4d904a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _persistentObjectsPrefab: {fileID: 2873043552072086315, guid: 82723e7b8a33c464893eddc285467fab,
+  _persistentObjectsPrefab: {fileID: 1450072215902362737, guid: 82723e7b8a33c464893eddc285467fab,
     type: 3}
 --- !u!114 &6400550474458286084
 MonoBehaviour:
@@ -6389,7 +6390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4057755524945931532
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6463,7 +6464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
-  m_VerticalFit: 2
+  m_VerticalFit: 1
 --- !u!114 &3873428936074916807
 MonoBehaviour:
   m_ObjectHideFlags: 0

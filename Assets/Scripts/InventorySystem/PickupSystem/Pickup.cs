@@ -17,7 +17,7 @@ namespace FlavorfulStory.InventorySystem.PickupSystem
         [field: SerializeField] public InventoryItem Item { get; private set; }
 
         /// <summary> Количество предметов.</summary>
-        public int Number { get; private set; }
+        public int Number { get; private set; } = 1;
 
         /// <summary> Может быть подобран?</summary>
         public bool CanBePickedUp => _inventory.HasSpaceFor(Item);

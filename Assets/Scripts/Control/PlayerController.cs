@@ -32,7 +32,7 @@ namespace FlavorfulStory.Control
         /// <summary> Выполнение различных действий в зависимости от состояния.</summary>
         private void Update()
         {
-            if (!LockActionsManager.IsLock) InteractWithMovement();
+            InteractWithMovement();
 
             InteractSpecialAbilityKeys();
             // DEBUG
@@ -40,8 +40,21 @@ namespace FlavorfulStory.Control
                 GetComponent<ItemDropper>().DropItem(InventoryItem.GetItemFromID("ca9e19dc-3f88-4f9a-9074-a70acfc5ea0f"), 1);
         }
 
+        private void InteractWithMovement()
+        {
+            float x = Input.GetAxis("Horizontal"), z = Input.GetAxis("Vertical");
+            var direction = new Vector3(x, 0, z).normalized;
+            _playerMover.MoveAndRotate(direction);
+        }
+
         /// <summary> Взаимодействовать со специальными клавишами.</summary>
         private void InteractSpecialAbilityKeys()
+        {
+            SelectToolbarItem();
+            UseToolbarItem();
+        }
+
+        private void SelectToolbarItem()
         {
             for (int i = 0; i < 9; i++)
             {
@@ -52,11 +65,27 @@ namespace FlavorfulStory.Control
             }
         }
 
-        private void InteractWithMovement()
+        private void UseToolbarItem()
         {
-            float x = Input.GetAxis("Horizontal"), z = Input.GetAxis("Vertical");
-            var direction = new Vector3(x, 0, z).normalized;
-            _playerMover.MoveAndRotate(direction);
+            if (Input.GetMouseButtonDown(1))
+            {
+                var item = _toolbar.SelectedItem.GetItem() as ActionItem;
+                if (item == null) return;
+
+                if (item.IsConsumable)
+                {
+                    item.Use();
+                }
+            }
+        }
+
+        /// <summary> Переключение контроллера игрока.</summary>
+        /// <remarks> Используется чтобы игрок не двигался до загрузки другой сцены.</remarks> 
+        /// <param name="enabled"> Включить / Выключить контроллер.</param>
+        public static void SwitchController(bool enabled)
+        {
+            var playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            playerController.enabled = enabled;
         }
     }
 }

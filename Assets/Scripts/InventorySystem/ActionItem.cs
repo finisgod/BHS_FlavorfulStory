@@ -13,10 +13,9 @@ namespace FlavorfulStory.InventorySystem
 
         /// <summary> Использование предмета.</summary>
         /// <remarks> Переопределите для обеспечения функциональности.</remarks>
-        /// <param name="user"> Персонаж, который использует это действие.</param>
-        public virtual void Use(GameObject user)
+        public virtual void Use()
         {
-            Debug.Log("Using action: " + this);
+            
         }
     }
 }

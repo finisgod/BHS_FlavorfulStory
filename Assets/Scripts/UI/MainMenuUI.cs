@@ -1,8 +1,8 @@
+using FlavorfulStory.Control;
 using FlavorfulStory.SceneManagement;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace FlavorfulStory.UI
 {
@@ -18,6 +18,16 @@ namespace FlavorfulStory.UI
         /// <summary> Название сохраненного файла для новой игры.</summary>
         /// <remarks> Название формируется путем соединения строк имени игрока и названия магазина.</remarks>
         private string NewGameSaveFileName => string.Concat(_newGameInputFields.Select(field => field.text));
+
+        private void OnEnable()
+        {
+            PlayerController.SwitchController(false);
+        }
+
+        private void OnDisable()
+        {
+            PlayerController.SwitchController(true);
+        }
 
         /// <summary> Начать новую игру.</summary>
         public void OnClickNewGame()
@@ -76,7 +86,7 @@ namespace FlavorfulStory.UI
         /// <summary> Вернуться в главное меню.</summary>
         public void OnClickReturnToMainMenu()
         {
-            SceneManager.LoadScene(SceneType.MainMenu.ToString());
+            SavingWrapper.LoadSceneByName(SceneType.MainMenu.ToString());
         }
 
         /// <summary> Выйти из игры.</summary>

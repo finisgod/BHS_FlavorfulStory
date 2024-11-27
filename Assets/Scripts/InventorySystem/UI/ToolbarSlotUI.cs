@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,18 +23,27 @@ namespace FlavorfulStory.InventorySystem.UI
         private bool _isSelected;
         private Image _image;
 
+        /// <summary> Инвентарь.</summary>
+        private Inventory _inventory;
+
         private void Awake()
         {
+            _inventory = Inventory.GetPlayerInventory();
+
             _index = transform.GetSiblingIndex();
             _keyText.text = $"{_index + 1}";
             _image = GetComponent<Image>();
             _toolbar = transform.parent.GetComponent<Toolbar>();
         }
 
-        public InventoryItem GetItem()
+        public void Redraw()
         {
-            return null;
+            _icon.SetItem(_inventory.GetItemInSlot(_index), _inventory.GetNumberInSlot(_index));
         }
+
+        /// <summary> Получить предмет, который в данный момент находится в этом источнике.</summary>
+        /// <returns> Возвращает предмет, который в данный момент находится в этом источнике.</returns>
+        public InventoryItem GetItem() => _inventory.GetItemInSlot(_index);
 
         public void Select()
         {

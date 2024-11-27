@@ -30,12 +30,12 @@ namespace FlavorfulStory.InventorySystem.UI
         /// <summary> ѕерерисовать инвентарь.</summary>
         private void RedrawInventory()
         {
-            DestroyAllPrefabs();
+            DestroyAllSlots();
             SpawnInventorySlots();
         }
 
-        /// <summary> ”ничтожить все префабы.</summary>
-        private void DestroyAllPrefabs()
+        /// <summary> ”ничтожить все слоты инвентар€.</summary>
+        private void DestroyAllSlots()
         {
             foreach (Transform child in _placeToSpawnSlots)
             {

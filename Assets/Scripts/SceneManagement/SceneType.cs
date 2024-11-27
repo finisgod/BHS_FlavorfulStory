@@ -9,6 +9,9 @@ namespace FlavorfulStory.SceneManagement
         MainMenu,
 
         /// <summary> Каменный остров.</summary>
-        RockyIsland
+        RockyIsland,
+
+        /// <summary> Ресторан.</summary>
+        Restaurant
     }
 }
