@@ -1,5 +1,4 @@
 ﻿using FlavorfulStory.InventorySystem;
-using FlavorfulStory.InventorySystem.DropSystem;
 using FlavorfulStory.InventorySystem.UI;
 using FlavorfulStory.Movement;
 using UnityEngine;
@@ -10,9 +9,6 @@ namespace FlavorfulStory.Control
     [RequireComponent(typeof(PlayerMover))]
     public class PlayerController : MonoBehaviour
     {
-        /// <summary>
-        /// 
-        /// </summary>
         [SerializeField] private Toolbar _toolbar;
 
         /// <summary> Передвижение игрока.</summary>
@@ -24,20 +20,11 @@ namespace FlavorfulStory.Control
             _playerMover = GetComponent<PlayerMover>();
         }
 
-        //private void Start()
-        //{
-        //    //WorldTime.DayEndedEvent += ToSpawn;
-        //}
-
         /// <summary> Выполнение различных действий в зависимости от состояния.</summary>
         private void Update()
         {
             InteractWithMovement();
-
             InteractSpecialAbilityKeys();
-            // DEBUG
-            if (Input.GetKeyDown(KeyCode.Space))
-                GetComponent<ItemDropper>().DropItem(InventoryItem.GetItemFromID("ca9e19dc-3f88-4f9a-9074-a70acfc5ea0f"), 1);
         }
 
         private void InteractWithMovement()
@@ -84,8 +71,8 @@ namespace FlavorfulStory.Control
         /// <param name="enabled"> Включить / Выключить контроллер.</param>
         public static void SwitchController(bool enabled)
         {
-            var playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-            playerController.enabled = enabled;
+            var playerController = GameObject.FindWithTag("Player")?.GetComponent<PlayerController>();
+            if (playerController) playerController.enabled = enabled;
         }
     }
 }

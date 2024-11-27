@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -21,7 +20,6 @@ namespace FlavorfulStory.InventorySystem.UI
 
         private Toolbar _toolbar;
         private bool _isSelected;
-        private Image _image;
 
         /// <summary> Инвентарь.</summary>
         private Inventory _inventory;
@@ -32,7 +30,6 @@ namespace FlavorfulStory.InventorySystem.UI
 
             _index = transform.GetSiblingIndex();
             _keyText.text = $"{_index + 1}";
-            _image = GetComponent<Image>();
             _toolbar = transform.parent.GetComponent<Toolbar>();
         }
 
@@ -59,7 +56,7 @@ namespace FlavorfulStory.InventorySystem.UI
         private void FadeToColor(Color color)
         {
             const float FadeDuration = 0.2f;
-            _image.CrossFadeColor(color, FadeDuration, true, true);
+            GetComponent<Image>().CrossFadeColor(color, FadeDuration, true, true);
         }
 
         public void OnPointerClick(PointerEventData eventData)

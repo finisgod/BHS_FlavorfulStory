@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 3528323346317996453}
   - component: {fileID: 329358961049614815}
   - component: {fileID: 7849824888327038791}
+  - component: {fileID: 9046809168143299075}
   m_Layer: 0
   m_Name: stul
   m_TagString: Untagged
@@ -199,3 +200,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &9046809168143299075
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8892401511817548246}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.011070506, y: 0.014571914, z: 0.025962584}
+  m_Center: {x: -2.328307e-10, y: 0.001262253, z: 0.012878938}

@@ -1859,6 +1859,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HpPotionPickupSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 319015060972705785, guid: b7a58d4c54fbce54f8fcd204f439a8c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3587372054142250711, guid: b7a58d4c54fbce54f8fcd204f439a8c9,
         type: 3}
       propertyPath: _uniqueIdentifier
@@ -1942,6 +1947,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DaggerPickupSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 319015060972705785, guid: b7a58d4c54fbce54f8fcd204f439a8c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3587372054142250711, guid: b7a58d4c54fbce54f8fcd204f439a8c9,
         type: 3}

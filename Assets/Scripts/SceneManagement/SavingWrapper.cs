@@ -46,18 +46,20 @@ namespace FlavorfulStory.SceneManagement
 
         /// <summary> Загрузить первую сцену.</summary>
         /// <returns> Возвращает корутину, которая запускает первую сцену.</returns>
-        public IEnumerator LoadFirstScene()
+        private IEnumerator LoadFirstScene()
         {
+            yield return PersistentObject.Instance.GetFader().FadeOut(Fader.FadeOutTime);
             yield return SceneManager.LoadSceneAsync(_firstUploadedScene.ToString());
+            yield return PersistentObject.Instance.GetFader().FadeIn(Fader.FadeInTime);
         }
 
         /// <summary> Загрузить последнюю сцену.</summary>
         /// <returns> Возвращает корутину, которая запускает послендюю сцену при сохранении.</returns>
-        public static IEnumerator LoadLastScene()
+        private static IEnumerator LoadLastScene()
         {
+            yield return PersistentObject.Instance.GetFader().FadeOut(Fader.FadeOutTime);
             yield return SavingSystem.LoadLastScene(GetCurrentSave());
-            //Fader.Instance.FadeOutImmediate();
-            //yield return Fader.Instance.FadeIn(Fader.FadeInTime);
+            yield return PersistentObject.Instance.GetFader().FadeIn(Fader.FadeInTime);
         }
 
         /// <summary> Загрузить сцену по названию.</summary>

@@ -29,6 +29,8 @@ namespace FlavorfulStory.SceneManagement
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
 
+            yield return PersistentObject.Instance.GetFader().FadeOut(Fader.FadeOutTime);
+
             PlayerController.SwitchController(false);
             SavingWrapper.Save();
             yield return SavingWrapper.LoadSceneAsyncByName(_sceneToLoad.ToString());
@@ -38,6 +40,9 @@ namespace FlavorfulStory.SceneManagement
             PlayerController.SwitchController(false);
 
             SavingWrapper.Save();
+
+            yield return new WaitForSeconds(Fader.FadeWaitTime);
+            PersistentObject.Instance.GetFader().FadeIn(Fader.FadeInTime);
 
             PlayerController.SwitchController(true);
             Destroy(gameObject);
