@@ -6,8 +6,8 @@ namespace FlavorfulStory.LocationManager
     {
         public override void Interact()
         {
+            base.Interact();
             Debug.Log("Interacting with repairable object " + gameObject.name);
-            _appearanceSwitcher.ChangeAppearance();
         }
     }
 }

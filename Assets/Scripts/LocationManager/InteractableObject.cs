@@ -5,38 +5,22 @@ namespace FlavorfulStory.LocationManager
     [RequireComponent(typeof(Outline))]
     public class InteractableObject : MonoBehaviour
     {
-        public Outline _outline;
+        private Outline _outline;
         protected AppearanceSwitcher _appearanceSwitcher;
 
         private void Awake()
         {
             _outline = GetComponent<Outline>();
+            SwitchOutline(false);
             _appearanceSwitcher = GetComponentInParent<AppearanceSwitcher>();
         }
-
-        private void Start()
-        {
-            _outline.enabled = false;
-        }
-
-        // private void Start()
-        // {
-        //     _outline.enabled = false;
-        // }
-        //
-        // private void OnMouseEnter()
-        // {
-        //     _outline.enabled = true;
-        // }
-        
-        // private void OnMouseExit()
-        // {
-        //     _outline.enabled = false;
-        // }
 
         public virtual void Interact()
         {
             _appearanceSwitcher.ChangeAppearance();
+            print("Interacted");
         }
+
+        public void SwitchOutline(bool enabled) => _outline.enabled = enabled;
     }
 }
