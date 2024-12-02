@@ -4,31 +4,56 @@ using UnityEngine;
 
 namespace FlavorfulStory.LocationManager
 {
+    /// <summary> Взаимодействие с объектами.</summary>
     public class InteractWithObjects : MonoBehaviour
     {
+        /// <summary> Радиус взаимодействия</summary>
         [SerializeField, Range(1f, 10f)] private float _radius;
+        
+        /// <summary> Кнопка взаимодействия.</summary>
         [SerializeField] private KeyCode _interactKey = KeyCode.E;
+        
+        /// <summary> Подсказка для взаимодействия мышью.</summary>
+        [SerializeField] private GameObject _mouseTip;
+        
+        /// <summary> Подсказка взаимодействия через клавиатуру.</summary>
+        [SerializeField] private GameObject _keyboardTip;
+        
+        /// <summary> Текущая цель.</summary>
         private InteractableObject _currentTarget;
+        
+        /// <summary> Цель принадлежит курсору.</summary>
+        private bool _isCursorTarget;
 
         private void Update()
         {
-            if (_currentTarget) _currentTarget.SwitchOutline(false);
-            
+            if (_currentTarget)
+            {
+                _currentTarget.SwitchOutline(false);
+                _mouseTip.SetActive(false);
+                _keyboardTip.SetActive(false);
+            }
+
             _currentTarget = FindTarget();
-            
+
             if (_currentTarget) _currentTarget.SwitchOutline(true);
             
-            if (Input.GetKeyDown(_interactKey) || Input.GetMouseButtonDown(0))
+            if (CanInteract())
             {
-                if (CanInteract()) _currentTarget.Interact();
+                _keyboardTip.SetActive(true);
+                if (_isCursorTarget) _mouseTip.SetActive(true);
+                if (Input.GetKeyDown(_interactKey) || Input.GetMouseButtonDown(0)) _currentTarget.Interact();
             }
         }
         
+        /// <summary> Поиск цели.</summary>
         private InteractableObject FindTarget()
         {
             InteractableObject target = GetCursorTarget();
+            _isCursorTarget = true;
             if (!target)
             {
+                _isCursorTarget = false;
                 var nearbyInteractables = GetNearbyObjects();
                 if (nearbyInteractables.Count() > 0)
                     target = GetClosestInteractable(nearbyInteractables);
@@ -36,6 +61,7 @@ namespace FlavorfulStory.LocationManager
             return target;
         }
         
+        /// <summary> Получение цели через курсор.</summary>
         private InteractableObject GetCursorTarget()
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -44,6 +70,7 @@ namespace FlavorfulStory.LocationManager
             return isHit ? hitInfo.collider.GetComponent<InteractableObject>() : null;
         }
         
+        /// <summary> Получение объектов в радуисе взаимодействия.</summary>
         private IEnumerable<InteractableObject> GetNearbyObjects()
         {
             RaycastHit[] hits = Physics.SphereCastAll(
@@ -56,6 +83,7 @@ namespace FlavorfulStory.LocationManager
             return hits.Select(hit => hit.collider.GetComponent<InteractableObject>());
         }
         
+        /// <summary> Получение ближайшего объекта.</summary>
         private InteractableObject GetClosestInteractable(IEnumerable<InteractableObject> interactables)
         {
             InteractableObject closest = null;
@@ -71,14 +99,19 @@ namespace FlavorfulStory.LocationManager
             return closest;
         }
         
+        /// <summary> Можно взаимодействовать.</summary>
         private bool CanInteract() => 
             _currentTarget && Vector3.Distance(transform.position, _currentTarget.transform.position) <= _radius;
+        
 
+        /// <summary> Рисование в окне сцены.</summary>
         private void OnDrawGizmos()
         {
             var player = GameObject.FindGameObjectWithTag("Player");
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(player.transform.position, _radius);
+            if (_currentTarget)
+                Gizmos.DrawLine(player.transform.position, _currentTarget.transform.position);
         }
     }
 }
