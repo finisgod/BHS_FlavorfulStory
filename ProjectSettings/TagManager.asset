@@ -9,6 +9,8 @@ TagManager:
   - Ground
   - Npc
   - SpawnPoint
+  - AudioManager
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Grid
   - Tile
   - Ground
-  - 
+  - Interactable
   - 
   - 
   - 

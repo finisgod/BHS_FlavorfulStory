@@ -44,7 +44,7 @@ namespace FlavorfulStory.SceneManagement
 
             if (Input.GetKeyDown(KeyCode.K)) Save();
 
-            if (Input.GetKeyDown(KeyCode.Delete)) Delete();
+            if (Input.GetKeyDown(KeyCode.P)) Delete();
         }
 #endif
     }
