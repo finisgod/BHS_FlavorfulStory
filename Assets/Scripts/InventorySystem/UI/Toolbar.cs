@@ -28,7 +28,7 @@ namespace FlavorfulStory.InventorySystem.UI
             RedrawToolbar();
         }
 
-        /// <summary> Перерисовать инвентарь.</summary>
+        /// <summary> Перерисовать панель инструментов.</summary>
         private void RedrawToolbar()
         {
             foreach (var slot in _slots)

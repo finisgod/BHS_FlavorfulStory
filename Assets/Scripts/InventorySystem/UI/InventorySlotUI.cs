@@ -15,6 +15,7 @@ namespace FlavorfulStory.InventorySystem.UI
         /// <summary> Инвентарь.</summary>
         private Inventory _inventory;
 
+        /// <summary> Инициализация полей.</summary>
         private void Awake()
         {
             _inventory = Inventory.GetPlayerInventory();

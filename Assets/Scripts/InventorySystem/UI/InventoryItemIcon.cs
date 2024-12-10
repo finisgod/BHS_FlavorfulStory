@@ -22,11 +22,11 @@ namespace FlavorfulStory.InventorySystem.UI
         {
             var iconImage = GetComponent<Image>();
             iconImage.enabled = item != null;
-            if (item != null) iconImage.sprite = item.Icon;
+            if (item) iconImage.sprite = item.Icon;
 
-            if (_itemNumberText == null) return;
+            if (!_itemNumberText) return;
 
-            _textContainer.SetActive(number > 0);
+            _textContainer.SetActive(number > 1);
             _itemNumberText.text = number.ToString();
         }
     }

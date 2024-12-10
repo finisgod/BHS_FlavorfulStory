@@ -9,7 +9,7 @@ namespace FlavorfulStory.InventorySystem.UI
         [SerializeField] private InventorySlotUI _inventorySlotPrefab;
 
         /// <summary> Место для спавна слотов инвентаря.</summary>
-        [SerializeField] private Transform _placeToSpawnSlots;
+        private Transform _placeToSpawnSlots;
 
         /// <summary> Инвентарь игрока.</summary>
         private Inventory _playerInventory;
@@ -19,6 +19,8 @@ namespace FlavorfulStory.InventorySystem.UI
         {
             _playerInventory = Inventory.GetPlayerInventory();
             _playerInventory.InventoryUpdated += RedrawInventory;
+
+            _placeToSpawnSlots = transform;
         }
 
         /// <summary> При старте перерисовываем инвентарь.</summary>
