@@ -42,7 +42,11 @@ namespace FlavorfulStory.LocationManager
             {
                 _keyboardTip.SetActive(true);
                 if (_isCursorTarget) _mouseTip.SetActive(true);
-                if (Input.GetKeyDown(_interactKey) || Input.GetMouseButtonDown(0)) _currentTarget.Interact();
+                
+                if (Input.GetMouseButtonDown(0) && _isCursorTarget)
+                    _currentTarget.Interact();
+                else if (Input.GetKeyDown(_interactKey))
+                    _currentTarget.Interact();
             }
         }
         
